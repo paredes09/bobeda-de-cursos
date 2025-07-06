@@ -1,0 +1,389 @@
+---
+import Shopping_cart from "./icons/Shopping-cart.astro";
+import User from "./icons/User.astro";
+---
+
+<header class="fixed z-40 w-screen">
+    <section id="globalNav" class="globalNav absolute z-40 w-full overflow-x-hidden bg-slate-500/70 h-screen backdrop-blur-md">
+        <div id="MainMenu" class="globalMainMenu mt-10 absolute w-full">
+        <nav>
+            <ul class="text-xl font-bold opacity-70 text-white pt-5">
+                <li>
+                    <div>
+                        <a href="../" class="flex px-5 py-4 items-center w-full hover:bg-slate-400 menuMovil">
+                            Inicio                           
+                        </a>   
+                    </div>                    
+                </li>
+                <li>
+                    <div>
+                        <a href="../" class="flex px-5 py-4 items-center w-full hover:bg-slate-400 menuMovil">
+                            Mi perfil                          
+                        </a>   
+                    </div>                    
+                </li>
+                <li>
+                    <div>
+                        <a href="../" class="flex px-5 py-4 items-center w-full hover:bg-slate-400 menuMovil">
+                            Mi carrito                          
+                        </a>   
+                    </div>                    
+                </li>
+                <li>
+                    <div>
+                        <a href="../" class="flex px-5 py-4 items-center w-full hover:bg-slate-400 menuMovil">
+                            Todos los cursos                           
+                        </a>   
+                    </div>                    
+                </li>
+                <li>
+                    <div>
+                        <a href="../" class="flex px-5 py-4 items-center w-full hover:bg-slate-400 menuMovil">
+                            Vende tus cursos                           
+                        </a>   
+                    </div>                    
+                </li>
+            </ul>
+            
+        </nav>
+        </div>
+    </section>
+    <section class="relative bg-primary w-screen py-2 space-x-10 text-white text-sm">
+    <div class="flex max-w-[1400px] m-auto px-10">
+        <div class="flex-none">
+            <a href="../">
+                <img
+                    class="w-40 h-auto md:p-1 p-2"
+                    src="../../public/img/logo.webp"
+                    alt=""
+                />
+            </a>
+        </div>
+        <div class="grow caret-amber-700 content-center md:hidden">
+            <div class="flex w-full caret-amber-700 items-center justify-end space-x-7">
+                <a href="#" target="_blank" class="hover:text-[#F4C542]">
+                    <User class="size-8 inline-block" /></a
+                >
+                <div class="z-50 self-center block lg:hidden lg:ms-0 absolute right-5">
+                    <div class="flex"> 
+                        <button id="btnDisplayNav" class="flex flex-col size-[2rem] border-0 gap-2 py-1">
+                            <div class="bg-white size-full rounded-sm origin-left"></div>
+                            <div class="bg-white size-full rounded-sm origin-left"></div>
+                            <div class="bg-white size-full rounded-sm origin-left"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grow content-center hidden md:block ">
+            <div class="flex flex-row-reverse">
+                <ul class="flex gap-5 text-[18px] items-center">
+                    <li>
+                        <a href="#" class="hover:text-[#F4C542]">
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../" class="hover:text-[#F4C542]">
+                            Todos los cursos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../" class="hover:text-[#F4C542]">
+                            Vende tu curso
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../" class="hover:text-[#F4C542]">
+                            Soporte
+                        </a>
+                    </li>
+                    <li>
+                        <div class="relative group inline-block ">
+                            <a href="" target="_blank" class="text-white hover:text-[#F4C542]">
+                                <Shopping_cart class="size-8 inline-block" />
+                            </a>
+                            <div
+                                class="absolute left-1/2 -translate-x-1/2 top-full mb-2 w-max px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            >
+                                Carrito
+                            </div>
+                    </li>
+                    <li>
+                        <div class="relative group inline-block">
+                            <a href="#" target="_blank" class="text-white hover:text-[#F4C542]">
+                                <User class="size-8 inline-block" /></a
+                            >
+                            <div
+                                class="absolute left-1/2 -translate-x-1/2 top-full mb-2 w-max px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            >
+                                Entrar
+                            </div>
+                        </div>
+                    </li>
+                </ul> 
+            </div>     
+        </div>
+    </div>
+ </section>
+ 
+
+</header>
+
+<style>
+    .ms-full {
+        margin-left: 100%;
+    }
+
+    .menuMovil{
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.9s ease-in-out;
+    }
+
+    .subMenuMovil{
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.9s ease-in-out;
+    }
+
+    .mostrarSombra{
+        visibility: visible;
+        opacity: 1;        
+    }
+
+    .sombra:hover{
+        /*text-shadow: 0 0 1px #FFF, 0 0 1px #FFF;*/
+        -webkit-text-stroke-width: 0.5px; /* Grosor del trazo */
+        -webkit-text-stroke-color: #3e4095; /* Color del trazo */
+        transition: all 0.2s ease-in-out;
+    }    
+    .sombra:hover > svg{        
+        stroke-width: 4px;
+        transform: rotate(90deg);
+        transition: all .3s ease-in-out;
+    }
+ 
+    .rotarVolver:hover > svg{        
+        stroke-width: 4px;
+        transform: rotate(-90deg);
+        transition: all .3s ease-in-out;        
+    }
+
+    .sombraHijo:hover {
+        -webkit-text-stroke-width: 0.5px; /* Grosor del trazo */
+        -webkit-text-stroke-color: rgb(24 25 58 / var(--tw-text-opacity)); /* Color del trazo */
+    }
+
+    .sombraHijo:hover > svg{
+        stroke-width: 4px;
+        transform: rotate(-90deg);
+        transition: all 0.3s;
+    }
+
+    .MenuNieto{
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .MenuNieto > li:hover{
+        -webkit-text-stroke-width: 0.5px; /* Grosor del trazo */
+        -webkit-text-stroke-color: rgb(24 25 58 / var(--tw-text-opacity)); /* Color del trazo */
+    }
+
+    .MenuHijo > ul > li:hover > .MenuNieto{
+        -webkit-text-stroke-width: 0;
+        visibility: visible;
+        opacity: 1;
+        transition: all .3s ease-in-out;
+    }
+
+    .MenuHijo{
+        visibility: hidden;
+        opacity: 0;
+    }
+    
+    .MenuPadre:hover > .MenuHijo{        
+        visibility: visible;
+        opacity: 1;
+        transition: all .3s ease-in-out;
+    }
+
+    button > div{
+        transition: all .5s;
+    }
+
+    .globalNav{
+        visibility: hidden;        
+        transform: translateY(-100%); 
+        transition: transform 0s, 0.5s ease-in-out;
+    }
+
+    .mostrar-nav {
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .btnDisplayNav div:first-child {
+    transform: rotate(45deg);
+    background-color: white
+    }
+    .btnDisplayNav div:nth-child(2){
+        opacity: 0;
+    }
+    .btnDisplayNav div:last-child{
+        transform: rotate(-45deg);
+        background-color: white
+   
+    }
+    
+
+    .globalMainMenu{
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;        
+    }
+
+    .mostrar-MainMenu{        
+        visibility: visible;
+        opacity: 1;
+        transform: translatex(0);
+    }
+
+    .btnBackToMainMenu{
+        visibility: hidden;
+        opacity: 0;
+        color: #FFFFFF;
+        transform: translatex(100%);
+        transition: opacity 0.4s ease-in-out, transform  0s, 0.5s ease-in-out;
+    }
+
+    .globalNavSubMenu{        
+        visibility: hidden;
+        opacity: 0;
+        /*transform: translatex(100%);*/
+        transition: opacity 0.4s ease-in-out, transform  0s, 0.5s ease-in-out;        
+    }    
+
+    .mostrar-subMenu{
+        visibility: visible;       
+        opacity: 1; 
+        transform: translatex(0);
+    }
+
+    .MainMenu > nav > ul > li > div{
+        visibility: hidden;
+        transition: visibility 0s, 0.5s ease-in-out; 
+        transform: translatex(0);
+    }
+
+    .ocultarMenu{
+        visibility: hidden;
+        opacity: 0;
+        transform: translatex(-100%);
+        transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;   
+    }
+
+    @media (min-width: 1024px) {
+        .mostrar-nav {
+            visibility: hidden;
+            transform: translateY(100%);
+        }
+
+        .btnDisplayNav div:first-child{
+            transform: rotate(-45deg);
+            
+        }
+        .btnDisplayNav div:nth-child(2){
+            opacity: 1;
+        }
+        .btnDisplayNav div:last-child{
+            transform: rotate(45deg);
+        }
+    }
+</style> 
+<script>
+
+    const btnDisplayNav = document.getElementById('btnDisplayNav') as HTMLButtonElement
+    const globalNav = document.getElementById('globalNav')
+    const MainMenu = document.getElementById('MainMenu')
+    const btnMenuI = document.getElementById('btnMenuI')
+    const SubMenuI = document.getElementById('SubMenuI')  
+    const btnBackToMainMenu = document.getElementById('btnBackToMainMenu')
+    const elementosMenu = document.getElementsByClassName('menuMovil')
+    const elementosSubMenu = document.getElementsByClassName('subMenuMovil')
+    
+    var menuI = false
+
+    btnDisplayNav?.addEventListener('click', () => {
+
+        btnDisplayNav.disabled = true
+
+        setTimeout(() => {
+            btnDisplayNav.disabled = false
+        }, 700)
+
+        if (globalNav?.classList.contains('mostrar-nav')) {
+            globalNav?.classList.remove('mostrar-nav')
+            btnDisplayNav?.classList.remove('btnDisplayNav')        
+            MainMenu?.classList.remove('mostrar-MainMenu')
+            SubMenuI?.classList.remove('mostrar-subMenu')
+            btnBackToMainMenu?.classList.remove('mostrar-subMenu')
+            menuI = false
+
+            for (let i = 0; i < elementosMenu.length; i++) {
+                elementosMenu[i].classList.remove('mostrarSombra')
+            }
+
+            for (let i = 0; i < elementosSubMenu.length; i++) {
+                elementosSubMenu[i].classList.remove('mostrarSombra')
+            }
+        }
+        else{
+            globalNav?.classList.toggle('mostrar-nav')
+            btnDisplayNav?.classList.toggle('btnDisplayNav')        
+            MainMenu?.classList.toggle('mostrar-MainMenu')  
+            for (let i = 0; i < elementosMenu.length; i++) {
+                setTimeout(() => {
+                    elementosMenu[i].classList.toggle('mostrarSombra')
+                }, i * 80)    
+            }                
+        }              
+    })
+
+    btnMenuI?.addEventListener('click', () => {
+        SubMenuI?.classList.toggle('mostrar-subMenu')
+        MainMenu?.classList.toggle('mostrar-MainMenu')  
+        btnBackToMainMenu?.classList.toggle('mostrar-subMenu')
+        menuI = !menuI
+        for (let i = 0; i < elementosSubMenu.length; i++) {
+            setTimeout(() => {
+                 elementosSubMenu[i].classList.toggle('mostrarSombra')
+            }, i * 80)   
+        }
+
+        for (let i = 0; i < elementosMenu.length; i++) {
+            elementosMenu[i].classList.remove('mostrarSombra')
+        }
+    })
+
+    btnBackToMainMenu?.addEventListener('click', () => {
+        if(menuI){
+            SubMenuI?.classList.toggle('mostrar-subMenu')
+            MainMenu?.classList.toggle('mostrar-MainMenu')  
+            btnBackToMainMenu?.classList.toggle('mostrar-subMenu')      
+            menuI = !menuI  
+            for (let i = 0; i < elementosMenu.length; i++) {
+                setTimeout(() => {
+                    elementosMenu[i].classList.toggle('mostrarSombra');
+                }, i * 80)     
+            }
+
+            for (let i = 0; i < elementosSubMenu.length; i++) {
+                elementosSubMenu[i].classList.remove('mostrarSombra')
+            }
+        }
+    })
+
+</script>

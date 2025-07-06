@@ -1,0 +1,38 @@
+
+<div class="grid grid-cols-2 md:grid-cols-4 text-center py-8">
+    <div>
+      <span class="text-[#87CF11] text-2xl md:text-4xl font-bold">+<span id="counter1" class="text-3xl md:text-5xl">0</span></span>
+      <p class="text-sm md:text-[16px] mt-1 text-white">Cursos Vendidos</p>
+    </div>
+    <div>
+      <span class="text-[#87CF11] text-2xl md:text-4xl font-bold">+<span id="counter2" class="text-3xl md:text-5xl">0</span></span>
+      <p class="text-sm md:text-[16px] mt-1 text-white">Clientes Satisfechos</p>
+    </div>
+    <div>
+      <span class="text-[#87CF11] text-2xl md:text-4xl font-bold">+<span id="counter3" class="text-3xl md:text-5xl">0</span></span>
+      <p class="text-sm md:text-[16px] mt-1 text-white">Academias y Autores</p>
+    </div>
+    <div>
+      <span class="text-[#87CF11] text-2xl md:text-4xl font-bold">+<span id="counter4" class="text-3xl md:text-5xl">0</span></span>
+      <p class="text-sm md:text-[16px] mt-1 text-white">Años Vendiendo</p>
+    </div>
+  </div>
+  
+  <script>
+    import { CountUp } from 'countup.js';
+  
+    const options = { duration: 2.5, separator: ',' };
+  
+    const counters = [
+      { id: 'counter1', endVal: 5000 },
+      { id: 'counter2', endVal: 1000 },
+      { id: 'counter3', endVal: 30 },
+      { id: 'counter4', endVal: 3 },
+    ];
+  
+    counters.forEach(({ id, endVal }) => {
+      const el = document.getElementById(id);
+      if (el) new CountUp(id, endVal, options).start();
+    });
+  </script>
+  

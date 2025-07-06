@@ -1,20 +1,37 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import FloatingButton  from '../components/FloatingButton.astro';
+import "../styles/global.css"
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title,  description} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
 	<body>
+		<Header></Header>
 		<slot />
+		<FloatingButton></FloatingButton>
+		<Footer></Footer>
 	</body>
 </html>
 
 <style>
-	html,
-	body {
+	html {
+		background-color: #27385C;
+		font-family: 'Lato',sans-serif;
 		margin: 0;
 		width: 100%;
 		height: 100%;

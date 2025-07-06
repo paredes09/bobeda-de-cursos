@@ -1,0 +1,33 @@
+---
+import Telegram from "./icons/Telegram.astro";
+
+---
+
+<button class="floating-button group flex items-center overflow-hidden transition-all duration-300">
+    <div class="w-8 h-8 flex">
+        <Telegram></Telegram>
+    </div>
+   
+    <span class="text-white whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:ml-2 transition-all duration-300">
+        ¿Cómo puedo ayudarte?
+      </span>
+</button>
+
+<style>
+    .floating-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color:#2AABEE;
+      padding: 10px 10px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      z-index: 1000;
+      max-width:50px;
+    }
+    
+    .floating-button:hover {
+      max-width: 300px; 
+    }
+    </style>

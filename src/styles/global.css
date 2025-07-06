@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+p {
+    font-weight: 400;
+    font-style: normal;
+    size: 16px;
+    line-height: 1.4;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+strong{
+    size: 16px;
+    line-height: 1.4;
+    font-style: normal;
+    color: white;
+    letter-spacing: 1px;
+}
+h1{
+    font-weight: 700;
+    font-style: normal;
+    font-size: 38px;
+    font-style: normal;
+    color: white;
+    line-height: 50px;
+    letter-spacing: 1.5px;
+    
+}
+h2{
+    font-weight: 900;
+    font-style: normal;
+    font-size: 30px;
+    font-style: normal;
+    color: white;
+    line-height: 40px;
+    letter-spacing: 3px;
+}
+h3{
+    font-weight: 400;
+    font-style: normal;
+    font-size: 23px;
+    font-style: normal;
+    color: white;
+    line-height: 20px;
+}
+
+:root{
+    --color-primary: #080E28;
+    --color-secundary: #27385C;
+}.bg-primary{
+    background-color: var(--color-primary);
+}.bg-secundary{
+    background-color: var(--color-secundary);
+}

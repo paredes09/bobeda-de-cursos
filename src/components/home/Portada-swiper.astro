@@ -1,0 +1,78 @@
+---
+import "swiper/css/bundle";
+import Cloud from "../icons/Cloud.astro";
+import Infinite from "../icons/Infinite.astro";
+import Segurity from "../icons/Segurity.astro";
+import Dowload from "../icons/Dowload.astro";
+import CallCenter from "../icons/Call-center.astro";
+---
+
+<section class="-mt-10 pb-10">
+    <div class="swiper portada bg-primary text-[#87CF11]">
+        <div class="swiper-wrapper m-5">
+            <div class="swiper-slide">
+                <div class="flex gap-3 ">
+                    <CallCenter class="size-7 inline-block" />
+                    <p>Soporte técnico</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="flex gap-3">
+                    <Infinite class="size-7 inline-block" />
+                    <p>Acceso de por vida</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="flex gap-3">
+                    <Cloud class="size-7 inline-block" />
+                    <p>Entrega por Mega</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="flex gap-3">
+                    <Dowload class="size-7 inline-block" />
+                    <p class="">Cursos descargables</p>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="flex gap-3">
+                    <Segurity class="size-7 inline-block" />
+                    <p>Garantía asegurada</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .swiper-wrapper {
+        transition-timing-function: linear !important;
+    }
+  
+</style>
+
+<script>
+    import Swiper from "swiper/bundle";
+
+    const swiper = new Swiper(".portada", {
+        slidesPerView: 2,
+        spaceBetween: 20,
+        loop: true,
+        speed: 9000,
+        allowTouchMove: false,
+        autoplay: {
+            delay: 1,
+            disableOnInteraction: false,
+        },
+
+        breakpoints: {
+            1200: {
+                slidesPerView: 4,
+            },
+        },
+    });
+</script>
