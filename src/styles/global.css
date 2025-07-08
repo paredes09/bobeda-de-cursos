@@ -12,7 +12,6 @@ strong{
     size: 16px;
     line-height: 1.4;
     font-style: normal;
-    color: white;
     letter-spacing: 1px;
 }
 h1{
@@ -35,19 +34,20 @@ h2{
     letter-spacing: 3px;
 }
 h3{
-    font-weight: 400;
+
     font-style: normal;
     font-size: 23px;
     font-style: normal;
-    color: white;
     line-height: 20px;
 }
 
 :root{
-    --color-primary: #080E28;
+    --color-primary: #fed700;
     --color-secundary: #27385C;
 }.bg-primary{
     background-color: var(--color-primary);
 }.bg-secundary{
     background-color: var(--color-secundary);
+}.text-primary{
+    color: var(--color-primary);
 }

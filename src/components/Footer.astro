@@ -2,12 +2,14 @@
 import Facebook from "./icons/Facebook.astro";
 import Telegram from "./icons/Telegram.astro";
 import Instagram from "./icons/Instagram.astro";
+import Bitcoin from "./icons/Bitcoin.astro";
+import Paypal from "./icons/Paypal.astro";
 ---
 
 
 <footer class="bottom-0 left-0 w-full bg-primary">
- <section class="text-white">
-    <div class="flex flex-wrap md:justify-center p-10 md:py-10 gap-x-20">
+ <section class="text-black m-auto">
+    <div class="flex flex-wrap max-w-[1400px] m-auto  p-10 md:py-10 gap-x-20">
         <div>
             <a href=""><img src="./img/logo.webp" class="w-40 h-auto" aria-label="Logo de Boveda de curso"></a>
             <div class="flex gap-x-3 py-2">
@@ -18,7 +20,7 @@ import Instagram from "./icons/Instagram.astro";
                     <Telegram class="size-6 inline-block"/>
                 </a>
                 <a href="#" target="_blank" aria-label="Instagram">
-                    <Instagram class="size-6 inline-block"/>
+                    <Instagram class="size-6 text-black inline-block"/>
                 </a>
             </div>
             <p>Compra seguro, con facilidad <br> y calidad de tus cursos</p>       
@@ -26,33 +28,43 @@ import Instagram from "./icons/Instagram.astro";
         <div>
             <h3 class=" font-bold md:pb-3 md:py-0 py-5">Catalogo de Cursos</h3>
             <ul role="list" class="space-y-3 px-3">
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Cursos Gratis</a></li> 
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Cursos Baratos</a></li>
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Cursos Actualizados</a></li> 
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Cursos Recomendados</a></li> 
+                <li class="flex"><a href="">Cursos Gratis</a></li> 
+                <li class="flex"><a href="">Cursos Baratos</a></li>
+                <li class="flex"><a href="">Cursos Actualizados</a></li> 
+                <li class="flex"><a href="">Cursos Recomendados</a></li> 
             </u>
         </div>
         <div>
             <h3 class="text-xl font-bold md:pb-3 md:py-0 py-5">Centro de Soporte</h3>
             <ul role="list" class="space-y-3 px-3">
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Acerca de Nosotros</a></li> 
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Contactos y Soporte</a></li>
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Preguntas Frecuentes</a></li> 
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Confianza en tu compra</a></li> 
+                <li class="flex"><a href="">Acerca de Nosotros</a></li> 
+                <li class="flex"><a href="">Contactos y Soporte</a></li>
+                <li class="flex"><a href="">Preguntas Frecuentes</a></li> 
+                <li class="flex"><a href="">Confianza en tu compra</a></li> 
             </ul>
         </div>
         <div>
             <h3 class="text-xl font-bold md:pb-3 md:py-0 py-5">Información Legal</h3>
             <ul role="list" class="space-y-3 px-3">
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Aviso Legal</a></li> 
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Política de Privacidad</a></li>
-                <li class="flex"><a href="" class="hover:text-[#F4C542]">Términos y Condiciones</a></li>  
+                <li class="flex"><a href="">Aviso Legal</a></li> 
+                <li class="flex"><a href="">Política de Privacidad</a></li>
+                <li class="flex"><a href="">Términos y Condiciones</a></li>  
             </ul>
         </div>
     </div>
-    <div class="w-full text-center text-xs pb-4">
-        <span>Desarrollado por <a class="font-bold cursor-pointer hover:underline" href="mailto:aroldoparedespineiros@gmail.com">aroldoparedespineiros@gmail.com</a></span>
-    </div>
+
  </section>
-  
+  <section class="w-full bg-[#232524]">
+    <div class="w-max-[1000px] flex flex-wrap-reverse justify-center md:justify-between text-xs px-0 md:px-20 py-5 text-white gap-y-5">
+        <div>
+            <p>&copy 2025 - Boveda de Cursos. Todos los derechos reservados.</p>
+            <p>Desarrollado por <a class="font-bold cursor-pointer hover:underline" href="mailto:aroldoparedespineiros@gmail.com">aroldoparedespineiros@gmail.com</a></p>
+        </div>
+        <div class="flex flex-row gap-x-2">
+            <Bitcoin class="h-[40px] w-[40px]"></Bitcoin>
+            <Paypal class="h-[40px] w-[40px]"></Paypal>
+        </div>
+    </div>
+    
+  </section>
 </footer>
