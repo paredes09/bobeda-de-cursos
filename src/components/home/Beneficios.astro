@@ -1,75 +1,133 @@
-<section class="max-w-[1400px] m-auto">
-    <h2 class="px-10">¿Tienes dudas? Aquí están las respuestas:</h2>
+---
+import 'swiper/css/bundle'
+---
 
-    <div
-        class="grid grid-cols-2 md:grid-cols-4 text-center gap-1 m-auto p-10"
-    >
-        <div
-            class="p-5 bg-gray-300/20 flex flex-col items-center text-center space-y-4 rounded-sm"
-        >
-            <img
-                src="../../img/2.webp"
-                alt=""
-                class="size-[160px] md:size-[180px]"
-            />
-            <samp class="font-bold text-white text-[16px] md:text-[20px]"
-                >¿El curso está completo y es de calidad?</samp
-            >
-            <p class="text-white">
-                Sí. Todos los cursos que ofrecemos son revisados y verificados. Recibes el contenido
-completo, sin partes faltantes, tal como fue creado originalmente.
+<section class="max-w-[1400px] px-10 m-auto">
+    
+    <h2 class="pb-10">¿Tienes dudas? Aquí están las respuestas:</h2>
 
-            </p>
-        </div>
+    <div class="swiper beneficios"> 
 
-        <div
-            class="p-5 bg-gray-300/20 flex flex-col items-center text-center space-y-4 rounded-sm"
-        >
-            <img
-                src="../../img/1.webp"
-                alt=""
-                class="size-[160px] md:size-[180px]"
-            />
-            <samp class="font-bold text-white text-[18px] md:text-[20px]"
-                >¿Cuánto tarda en llegar el curso?</samp
-            >
-            <p class="text-white">
-                Tu curso llega de forma inmediata a tu correo electrónico después de la compra. La
-descarga se realiza fácilmente a través de MEGA, sin complicaciones.
-            </p>
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide max-h-[500px] md:min-h-[500px] p-5 bg-gray-300/20 rounded-sm">
+                <div class="flex justify-center">      
+                    <img
+                    src="../../img/2.webp"
+                    alt=""
+                    class="size-[160px] md:size-[180px]"/>
+                </div>
+                <div class="text-white text-center">
+                    <samp class="font-bold text-[16px] md:text-[20px]"
+                    >¿El curso está completo y es de calidad?</samp>
+                <p>
+                    Sí. Todos los cursos que ofrecemos son revisados y verificados. Recibes el contenido completo, sin partes faltantes, tal como fue creado originalmente.</p>
+                </div>
+            </div>
+
+
+            <div class="swiper-slide max-h-[500px] md:min-h-[500px] p-5 bg-gray-300/20 rounded-sm">
+                <div class="flex justify-center">      
+                    <img
+                    src="../../img/1.webp"
+                    alt=""
+                    class="size-[160px] md:size-[180px]"/>
+                </div>
+                <div class="text-white text-center">
+                    <samp class="font-bold text-white text-[18px] md:text-[20px]"
+                    >¿Cuánto tarda en llegar el curso?</samp>
+                <p class="text-white">
+                    Tu curso llega de forma inmediata a tu correo electrónico después de la compra. La descarga se realiza fácilmente a través de MEGA, sin complicaciones.
+                </p>
+            
+                </div>
+            </div>
+            
+            <div class="swiper-slide max-h-[500px] md:min-h-[500px] p-5 bg-gray-300/20 rounded-sm">
+                <div class="flex justify-center">      
+                    <img
+                    src="../../img/4.webp"
+                    alt=""
+                    class="size-[160px] md:size-[180px]"/>
+                </div>
+                <div class="text-white text-center">
+                    <samp class="font-bold text-white text-[18px] md:text-[20px]"
+                    >¿Por qué los precios son tan bajos?
+                    </samp>
+                    <p class="text-white">
+                        Porque creemos que aprender no debería afectar tu economía. Ofrecemos preciosaccesibles para que puedas adquirir las habilidades que necesitas sin gastar de más.
+                    </p>
+                </div>
+            </div>
+            
+
+            <div class="swiper-slide max-h-[500px] md:min-h-[500px] p-5 bg-gray-300/20 rounded-sm">
+                <div class="flex justify-center">      
+                    <img
+                    src="../../img/3.webp"
+                    alt=""
+                    class="size-[160px] md:size-[180px]"/>
+                </div>
+                <div class="text-white text-center">
+                    <samp class="font-bold text-white text-[18px] md:text-[20px]"
+                    >Soporte y Preguntas</samp>
+                    <p class="text-white">
+                        Nuestro soporte es rápido y efectivo. Puedes contactarnos por Telegram, redes sociales o correo electrónico. Respondemos en el menor tiempo posible para ayudarte.
+                    </p>
+                </div>  
+            </div>
+            
         </div>
-        <div
-            class="p-5 bg-gray-300/20 flex flex-col items-center text-center space-y-4 rounded-sm"
-        >
-            <img
-                src="../../img/4.webp"
-                alt=""
-                class="size-[160px] md:size-[180px]"
-            />
-            <samp class="font-bold text-white text-[18px] md:text-[20px]"
-                >¿Por qué los precios son tan bajos?
-                </samp
-            >
-            <p class="text-white">
-                Porque creemos que aprender no debería afectar tu economía. Ofrecemos precios
-accesibles para que puedas adquirir las habilidades que necesitas sin gastar de más.
-            </p>
-        </div>
-        <div
-            class="p-5 bg-gray-300/20 flex flex-col items-center text-center space-y-4 rounded-sm"
-        >
-            <img
-                src="../../img/3.webp"
-                alt=""
-                class="size-[160px] md:size-[180px]"
-            />
-            <samp class="font-bold text-white text-[18px] md:text-[20px]"
-                >Soporte y Preguntas</samp
-            >
-            <p class="text-white">
-                Nuestro soporte es rápido y efectivo. Puedes contactarnos por Telegram, redes sociales o
-correo electrónico. Respondemos en el menor tiempo posible para ayudarte.
-            </p>
-        </div>
+        <div class="swiper-pagination"></div>    
     </div>
 </section>
+
+<style>
+    .swiper.beneficios {
+        width: 100%;
+        min-height: 360px;
+      --swiper-theme-color: #FFF;
+    }
+    @media (min-width: 700px) and (max-width: 769px) {
+    .swiper.beneficios {
+        width: 100%;
+        min-height: 420px;
+    }
+    }
+    @media (min-width: 780px) {
+    .swiper.beneficios {
+        width: 100%;
+        min-height: 540px;
+    }
+    }
+  </style>
+<script>
+    // import Swiper JS
+    import Swiper from 'swiper/bundle'
+  
+    const swiper = new Swiper('.beneficios', {
+      slidesPerView: 1,
+      spaceBetween: 5,
+      loop: true,
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+  
+      breakpoints: {
+        
+        700:{
+            slidesPerView: 2,
+        }, 
+        1000:{
+            slidesPerView: 3,
+        },
+        1400:{
+            slidesPerView: 4,
+        }     
+    }
+  
+    });
+  
+  </script>
