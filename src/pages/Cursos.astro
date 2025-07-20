@@ -1,0 +1,35 @@
+---
+import Start from '../components/icons/Start.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+
+<Layout title='boveda de cursos' description='Pagina de todos los cursos que se encuentran disponibles'>
+   <section class="bg-white w-max-[1400px] p-10 md:p-10 relative m-auto">
+        <div class="flex grid-cols-4 mt-20"> 
+            <div class="rounded-3xl">
+                <img class=" size-56" src="../img/prueba.webp" alt="">
+                <p>hola mundo</p>
+                <div class="flex text-amber-300">
+                    <Start></Start>
+                    <Start></Start>
+                    <Start></Start>
+                    <Start></Start>
+                    <Start></Start>
+                </div>
+                <div class="flex gap-2">
+                    <span class="line-through text-gray-400">$2500</span>
+                    <span class="text-gray-900 font-semibold">$10</span>
+                </div>
+                <div class="">
+                    <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Alternative</button>
+
+                </div>
+            </div>
+        </div>
+   </section>
+</Layout>
+
+<script>
+    // Aquí puedes agregar cualquier script adicional que necesites
+</script>
