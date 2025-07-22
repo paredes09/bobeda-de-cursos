@@ -1,0 +1,207 @@
+---
+import Layout from '../layouts/Layout.astro';
+import "easyzoom/css/easyzoom.css";
+
+---
+
+<Layout title='boveda de cursos' description='Pagina de todos los cursos que se encuentran disponibles'>
+    <section class=" bg-white p-10 md:p-10 relative">
+      
+
+ 
+      <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 mt-20 m-auto">
+        <ul
+          class="flex flex-row md:h-[60vh] md:flex-col size-auto md:size-40 overflow-auto rounded-lg md:space-y-2 space-x-2 md:space-x-0"
+          id="thumbnailList"
+        >
+          <li>
+            <img
+              class="thumbnail object-cover rounded cursor-pointer"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+              alt=""
+              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+            />
+          </li>
+          <li>
+            <img
+              class="thumbnail object-cover rounded cursor-pointer"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
+              alt=""
+              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
+            />
+          </li>
+          <li>
+            <img
+              class="thumbnail object-cover rounded cursor-pointer"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
+              alt=""
+              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
+            />
+          </li>
+          <li>
+            <img
+              class="thumbnail object-cover rounded cursor-pointer"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
+              alt=""
+              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
+            />
+          </li>
+          <li>
+            <img
+              class="thumbnail object-cover rounded cursor-pointer"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
+              alt=""
+              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
+            />
+          </li>
+        </ul>
+        <div>
+          <a href="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" id="mainImageLink">
+            <img
+              id="mainImage"
+              class="h-[60vh] w-full object-cover rounded-lg"
+              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+              alt=""
+            />
+          </a>
+        </div>
+        <div class=" space-y-3">
+          <h3>Bootcamp 1 Millón Funded Trader 2.0 - solci.fx</h3>
+          <div class="flex gap-2">
+            <span class="line-through text-gray-400">$2500</span>
+            <span class="text-gray-900 font-semibold">$10</span>
+        </div>
+        <strong>Información del curso:</strong>
+        <ul class="list-disc list-inside pl-7">
+          <li>Número de pedido (lo encuentras en la sección “Mi Cuenta &gt; Pedidos”).</li>
+          <li>Nombre del curso adquirido.</li>
+          <li>Motivo detallado por el cual solicitas el reembolso.</li>
+          <li>Evidencia (si aplica): capturas, video o descripción técnica del problema.</li>
+      </ul>
+      <div class="">
+        <button type="button" class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Añadir al carrito</button>
+    </div>
+    <div class=" items-center gap-3 mt-6">
+      <span class="text-lg font-bold text-gray-700">Paga mediante:</span>
+      <img src="../img/paypal.webp" alt="Paypal" class="h-8 w-auto" />
+    </div>
+    
+        </div>
+      </div>
+     
+    </div>    
+</section>
+<section class=" bg-white px-10 md:px-10 relative">
+    <div class="max-w-[1300px] m-auto">
+        <div class="border-b border-gray-100">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabs">
+              <li class="me-2">
+                <button data-tab="descripcion" class="tab-btn inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg hover:text-gray-600 hover:border-gray-300">
+                  Descripción
+                </button>
+              </li>
+              <li class="me-2">
+                <button data-tab="temario" class="tab-btn inline-flex items-center justify-center p-4 border-b-2  border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">
+                  Temario
+                </button>
+              </li>
+              <li class="me-2">
+                <button data-tab="opiniones" class="tab-btn inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">
+                  Opiniones
+                </button>
+              </li>
+            </ul>
+          </div>
+          <!-- Contenedores de contenido -->
+          <div class="mt-4">
+            <div id="descripcion" class="tab-content">
+              <p>Este es el contenido de la descripción del curso.</p>
+            </div> 
+            <div id="temario" class="tab-content hidden">
+              <p>Este es el contenido del temario del curso.</p>
+            </div>
+            <div id="opiniones" class="tab-content hidden">
+              <p>Aquí van las opiniones de los estudiantes.</p>
+            </div>
+          </div>
+                  
+    </div>
+</section>
+</Layout>
+
+
+<script>
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+  
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tabId = button.getAttribute('data-tab')!;
+  
+        // Quitar clases activas a todos los botones
+        tabButtons.forEach(btn => {
+          btn.classList.remove(
+            'text-blue-600',
+            'border-blue-600',
+            'dark:text-blue-500',
+            'dark:border-blue-500'
+          );
+          btn.classList.add(
+            'text-gray-500',
+            'border-transparent'
+          );
+        });
+  
+        // Ocultar todo el contenido
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+  
+        // Activar el botón actual
+        button.classList.add(
+          'text-blue-600',
+          'border-blue-600'
+        );
+        button.classList.remove(
+          'text-gray-500',
+          'border-transparent'
+        );
+  
+        // Mostrar contenido relacionado
+        document.getElementById(tabId)!.classList.remove('hidden');
+      });
+    });
+
+  </script>
+
+<script>
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const mainImage = document.querySelector<HTMLImageElement>('#mainImage')!;
+  const mainImageLink = document.querySelector<HTMLAnchorElement>('#mainImageLink')!;
+  
+  function updateActiveThumbnail(activeSrc: string) {
+    thumbnails.forEach((thumb) => {
+      const thumbEl = thumb as HTMLImageElement;
+      if (thumbEl.getAttribute('data-full') === activeSrc) {
+        
+        thumbEl.classList.remove('opacity-50');
+      } else {
+        
+        thumbEl.classList.add('opacity-50');
+      }
+    });
+  }
+
+  thumbnails.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const newSrc = (thumb as HTMLImageElement).getAttribute('data-full')!;
+      mainImage.src = newSrc;
+      mainImageLink.href = newSrc;
+      updateActiveThumbnail(newSrc);
+    });
+  });
+
+  updateActiveThumbnail(mainImage.src);
+</script>
+
