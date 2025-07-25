@@ -1,201 +1,321 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
-
+import Layout from "../layouts/Layout.astro";
+import Index from "./index.astro";
 ---
 
-<Layout title='boveda de cursos' description='Pagina de todos los cursos que se encuentran disponibles'>
-    <section class=" bg-white p-10 md:p-10 relative">
-      
-
- 
-      <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 mt-20 m-auto">
-        <ul
-          class="flex flex-row md:h-[60vh] md:flex-col size-auto md:size-40 overflow-auto rounded-lg md:space-y-2 space-x-2 md:space-x-0"
-          id="thumbnailList"
+<Layout
+  title="boveda de cursos"
+  description="Pagina de todos los cursos que se encuentran disponibles"
+>
+  <section class="bg-white p-10 md:p-10 relative">
+    <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 mt-20 m-auto">
+      <ul
+        class="flex flex-row md:h-[55vh] md:flex-col size-auto md:size-40 overflow-auto rounded-lg md:space-y-2 space-x-2 md:space-x-0"
+        id="thumbnailList"
+      >
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+          />
+        </li>
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
+          />
+        </li>
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
+          />
+        </li>
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
+          />
+        </li>
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
+          />
+        </li>
+      </ul>
+      <div>
+        <a
+          href="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+          id="mainImageLink"
         >
-          <li>
-            <img
-              class="thumbnail object-cover rounded cursor-pointer"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
-              alt=""
-              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
-            />
-          </li>
-          <li>
-            <img
-              class="thumbnail object-cover rounded cursor-pointer"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
-              alt=""
-              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
-            />
-          </li>
-          <li>
-            <img
-              class="thumbnail object-cover rounded cursor-pointer"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
-              alt=""
-              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
-            />
-          </li>
-          <li>
-            <img
-              class="thumbnail object-cover rounded cursor-pointer"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
-              alt=""
-              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
-            />
-          </li>
-          <li>
-            <img
-              class="thumbnail object-cover rounded cursor-pointer"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
-              alt=""
-              data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
-            />
-          </li>
-        </ul>
-        <div>
-          <a href="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" id="mainImageLink">
-            <img
-              id="mainImage"
-              class="h-[60vh] w-full object-cover rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
-              alt=""
-            />
-          </a>
-        </div>
-        <div class=" space-y-3">
-          <h3>Bootcamp 1 Millón Funded Trader 2.0 - solci.fx</h3>
-          <div class="flex gap-2">
-            <span class="line-through text-gray-400">$2500</span>
-            <span class="text-gray-900 font-semibold">$10</span>
+          <img
+            id="mainImage"
+            class="h-[54vh] w-full rounded-lg"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+            alt=""
+          />
+        </a>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="font-bold">
+          Bootcamp 1 Millón Funded Trader 2.0 - solci.fx
+        </h3>
+        <div class="flex gap-2">
+          <span class="line-through text-gray-400">$2500</span>
+          <span class="text-gray-900 font-semibold">$10</span>
         </div>
         <strong>Información del curso:</strong>
         <ul class="list-disc list-inside pl-7">
-          <li>Número de pedido (lo encuentras en la sección “Mi Cuenta &gt; Pedidos”).</li>
+          <li>
+            Número de pedido (lo encuentras en la sección “Mi Cuenta &gt;
+            Pedidos”).
+          </li>
           <li>Nombre del curso adquirido.</li>
           <li>Motivo detallado por el cual solicitas el reembolso.</li>
-          <li>Evidencia (si aplica): capturas, video o descripción técnica del problema.</li>
-      </ul>
-      <div class="">
-        <button type="button" class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Añadir al carrito</button>
-    </div>
-    <div class=" items-center gap-3 mt-6">
-      <span class="text-lg font-bold text-gray-700">Paga mediante:</span>
-      <img src="../img/paypal.webp" alt="Paypal" class="h-8 w-auto" />
-    </div>
-    
+          <li>
+            Evidencia (si aplica): capturas, video o descripción técnica del
+            problema.
+          </li>
+        </ul>
+        <div class="">
+          <button
+            type="button"
+            class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+            >Añadir al carrito</button
+          >
+        </div>
+        <div class="items-center gap-3 mt-6">
+          <span class="text-lg font-bold text-gray-700">Paga mediante:</span>
+          <img src="../img/paypal.webp" alt="Paypal" class="h-8 w-auto" />
         </div>
       </div>
-     
-    </div>    
-</section>
-<section class=" bg-white px-10 md:px-10 relative">
+    </div>
+  </section>
+  <section class="bg-white px-10 md:px-10 relative">
     <div class="max-w-[1300px] m-auto">
-        <div class="border-b border-gray-100">
-            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabs">
-              <li class="me-2">
-                <button data-tab="descripcion" class="tab-btn inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg hover:text-gray-600 hover:border-gray-300">
-                  Descripción
-                </button>
+      <div class="border-b border-gray-100">
+        <ul
+          class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400"
+          id="tabs"
+        >
+          <li class="me-2">
+            <button
+              data-tab="descripcion"
+              class="tab-btn inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg hover:text-gray-600 hover:border-gray-300"
+            >
+              Descripción
+            </button>
+          </li>
+          <li class="me-2">
+            <button
+              data-tab="temario"
+              class="tab-btn inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
+            >
+              Temario
+            </button>
+          </li>
+          <!-- <li class="me-2">
+            <button
+              data-tab="opiniones"
+              class="tab-btn inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
+            >
+              Opiniones
+            </button>
+          </li> -->
+        </ul>
+      </div>
+      <!-- Contenedores de contenido -->
+      <div class="py-10">
+        <div
+          id="descripcion"
+          class="tab-content flex bg-black/5 rounded-sm text-black"
+        >
+          <div class="p-7 space-y-5">
+            <h3 class="font-bold">Con tu compra Obtienes</h3>
+            <ul class="list-disc list-inside pl-7">
+              <li>
+                <strong>Acceso inmediato</strong> - Comienza al instante, sin
+                esperas.
               </li>
-              <li class="me-2">
-                <button data-tab="temario" class="tab-btn inline-flex items-center justify-center p-4 border-b-2  border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">
-                  Temario
-                </button>
+              <li>
+                <strong>Acceso de por vida</strong> - Comienza al instante, sin
+                esperas.
               </li>
-              <li class="me-2">
-                <button data-tab="opiniones" class="tab-btn inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">
-                  Opiniones
-                </button>
+              <li>
+                <strong>Calidad garantizada</strong> - Comienza al instante, sin
+                esperas.
               </li>
             </ul>
+            <p>
+              Disfruta de todo el contenido al instante y para siempre, con un
+              único pago.
+            </p>
           </div>
-          <!-- Contenedores de contenido -->
-          <div class="mt-4">
-            <div id="descripcion" class="tab-content">
-              <p>Este es el contenido de la descripción del curso.</p>
-            </div> 
-            <div id="temario" class="tab-content hidden">
-              <p>Este es el contenido del temario del curso.</p>
-            </div>
-            <div id="opiniones" class="tab-content hidden">
-              <p>Aquí van las opiniones de los estudiantes.</p>
+        </div>
+        <div id="temario"  class="tab-content w-full bg-black/5 rounded-sm text-black hidden" >
+          <div class=" p-7 space-y-5">
+            <h3 class="font-bold">Temario del curso</h3>
+            <p>31 Módulos</p>
+
+              <div class="border-b border-slate-200">
+                <button onclick="toggleAccordion(1);" class="w-full flex justify-between items-center py-5 text-slate-800">
+                  <span>What is Material Tailwind?</span>
+                  <span id="icon-1" class="text-slate-800 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                      <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                    </svg>
+                  </span>
+                </button>
+                <div id="content-1" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                  <div class="pb-5 text-sm text-slate-500">
+                    Material Tailwind is a framework that enhances Tailwind CSS with additional styles and components.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion Item 2 -->
+              <div class="border-b border-slate-200">
+                <button onclick="toggleAccordion(2);" class="w-full flex justify-between items-center py-5 text-slate-800">
+                  <span>How to use Material Tailwind?</span>
+                  <span id="icon-2" class="text-slate-800 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                      <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                    </svg>
+                  </span>
+                </button>
+                <div id="content-2" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                  <div class="pb-5 text-sm text-slate-500">
+                    You can use Material Tailwind by importing its components into your Tailwind CSS project.
+                  </div>
+                </div>
+              </div>
+
+               <!-- Accordion Item 3 -->
+                <div class="border-b border-slate-200">
+                  <button onclick="toggleAccordion(3);" class="w-full flex justify-between items-center py-5 text-slate-800">
+                    <span>What can I do with Material Tailwind?</span>
+                    <span id="icon-3" class="text-slate-800 transition-transform duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                      </svg>
+                    </span>
+                  </button>
+                  <div id="content-3" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                    <div class="pb-5 text-sm text-slate-500">
+                      Material Tailwind allows you to quickly build modern, responsive websites with a focus on design.
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
-                  
+
+        <div id="opiniones" class="tab-content hidden">
+          <p>Aquí van las opiniones de los estudiantes.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 </Layout>
 
+<script is:inline>
+  
+  function toggleAccordion(index) {
+    
+    
+    const content = document.getElementById(`content-${index}`);
+    const icon = document.getElementById(`icon-${index}`);
+ 
+    // SVG for Minus icon
+    const minusSVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+      </svg>
+    `;
+ 
+    // SVG for Plus icon
+    const plusSVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
+    `;
+ 
+    // Toggle the content's max-height for smooth opening and closing
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      content.style.maxHeight = '0';
+      icon.innerHTML = plusSVG;
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      icon.innerHTML = minusSVG;
+    }
+  }
+</script>
 
 <script>
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabContents = document.querySelectorAll(".tab-content");
 
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-  
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const tabId = button.getAttribute('data-tab')!;
-  
-        // Quitar clases activas a todos los botones
-        tabButtons.forEach(btn => {
-          btn.classList.remove(
-            'text-blue-600',
-            'border-blue-600',
-            'dark:text-blue-500',
-            'dark:border-blue-500'
-          );
-          btn.classList.add(
-            'text-gray-500',
-            'border-transparent'
-          );
-        });
-  
-        // Ocultar todo el contenido
-        tabContents.forEach(content => {
-          content.classList.add('hidden');
-        });
-  
-        // Activar el botón actual
-        button.classList.add(
-          'text-blue-600',
-          'border-blue-600'
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const tabId = button.getAttribute("data-tab")!;
+
+      // Quitar clases activas a todos los botones
+      tabButtons.forEach((btn) => {
+        btn.classList.remove(
+          "text-blue-600",
+          "border-blue-600",
+          "dark:text-blue-500",
+          "dark:border-blue-500",
         );
-        button.classList.remove(
-          'text-gray-500',
-          'border-transparent'
-        );
-  
-        // Mostrar contenido relacionado
-        document.getElementById(tabId)!.classList.remove('hidden');
+        btn.classList.add("text-gray-500", "border-transparent");
       });
-    });
 
-  </script>
+      // Ocultar todo el contenido
+      tabContents.forEach((content) => {
+        content.classList.add("hidden");
+      });
+
+      // Activar el botón actual
+      button.classList.add("text-blue-600", "border-blue-600");
+      button.classList.remove("text-gray-500", "border-transparent");
+
+      // Mostrar contenido relacionado
+      document.getElementById(tabId)!.classList.remove("hidden");
+    });
+  });
+</script>
 
 <script>
-  const thumbnails = document.querySelectorAll('.thumbnail');
-  const mainImage = document.querySelector<HTMLImageElement>('#mainImage')!;
-  const mainImageLink = document.querySelector<HTMLAnchorElement>('#mainImageLink')!;
-  
+  const thumbnails = document.querySelectorAll(".thumbnail");
+  const mainImage = document.querySelector<HTMLImageElement>("#mainImage")!;
+  const mainImageLink =
+    document.querySelector<HTMLAnchorElement>("#mainImageLink")!;
+
   function updateActiveThumbnail(activeSrc: string) {
     thumbnails.forEach((thumb) => {
       const thumbEl = thumb as HTMLImageElement;
-      if (thumbEl.getAttribute('data-full') === activeSrc) {
-        
-        thumbEl.classList.remove('opacity-50');
+      if (thumbEl.getAttribute("data-full") === activeSrc) {
+        thumbEl.classList.remove("opacity-50");
       } else {
-        
-        thumbEl.classList.add('opacity-50');
+        thumbEl.classList.add("opacity-50");
       }
     });
   }
 
   thumbnails.forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      const newSrc = (thumb as HTMLImageElement).getAttribute('data-full')!;
+    thumb.addEventListener("click", () => {
+      const newSrc = (thumb as HTMLImageElement).getAttribute("data-full")!;
       mainImage.src = newSrc;
       mainImageLink.href = newSrc;
       updateActiveThumbnail(newSrc);
@@ -204,4 +324,6 @@ import Layout from '../layouts/Layout.astro';
 
   updateActiveThumbnail(mainImage.src);
 </script>
+
+
 
