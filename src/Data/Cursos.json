@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "titulo": "Curso Prueba",
+        "Portada": "/img/prueba.webp",
+        "Precio-Anterior": "$3000",
+        "Precio-Actual" : "$80"
+    },
+    {
+        "id": 2,
+        "titulo": "Curso Prueba",
+        "Portada": "/img/prueba.webp",
+        "Precio-Anterior": "$3000",
+        "Precio-Actual" : "$80"
+    },
+    {
+        "id": 3,
+        "titulo": "Curso Prueba",
+        "Portada": "/img/prueba.webp",
+        "Precio-Anterior": "$3000",
+        "Precio-Actual" : "$80"
+    },
+    {
+        "id": 4,
+        "titulo": "Curso Prueba",
+        "Portada": "/img/prueba.webp",
+        "Precio-Anterior": "$3000",
+        "Precio-Actual" : "$80"
+    }
+]
