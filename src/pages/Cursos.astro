@@ -12,7 +12,7 @@ const NewListCursos = CursosB
    <section class=" bg-white p-10 md:p-10 relative m-auto">
         <div class=" max-w-[1300px] m-auto grid grid-cols-none md:grid-cols-4 mt-20 gap-5"> 
             {NewListCursos.map(news =>(<div class="">
-                <a href="/Detalle-Curso" class=" space-y-2">
+                <a href={`/${news.slug}`} class=" space-y-2">
                         <div class="relative group w-fit rounded-t-2xl overflow-hidden">
                             <img class="bg-transparent object-cover" src={news.Portada} alt="">
                             <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-30 transition duration-300"></div>

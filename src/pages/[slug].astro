@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CursosB from '../Data/Cursos.json';
 
+const {slug} = Astro.params;
+const detalleCurso = CursosB.find(c => c.slug === slug);
 ---
 
 <Layout
@@ -53,6 +56,7 @@ import Layout from "../layouts/Layout.astro";
             data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
           />
         </li>
+        
       </ul>
       <div>
         <a
@@ -70,11 +74,11 @@ import Layout from "../layouts/Layout.astro";
 
       <div class="space-y-3">
         <h3 class="font-bold">
-          Bootcamp 1 Millón Funded Trader 2.0 - solci.fx
+          {detalleCurso!.titulo + detalleCurso!.id}
         </h3>
         <div class="flex gap-2">
-          <span class="line-through text-gray-400">$2500</span>
-          <span class="text-gray-900 font-semibold">$10</span>
+          <span class="line-through text-gray-400">{detalleCurso?.["Precio-Anterior"]}</span>
+          <span class="text-gray-900 font-semibold">{detalleCurso?.["Precio-Actual"]}</span>
         </div>
         <strong>Información del curso:</strong>
         <ul class="list-disc list-inside pl-7">
