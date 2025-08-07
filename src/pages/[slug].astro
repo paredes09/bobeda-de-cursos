@@ -13,7 +13,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
   <section class="bg-white p-10 md:p-10 relative">
     <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 mt-20 m-auto">
       <ul
-        class="flex flex-row md:h-[55vh] md:flex-col size-auto md:size-40 overflow-auto rounded-lg md:space-y-2 space-x-2 md:space-x-0"
+        class="flex flex-row md:h-[68vh] md:flex-col size-auto md:size-40 overflow-auto rounded-lg md:space-y-2 space-x-2 md:space-x-0"
         id="thumbnailList"
       >
         <li>
@@ -65,7 +65,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
         >
           <img
             id="mainImage"
-            class="h-[54vh] w-full rounded-lg"
+            class="h-[50vh] md:h-[68vh] w-full rounded-lg"
             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
             alt=""
           />
@@ -93,20 +93,40 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
             problema.
           </li>
         </ul>
-        <div class="">
+        <div class="md:flex gap-5 space-y-5 md:space-y-0 ">
+          <button
+            type="button"
+            class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+            >Comprar ahora</button
+          >
           <button
             type="button"
             class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
             >Añadir al carrito</button
           >
         </div>
-        <div class="items-center gap-3 mt-6">
+        <div class="mt-6">
           <span class="text-lg font-bold text-gray-700">Paga mediante:</span>
-          <img src="../img/paypal.webp" alt="Paypal" class="h-8 w-auto" />
+          <div class="flex items-center justify-between ">
+            <div class="w-[50px] md:w-[80px]">
+              <img src="../../img/mc.svg" alt="">
+            </div>
+            <div class="w-[50px] md:w-[80px] my-0">
+              <img src="../../img/visa.svg" alt="">
+            </div>
+            <div class="w-[70px] md:w-[130px] my-0">
+              <img src="../../img/paypal1.svg" alt="">
+            </div>
+            <div class="w-[70px] md:w-[130px] my-0">
+              <img src="../../img/binance.svg" alt="">
+            </div>
+          </div>
         </div>
+        
       </div>
     </div>
   </section>
+  
   <section class="bg-white px-10 md:px-10 relative">
     <div class="max-w-[1300px] m-auto">
       <div class="border-b border-gray-100">
