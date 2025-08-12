@@ -88,6 +88,7 @@ import Register from "./icons/Register.astro";
   <script class="">
 
     const openModal = document.getElementById("openModal");
+    const openModal1 = document.getElementById("openModal1");
     const closeModal = document.getElementById("closeModal");
     const modalOverlay = document.getElementById("modalOverlay");
   
@@ -96,7 +97,13 @@ import Register from "./icons/Register.astro";
       modalOverlay.classList.add("flex");
       
     });
-  
+    
+    openModal1.addEventListener("click", () => {
+      modalOverlay.classList.remove("hidden");
+      modalOverlay.classList.add("flex");
+      
+    });
+    
     closeModal.addEventListener("click", () => {
       modalOverlay.classList.remove("flex");
       modalOverlay.classList.add("hidden");
