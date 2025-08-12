@@ -1,6 +1,7 @@
 ---
 import Shopping_cart from "./icons/Shopping-cart.astro";
 import User from "./icons/User.astro";
+import LoginModal from "./Login-Modal.astro";
 ---
 
 <header class="fixed z-40 w-screen">
@@ -61,7 +62,7 @@ import User from "./icons/User.astro";
         </div>
         <div class="grow caret-amber-700 content-center md:hidden">
             <div class="flex w-full caret-amber-700 items-center justify-end space-x-7">
-                <a href="#" target="_blank" class="hover:text-neutral-500">
+                <a id="openModal" target="_blank" class="hover:text-neutral-500">
                     <User class="size-8 inline-block" /></a
                 >
                 <div class="z-50 self-center block lg:hidden lg:ms-0 absolute right-5">
@@ -112,7 +113,7 @@ import User from "./icons/User.astro";
                     </li>
                     <li>
                         <div class="relative group inline-block">
-                            <a href="#" target="_blank" class="hover:text-neutral-500">
+                            <a id="openModal" target="_blank" class="hover:text-neutral-500">
                                 <User class="size-8 inline-block" /></a
                             >
                             <div
@@ -127,7 +128,7 @@ import User from "./icons/User.astro";
         </div>
     </div>
  </section>
- 
+ <LoginModal></LoginModal>
 
 </header>
 

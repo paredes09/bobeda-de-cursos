@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Paypal from "../components/icons/Paypal.astro"
+---
+
+<Layout
+  title="boveda de cursos"
+  description="Detalles de su pedido y facturacion"
+>
+  <section class="bg-white p-10 md:p-10 relative">
+    <div class="max-w-[1300px] flex flex-col gap-4 mt-30 md:mt-30 m-auto">
+      <div class="flex justify-between items-center">
+        <samp class="text-2xl md:text-5xl"> Detalles de su pedido</samp>
+      </div>
+      
+      
+      <div class="grid gap-4 grid-cols-1 lg:grid-cols-6 lg:grid-rows-6">
+        <!-- Detalles de facturación -->
+        <div class="lg:col-span-4 lg:row-span-3">
+          <div class="bg-white rounded-sm border border-gray-200 p-6 shadow-sm w-full">
+            <h3>Detalles de facturación</h3>
+            <div class="grid gap-4 grid-cols-1 lg:grid-cols-4 lg:grid-rows-4  py-10">
+              <div class="lg:col-span-2 lg:row-span-2">
+                <p class="text-sm text-gray-500">Nombres</p>
+                <p class="text-lg font-semibold">Aroldo Francisco</p>
+              </div>
+              <div class="lg:col-span-2 lg:row-span-2 lg:col-start-3">
+                <p class="text-sm text-gray-500">Apellidos</p>
+                <p class="text-lg font-semibold">Paredes Piñeiros</p>
+              </div>
+              <div class="lg:col-span-2 lg:row-span-2 lg:row-start-3">
+                <p class="text-sm text-gray-500">País / Región</p>
+                <p class="text-lg font-semibold">Perú</p>
+              </div>
+              <div class="lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-3">
+                <p class="text-sm text-gray-500">Correo electrónico</p>
+                <p class="text-lg font-semibold">aroldopruebapage@gmail.com</p>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      
+        <!-- Segundo elemento -->
+        <div class="lg:col-span-2 lg:row-span-6 lg:col-start-5">
+          <div class="bg-white rounded-sm border border-gray-200 p-6 shadow-sm w-full">
+            <!-- Título -->
+            <h3 class="text-lg font-semibold mb-4">Tu pedido</h3>
+        
+            <!-- Encabezado -->
+            <div class="flex justify-between font-semibold text-red-500 border-b pb-2">
+              <span>Producto</span>
+              <span>Subtotal</span>
+            </div>
+        
+            <!-- Producto -->
+            <div class="flex justify-between py-3 text-sm text-gray-700 border-b">
+              <span>Élite de Trading 2025 – Pako Thawani × 2</span>
+              <span>$80.00</span>
+            </div>
+        
+            <!-- Subtotal -->
+            <div class="flex justify-between py-3 font-semibold text-red-500 border-b">
+              <span>Subtotal</span>
+              <span>$80.00</span>
+            </div>
+        
+            <!-- Total -->
+            <div class="flex justify-between py-3 font-bold text-red-500 text-lg">
+              <span>Total</span>
+              <span>$80.00</span>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Tercer elemento -->
+        <div class="lg:col-span-4 lg:row-span-3 lg:row-start-4">
+          <div class="bg-white rounded-sm border border-gray-200 p-6 shadow-sm w-full space-y-4">
+            
+            <!-- Opción PayPal -->
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input type="radio" name="payment" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+              <span class="flex items-center space-x-5">
+                <span>PayPal</span>
+                <Paypal class="size-6"></Paypal>
+              </span>
+            </label>
+            <p class="text-gray-500 text-sm pl-6">Pago vía PayPal.</p>
+        
+            <!-- Opción Tarjeta -->
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input type="radio" name="payment" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+              <span>Tarjetas de débito y crédito</span>
+            </label>
+        
+            <!-- Aviso de privacidad -->
+            <p class="text-sm text-gray-600">
+              Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en esta web y otros propósitos descritos en nuestra 
+              <a href="#" class="text-red-500 underline">política de privacidad</a>.
+            </p>
+        
+            <!-- Checkbox de términos -->
+            <label class="flex items-start space-x-2 cursor-pointer">
+              <input type="checkbox" class="mt-1 w-4 h-4 text-red-500 border-gray-300 focus:ring-red-500">
+              <span class="text-sm text-gray-600">
+                He leído y estoy de acuerdo con los 
+                <a href="#" class="text-red-500 underline">términos y condiciones</a> de la web <span class="text-red-500">*</span>
+              </span>
+            </label>
+            
+          </div>
+        </div>
+        
+      </div>
+  
+  </section>
+</Layout>
