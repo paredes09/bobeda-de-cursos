@@ -1,4 +1,4 @@
-import type { ServiceAccount } from "firebase-admin";
+/* import type { ServiceAccount } from "firebase-admin";
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 
 const activeApps = getApps();
@@ -27,4 +27,4 @@ const initApp = () => {
   })
 }
 
-export const app = activeApps.length === 0 ? initApp() : activeApps[0];
+export const app = activeApps.length === 0 ? initApp() : activeApps[0]; */
