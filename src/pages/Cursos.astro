@@ -10,6 +10,7 @@ const NewListCursos = CursosB
 
 <Layout title='boveda de cursos' description='Pagina de todos los cursos que se encuentran disponibles'>
    <section class=" bg-white p-10 md:p-10 relative m-auto">
+    
         <div class=" max-w-[1300px] m-auto grid grid-cols-none md:grid-cols-4 mt-20 gap-5"> 
             {NewListCursos.map(news =>(<div class="">
                 <a href={`/${news.slug}`} class=" space-y-2">
@@ -30,7 +31,7 @@ const NewListCursos = CursosB
                         <span class="text-gray-900 font-semibold">{news['Precio-Actual']}</span>
                     </div>
                 </a>
-          
+                
                 <div class="mt-2">
                     <button type="button" class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Añadir al carrito</button>
                 </div>

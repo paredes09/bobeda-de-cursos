@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { getAuth } from "firebase-admin/auth";
 import { app } from "../../../firebase/server";
 
+
 export const POST: APIRoute = async ({ request, redirect }) => {
   const auth = getAuth(app);
 
@@ -17,7 +18,6 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       { status: 400 }
     );
   }
-
   /* Create user */
   try {
     await auth.createUser({
@@ -25,11 +25,16 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       password,
       displayName: name,
     });
+    
+    return redirect("/");
+     
   } catch (error: any) {
     return new Response(
       "Something went wrong",
       { status: 400 }
     );
   }
-  return redirect("/signin");
+  
+  
+
 };

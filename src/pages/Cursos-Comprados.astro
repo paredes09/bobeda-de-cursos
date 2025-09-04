@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import LoginModal from "../components/Login-Modal.astro";
+import { alertaCorrecta } from "../utils/Alertas.js";
+
 ---
 
 <Layout
@@ -38,7 +39,9 @@ import LoginModal from "../components/Login-Modal.astro";
                         Amazon FBA por Bessy Arteaga
                     </h3>
                 </div>
-
+                <button id="btn-ok" style="margin-right:10px; padding:10px; background:green; color:white;">
+                  Mostrar Correcto
+                </button>
                 <td
                   class="itemTotal content-start text-gray-900 font-semibold py-4 text-right"
                   >
@@ -54,6 +57,15 @@ import LoginModal from "../components/Login-Modal.astro";
       </div>
     </div>
   </section>
-  <LoginModal></LoginModal>
-</Layout>
 
+  
+
+</Layout>
+<script>
+  import { alertaCorrecta } from "../utils/Alertas.js";
+
+  document.getElementById("btn-ok")!.addEventListener("click", () => {
+    alertaCorrecta();
+  });
+
+</script>
