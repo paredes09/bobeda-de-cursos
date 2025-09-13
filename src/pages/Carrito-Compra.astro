@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Trash from "../components/icons/Trash.astro";
+import CursoItem from "../components/Curso-Item.astro";
 ---
 
 <Layout
@@ -12,257 +12,156 @@ import Trash from "../components/icons/Trash.astro";
       <div class="flex justify-between items-center">
         <samp class="text-2xl md:text-5xl"> Tu carrito</samp>
         <a
-          href="#"
+          href="/Cursos"
           class="text-[12px] md:text-[16px] underline underline-offset-4 hover:text-blue-400 hover:decoration-blue-400 hover:decoration-2"
         >
           Seguir Comprando
         </a>
       </div>
-      <div class="item relative overflow-x-auto">
-        <table
-          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-b-1 border-black/7"
-        >
-          <thead
-            class="text-xs text-gray-400 uppercase border-b-1 border-black/7"
+      <div class="flex flex-col-reverse md:flex-row w-full gap-x-10">
+        <div class="grow-3">
+          <div class="text-gray-400 text-sm mb-5">
+            <p><span id="contador-carrito">0</span> CURSOS EN LA CESTA</p>
+          </div>
+          <CursoItem />
+          <div
+            id="carrito-container"
+            class="space-y-6 divide-y divide-gray-200"
           >
-            <tr>
-              <th scope="col" class="py-3">Producto</th>
-              <th scope="col" class="py-3 hidden md:table-cell">Cantidad</th>
-              <th scope="col" class="py-3 text-right">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="">
-              <td class="flex py-4 space-x-5">
-                <img
-                  src="../img/prueba.webp"
-                  class="w-20 md:w-30 max-w-full max-h-full"
-                  alt=""
-                />
-                <div class="flex-row">
-                  <p>Amazon FBA por Bessy Arteaga</p>
-                  <span class="price text-gray-500 font-semibold">12</span>
-                  <div class="flex items-center space-x-2">
-                    <div class=" border p-1.5 md:hidden">
-                      <!-- Botón de menos -->
-                      <button
-                        class="decreaseBtn inline-flex items-center justify-center p-1 text-sm font-medium size-[18px] text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100"
-                        type="button"
-                      >
-                        <span class="sr-only">Decrease</span>
-                        <svg
-                          class="w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 2"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M1 1h16"></path>
-                        </svg>
-                      </button>
-                
-                      <!-- Input de número -->
-                      <input
-                        type="number"
-                        class="quantityInput appearance-none text-center placeholder:text-center w-8 text-gray-900 text-sm"
-                        placeholder="1"
-                        required
-                        min="1"
-                        value="1"
-                        style="appearance: textfield; -moz-appearance: textfield;"
-                      />
-                
-                      <!-- Botón de más -->
-                      <button
-                        class="increaseBtn inline-flex items-center justify-center size-[18px] p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100"
-                        type="button"
-                      >
-                        <span class="sr-only">Increase</span>
-                        <svg
-                          class="w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 18"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 1v16M1 9h16"></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <Trash
-                      class="w-6 h-6 text-gray-500 hover:text-red-500 cursor-pointer md:hidden"
-                    />
-                  </div>
-               
-                </div>
-
-                <td class="py-4 content-center hidden md:table-cell">
-                  <div class="flex items-center space-x-5">
-                    <div class="border p-3">
-                      <!-- Botón de menos -->
-                      <button
-                        class="decreaseBtn inline-flex items-center justify-center p-1 text-sm font-medium h-6 w-6 text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100"
-                        type="button"
-                      >
-                        <span class="sr-only">Decrease</span>
-                        <svg
-                          class="w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 2"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M1 1h16"></path>
-                        </svg>
-                      </button>
-
-                      <!-- Input de número -->
-                      <input
-                        type="number"
-                        class="quantityInput appearance-none text-center placeholder:text-center w-8 mx-5 text-gray-900 text-sm"
-                        placeholder="1"
-                        required
-                        min="1"
-                        value="1"
-                        style="appearance: textfield; -moz-appearance: textfield;"
-                      />
-
-                      <!-- Botón de más -->
-                      <button
-                        class="increaseBtn inline-flex items-center justify-center h-6 w-6 p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100"
-                        type="button"
-                      >
-                        <span class="sr-only">Increase</span>
-                        <svg
-                          class="w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 18"
-                        >
-                          <path
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 1v16M1 9h16"></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <Trash
-                      class="w-6 h-6 text-gray-500 hover:text-red-500 cursor-pointer hidden md:block"
-                    />
-                  </div>
-                </td>
-                <td
-                  class="itemTotal content-start md:content-center text-gray-900 font-semibold py-4 text-right"
-                  >12</td
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="flex flex-col items-center md:items-end pt-10">
-          <div class="w-full md:w-[40vh] text-center md:text-end space-y-5">
-            <p>Total estimado $<span id="grandTotal">0.00</span></p>
-            <p class="text-gray-500">
-              Impuesto incluido, se te entregara un link con los detalles para
-              la descarga de tu curso
+          </div>
+        </div>
+        <div class="grow">
+          <div id="resumen-carrito" class="flex flex-col mb-5 md:mb-0">
+            <p class="text-gray-400 text-sm mb-2">TOTAL</p>
+            <h3 id="total-actual" class="text-black font-bold">S/. 0,00</h3>
+            <span id="total-anterior" class="text-gray-500 text-sm line-through"
+              >S/. 0,00</span
+            >
+            <p
+              id="descuento-texto"
+              class="text-green-600 text-sm font-semibold"
+            >
+              0% de descuento
             </p>
             <div class="mt-2">
               <button
                 type="button"
-                class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-                >Comprar</button
+                class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-sm border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+                >Proceder a pagar</button
               >
             </div>
           </div>
-        </div>   
+        </div>
       </div>
     </div>
   </section>
 
-  <style>
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  </style>
+  <script type="module">
+    document.addEventListener("DOMContentLoaded", () => {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const template = document.querySelector(".curso-item-template");
+      const container = document.getElementById("carrito-container");
+      const contador = document.getElementById("contador-carrito");
+      const resumen = document.getElementById("resumen-carrito");
 
+      const totalActualEl = document.getElementById("total-actual");
+      const totalAnteriorEl = document.getElementById("total-anterior");
+      const descuentoTextoEl = document.getElementById("descuento-texto");
 
-<script>
-  const updateTotals = () => {
-  const items = document.querySelectorAll(".item");
-  let grandTotal = 0;
+      contador.textContent = carrito.length;
+      container.innerHTML = ""; // Limpia antes de volver a renderizar
 
-  items.forEach((item) => {
-    const price = parseFloat(item.querySelector(".price")?.textContent || 0);
-    const quantityInput = item.querySelector(".quantityInput");
-    const quantity = quantityInput ? parseInt(quantityInput.value) || 0 : 0;
-    const itemTotal = price * quantity;
+      if (!template) {
+        console.error("No se encontró la plantilla .curso-item-template");
+        return;
+      }
+      if (carrito.length === 0) {
+        container.innerHTML = "<p>No hay productos en el carrito.</p>";
+        actualizarTotales([]);
+        resumen.style.display = "none"; 
+        return;
+      } else {
+        carrito.forEach((curso) => {
+          const clone = template.cloneNode(true);
+          clone.classList.remove("hidden", "curso-item-template");
 
-    const itemTotalEl = item.querySelector(".itemTotal");
-    if (itemTotalEl) {
-      itemTotalEl.textContent = itemTotal.toFixed(2);
-    }
+          clone.querySelector(".curso-imagen").src = curso.Portada;
+          clone.querySelector(".curso-imagen").alt = curso.titulo;
+          clone.querySelector(".curso-titulo").textContent = curso.titulo;
+          clone.querySelector(".curso-precioactual").textContent =
+            `S/ ${parseFloat(curso.PrecioActual).toFixed(2)}`;
 
-    grandTotal += itemTotal;
-  });
+          clone.querySelector(".curso-precioanterior").textContent =
+            `S/ ${parseFloat(curso.PrecioAnterior).toFixed(2)}`;
 
-  const grandTotalEl = document.getElementById("grandTotal");
-  if (grandTotalEl) {
-    grandTotalEl.textContent = grandTotal.toFixed(2);
-  }
-};
+          const estrellas = clone.querySelector(".curso-estrellas");
+          estrellas.innerHTML = `
+          ${'<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.849 1.524 8.278L12 18.896l-7.46 4.537 1.524-8.278-6.064-5.849 8.332-1.151z"/></svg>'.repeat(
+            4,
+          )}
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="half">
+                <stop offset="50%" stop-color="currentColor"/>
+                <stop offset="50%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#half)" d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.849 1.524 8.278L12 18.896l-7.46 4.537 1.524-8.278-6.064-5.849 8.332-1.151z"/>
+          </svg>
+        `;
 
-  const quantityInputs = document.querySelectorAll(".quantityInput");
+          // Eliminar del carrito
+          clone
+            .querySelector(".curso-eliminar")
+            .addEventListener("click", (e) => {
+              e.preventDefault();
 
-  const syncQuantities = (value) => {
-    quantityInputs.forEach(input => {
-      input.value = value;
+              // Actualiza el carrito en memoria
+              const nuevoCarrito = JSON.parse(
+                localStorage.getItem("carrito"),
+              ).filter((item) => item.id !== curso.id);
+              contador.textContent = nuevoCarrito.length;
+              // Guarda el nuevo carrito
+              localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+
+              // Elimina el elemento visualmente
+              clone.remove();
+
+              // Si está vacío, muestra mensaje
+              if (nuevoCarrito.length === 0) {
+                resumen.style.display = "none"; 
+                container.innerHTML = "<p>No hay productos en el carrito.</p>";
+                actualizarTotales([]);
+              }
+              actualizarTotales(nuevoCarrito);
+            });
+
+          container.appendChild(clone);
+        });
+
+        actualizarTotales(carrito);
+      }
+
+      // Función para actualizar el bloque de totales
+        function actualizarTotales(carrito) {
+          let totalActual = 0;
+          let totalAnterior = 0;
+
+          carrito.forEach(curso => {
+            totalActual += parseFloat(curso.PrecioActual) || 0;
+            totalAnterior += parseFloat(curso.PrecioAnterior) || 0;
+          });
+
+          totalActualEl.textContent = `S/ ${totalActual.toFixed(2)}`;
+          totalAnteriorEl.textContent = `S/ ${totalAnterior.toFixed(2)}`;
+
+          if (totalAnterior > 0) {
+            const descuento = ((totalAnterior - totalActual) / totalAnterior) * 100;
+            descuentoTextoEl.textContent = `${descuento.toFixed(0)}% de descuento`;
+          } else {
+            descuentoTextoEl.textContent = '0% de descuento';
+          }
+        }
     });
-    updateTotals();
-  };
-
-  document.querySelectorAll(".increaseBtn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const input = btn.previousElementSibling;
-      const newVal = parseInt(input.value) + 1;
-      syncQuantities(newVal);
-    });
-  });
-
-  document.querySelectorAll(".decreaseBtn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const input = btn.nextElementSibling;
-      const currentVal = parseInt(input.value);
-      const newVal = currentVal > 1 ? currentVal - 1 : 1;
-      syncQuantities(newVal);
-    });
-  });
-
-  // También sincroniza cuando se escribe directamente
-  quantityInputs.forEach(input => {
-    input.addEventListener("input", (e) => {
-      const val = parseInt(e.target.value) || 1;
-      syncQuantities(val);
-    });
-  });
-
-  updateTotals(); // inicializar
-</script>
-
+  </script>
 </Layout>
-

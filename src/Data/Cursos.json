@@ -2,33 +2,33 @@
     {
         "id": 1,
         "slug": "curso-prueba-1",
-        "titulo": "Curso Prueba",
+        "titulo": "Curso Prueba 1",
         "Portada": "/img/prueba.webp",
-        "Precio-Anterior": "$3000",
-        "Precio-Actual" : "$80"
+        "PrecioAnterior": "3000",
+        "PrecioActual" : "80"
     },
     {
         "id": 2,
         "slug": "curso-prueba-2",
-        "titulo": "Curso Prueba",
+        "titulo": "Curso Prueba 2 ",
         "Portada": "/img/prueba.webp",
-        "Precio-Anterior": "$3000",
-        "Precio-Actual" : "$80"
+        "PrecioAnterior": "3000",
+        "PrecioActual" : "80"
     },
     {
         "id": 3,
         "slug": "curso-prueba-3",
-        "titulo": "Curso Prueba",
+        "titulo": "Curso Prueba 3 ",
         "Portada": "/img/prueba.webp",
-        "Precio-Anterior": "$3000",
-        "Precio-Actual" : "$80"
+        "PrecioAnterior": "3000",
+        "PrecioActual" : "80"
     },
     {
         "id": 4,
         "slug": "curso-prueba-4",
-        "titulo": "Curso Prueba",
+        "titulo": "Curso Prueba 4",
         "Portada": "/img/prueba.webp",
-        "Precio-Anterior": "$3000",
-        "Precio-Actual" : "$80"
+        "PrecioAnterior": "3000",
+        "PrecioActual" : "80"
     }
 ]

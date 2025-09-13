@@ -12,13 +12,15 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
 >
   <section class="bg-white p-10 md:p-10 relative">
     <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 mt-20 m-auto">
-      <ul
-        class="flex flex-row md:h-[68vh] md:flex-col size-auto md:size-40 overflow-auto rounded-lg md:space-y-2 space-x-2 md:space-x-0"
+      <div class="flex flex-col-reverse md:flex-row gap-4">
+        <ul
+        class="flex flex-row md:h-[68vh] md:flex-col size-auto md:size-40 overflow-x-auto overflow-y-hidden md:overflow-y-auto md:overflow-x-hidden rounded-lg md:space-y-2 space-x-2 md:space-x-0 scroll-hidden"
         id="thumbnailList"
       >
+      
         <li>
           <img
-            class="thumbnail object-cover rounded cursor-pointer"
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px] "
             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
             alt=""
             data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
@@ -26,7 +28,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
         </li>
         <li>
           <img
-            class="thumbnail object-cover rounded cursor-pointer"
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
             alt=""
             data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
@@ -34,7 +36,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
         </li>
         <li>
           <img
-            class="thumbnail object-cover rounded cursor-pointer"
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
             alt=""
             data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
@@ -42,7 +44,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
         </li>
         <li>
           <img
-            class="thumbnail object-cover rounded cursor-pointer"
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
             alt=""
             data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
@@ -50,13 +52,36 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
         </li>
         <li>
           <img
-            class="thumbnail object-cover rounded cursor-pointer"
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
             alt=""
             data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
           />
         </li>
-        
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
+          />
+        </li>
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg"
+          />
+        </li>
+        <li>
+          <img
+            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
+            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg"
+            alt=""
+            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg"
+          />
+        </li>
       </ul>
       <div>
         <a
@@ -71,14 +96,20 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
           />
         </a>
       </div>
+      </div>
+      
 
       <div class="space-y-3">
         <h3 class="font-bold">
-          {detalleCurso!.titulo + detalleCurso!.id}
+          {detalleCurso!.titulo}
         </h3>
         <div class="flex gap-2">
-          <span class="line-through text-gray-400">{detalleCurso?.["Precio-Anterior"]}</span>
-          <span class="text-gray-900 font-semibold">{detalleCurso?.["Precio-Actual"]}</span>
+          <span class="line-through text-gray-400">
+            S/ {parseFloat(detalleCurso?.["PrecioAnterior"]!).toFixed(2)}
+          </span>
+          <span class="text-gray-900 font-semibold">
+            S/ {parseFloat(detalleCurso?.["PrecioActual"]!).toFixed(2)}
+          </span> 
         </div>
         <strong>Información del curso:</strong>
         <ul class="list-disc list-inside pl-7">
@@ -100,10 +131,10 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
             >Comprar ahora</button
           >
           <button
-            type="button"
-            class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-            >Añadir al carrito</button
-          >
+          type="button"
+          class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+          data-curso={JSON.stringify(detalleCurso)}
+          >Agregar al carrito</button>
         </div>
         <div class="mt-6">
           <span class="text-lg font-bold text-gray-700">Paga mediante:</span>
@@ -255,6 +286,17 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
   </section>
 </Layout>
 
+<style>
+  .scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-hidden {
+  -ms-overflow-style: none; /* IE y Edge */
+  scrollbar-width: none; /* Firefox */
+}
+</style>
+
 <script is:inline>
   const plusSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
@@ -354,5 +396,20 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
   updateActiveThumbnail(mainImage.src);
 </script>
 
+<script class:list="">
 
+  import agregarAlCarrito from "../utils/Add-Shopping-Card.js";
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const botones = document.querySelectorAll('.add-to-cart');
+
+    botones.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const curso = JSON.parse(btn.getAttribute('data-curso'));
+        console.log(curso);
+        agregarAlCarrito(curso);
+      });
+    });
+  });
+</script>
 

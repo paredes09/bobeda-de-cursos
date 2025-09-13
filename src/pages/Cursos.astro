@@ -1,41 +1,76 @@
 ---
-import Start from '../components/icons/Start.astro';
-import Layout from '../layouts/Layout.astro';
+import Start from "../components/icons/Start.astro";
+import Layout from "../layouts/Layout.astro";
+import CursosB from "../Data/Cursos.json";
 
-import CursosB from '../Data/Cursos.json';
+const NewListCursos = CursosB;
 
-const NewListCursos = CursosB
+
 ---
 
+<Layout
+    title="boveda de cursos"
+    description="Pagina de todos los cursos que se encuentran disponibles"
+>
+    <section class="bg-white p-10 md:p-10 relative m-auto">
+        <div
+            class="max-w-[1300px] m-auto grid grid-cols-none md:grid-cols-4 mt-20 gap-5"
+        >
+            {
+                NewListCursos.map((news) => (
+                    <div class="">
+                        <a href={`/${news.slug}`} class=" space-y-2">
+                            <div class="relative group w-fit rounded-t-2xl overflow-hidden">
+                                <img
+                                    class="bg-transparent object-cover"
+                                    src={news.Portada}
+                                    alt=""
+                                />
+                                <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-30 transition duration-300" />
+                            </div>
+                            <p>{news.titulo + " " + news.id}</p>
+                            <div class="flex text-amber-300">
+                                <Start />
+                                <Start />
+                                <Start />
+                                <Start />
+                                <Start />
+                            </div>
+                            <div class="flex gap-2">
+                                <span class="line-through text-gray-400">
+                                    S/ {parseFloat(news?.["PrecioAnterior"]!).toFixed(2)}
+                                </span>
+                                <span class="text-gray-900 font-semibold">
+                                    S/ {parseFloat(news?.["PrecioActual"]!).toFixed(2)}
+                                </span>
+                            </div>
+                        </a>
 
-<Layout title='boveda de cursos' description='Pagina de todos los cursos que se encuentran disponibles'>
-   <section class=" bg-white p-10 md:p-10 relative m-auto">
-    
-        <div class=" max-w-[1300px] m-auto grid grid-cols-none md:grid-cols-4 mt-20 gap-5"> 
-            {NewListCursos.map(news =>(<div class="">
-                <a href={`/${news.slug}`} class=" space-y-2">
-                        <div class="relative group w-fit rounded-t-2xl overflow-hidden">
-                            <img class="bg-transparent object-cover" src={news.Portada} alt="">
-                            <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-30 transition duration-300"></div>
-                        </div>
-                    <p>{news.titulo +' '+ news.id}</p>
-                    <div class="flex text-amber-300">
-                        <Start></Start>
-                        <Start></Start>
-                        <Start></Start>
-                        <Start></Start>
-                        <Start></Start>
+                        <button
+            type="button"
+            class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+            data-curso={JSON.stringify(news)}
+            >Agregar al carrito</button>
                     </div>
-                    <div class="flex gap-2">
-                        <span class="line-through text-gray-400">{news['Precio-Anterior']}</span>
-                        <span class="text-gray-900 font-semibold">{news['Precio-Actual']}</span>
-                    </div>
-                </a>
-                
-                <div class="mt-2">
-                    <button type="button" class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Añadir al carrito</button>
-                </div>
-            </div>))}
+                ))
+            }
         </div>
-   </section>
+    </section>   
 </Layout>
+
+<script class:list="">
+
+  import agregarAlCarrito from "../utils/Add-Shopping-Card.js";
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const botones = document.querySelectorAll('.add-to-cart');
+
+    botones.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const curso = JSON.parse(btn.getAttribute('data-curso'));
+        console.log(curso);
+        agregarAlCarrito(curso);
+      });
+    });
+  });
+</script>

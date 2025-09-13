@@ -1,0 +1,41 @@
+---
+import Trash from "../components/icons/Trash.astro";
+
+---
+<div class="curso-item-template hidden">
+<div class="flex flex-row w-full justify-between space-y-2 ">
+    <div class="flex flex-row gap-x-5">
+        <div>
+          <img
+        src=""
+        class="curso-imagen size-14 md:size-24 max-w-full max-h-full"
+        alt=""/>
+        </div>
+      <div>
+        <strong class="curso-titulo text-black font-black text-sm line-clamp-3"></strong>
+        <p class="hidden md:block">Por Bessy Arteaga</p>
+        <div class="flex flex-col-reverse md:flex-row gap-2">
+          <!-- Badge Lo más vendido -->
+          <span class="bg-cyan-100 text-cyan-800 w-min whitespace-nowrap text-sm font-semibold px-2 py-1 rounded ">
+            Lo más vendido
+          </span>
+          <!-- Rating -->
+          <div class="flex items-center gap-1">
+            <span class="font-bold text-orange-700">4,7</span>
+            <!-- Estrellas -->
+            <div class="curso-estrellas flex text-orange-600">
+            </div>
+          </div>
+        </div>
+        <a href="#" class="curso-eliminar flex items-center text-sm text-indigo-600 hover:underline mt-2"
+        ><Trash class="w-4 h-4 mr-1" /> Eliminar</a>
+      </div>
+    </div>
+    <div class="flex flex-col whitespace-nowrap text-right">
+      <!-- Precio actual -->
+      <span class="curso-precioactual text-indigo-600 font-extrabold text-xl "></span>
+      <!-- Precio anterior (tachado) -->
+      <span class="curso-precioanterior text-gray-500 text-sm line-through"></span> 
+    </div>
+  </div>
+</div>
