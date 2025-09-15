@@ -34,5 +34,8 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
     path: "/",
   });
 
-  return redirect("/Carrito-Compra");
+  // redirect to actual page  
+  return redirect(request.headers.get("Referer") || "/");
+
+  
 };

@@ -19,7 +19,7 @@ const NewListCursos = CursosB;
             {
                 NewListCursos.map((news) => (
                     <div class="">
-                        <a href={`/${news.slug}`} class=" space-y-2">
+                        <a href={`/Curso/${news.slug}`} class=" space-y-2">
                             <div class="relative group w-fit rounded-t-2xl overflow-hidden">
                                 <img
                                     class="bg-transparent object-cover"
@@ -68,7 +68,6 @@ const NewListCursos = CursosB;
     botones.forEach((btn) => {
       btn.addEventListener('click', () => {
         const curso = JSON.parse(btn.getAttribute('data-curso'));
-        console.log(curso);
         agregarAlCarrito(curso);
       });
     });

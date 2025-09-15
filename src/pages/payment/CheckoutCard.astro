@@ -1,6 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Paypal from "../components/icons/Paypal.astro"
+import Layout from "../../layouts/Layout.astro";
+import Paypal from "../../components/icons/Paypal.astro"
+import FacturacionItem from "../../components/payments/Facturacion-Item.astro";
 ---
 
 <Layout
@@ -43,34 +44,8 @@ import Paypal from "../components/icons/Paypal.astro"
       
         <!-- Segundo elemento -->
         <div class="lg:col-span-2 lg:row-span-6 lg:col-start-5">
-          <div class="bg-white rounded-sm border border-gray-200 p-6 shadow-sm w-full">
-            <!-- Título -->
-            <h3 class="text-lg font-semibold mb-4">Tu pedido</h3>
-        
-            <!-- Encabezado -->
-            <div class="flex justify-between font-semibold text-red-500 border-b pb-2">
-              <span>Producto</span>
-              <span>Subtotal</span>
-            </div>
-        
-            <!-- Producto -->
-            <div class="flex justify-between py-3 text-sm text-gray-700 border-b">
-              <span>Élite de Trading 2025 – Pako Thawani × 2</span>
-              <span>$80.00</span>
-            </div>
-        
-            <!-- Subtotal -->
-            <div class="flex justify-between py-3 font-semibold text-red-500 border-b">
-              <span>Subtotal</span>
-              <span>$80.00</span>
-            </div>
-        
-            <!-- Total -->
-            <div class="flex justify-between py-3 font-bold text-red-500 text-lg">
-              <span>Total</span>
-              <span>$80.00</span>
-            </div>
-          </div>
+          <FacturacionItem/>
+          <div id="facturacion-container"></div>
         </div>
       
         <!-- Tercer elemento -->
@@ -107,11 +82,42 @@ import Paypal from "../components/icons/Paypal.astro"
                 <a href="#" class="text-red-500 underline">términos y condiciones</a> de la web <span class="text-red-500">*</span>
               </span>
             </label>
-            
           </div>
-        </div>
-        
+        </div>  
       </div>
-  
   </section>
+
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', function () {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const template = document.querySelector(".facturacion-item-template");
+      const facturacionContainer = document.getElementById("facturacion-container");
+  
+      if (!template || !facturacionContainer) return;
+  
+      let precioTotal = 0;
+      const clone = template.cloneNode(true);
+      clone.classList.remove("hidden", "facturacion-item-template");
+  
+      const listaProductos = clone.querySelector("#facturacion-lista-productos");
+  
+      carrito.forEach(buyNow => {
+        const precio = parseFloat(buyNow.PrecioActual) || 0;
+        precioTotal += precio;
+  
+        const itemHTML = `
+          <div class="flex justify-between py-3 text-sm text-gray-700 border-b">
+            <span>${buyNow.titulo}</span>
+            <span>S/ ${precio.toFixed(2)}</span>
+          </div>
+        `;
+        listaProductos.insertAdjacentHTML("beforeend", itemHTML);
+      });
+  
+      clone.querySelector(".curso-precioTotal").textContent = `S/ ${precioTotal.toFixed(2)}`;
+      facturacionContainer.appendChild(clone);
+    });
+  </script>
+  
 </Layout>
+

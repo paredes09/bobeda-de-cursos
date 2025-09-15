@@ -1,6 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import CursosB from '../Data/Cursos.json';
+import Layout from "../../layouts/Layout.astro";
+import CursosB from '../../Data/Cursos.json';
+import LoginModal from "../../components/Login-Modal.astro";
 
 const {slug} = Astro.params;
 const detalleCurso = CursosB.find(c => c.slug === slug);
@@ -126,14 +127,14 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
         </ul>
         <div class="md:flex gap-5 space-y-5 md:space-y-0 ">
           <button
-            type="button"
-            class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-            >Comprar ahora</button
-          >
+          type="button"
+          class="add-buy-now w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+          data-curso={JSON.stringify(detalleCurso)}
+          ></button>
           <button
           type="button"
           class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-          data-curso={JSON.stringify(detalleCurso)}
+          data-cursos={JSON.stringify(detalleCurso)}
           >Agregar al carrito</button>
         </div>
         <div class="mt-6">
@@ -284,6 +285,10 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
       </div>
     </div>
   </section>
+    <!-- contenido del modal -->
+    <LoginModal/>
+  
+ 
 </Layout>
 
 <style>
@@ -396,20 +401,78 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
   updateActiveThumbnail(mainImage.src);
 </script>
 
+
+// Agregar al carrito
 <script class:list="">
 
-  import agregarAlCarrito from "../utils/Add-Shopping-Card.js";
+  import agregarAlCarrito from "../../utils/Add-Shopping-Card.js";
 
   document.addEventListener('DOMContentLoaded', () => {
     const botones = document.querySelectorAll('.add-to-cart');
 
     botones.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const curso = JSON.parse(btn.getAttribute('data-curso'));
-        console.log(curso);
+        const curso = JSON.parse(btn.getAttribute('data-cursos'));
         agregarAlCarrito(curso);
       });
     });
   });
 </script>
 
+// Compra rapida, no agrega al carrito, va directo a checkout
+<!-- <script class:list="">
+
+  import comprarAhora from "../../utils/Buy-Now.js";
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const botones = document.querySelectorAll('.add-buy-now');
+
+    botones.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const curso = JSON.parse(btn.getAttribute('data-curso'));
+        console.log(curso);
+        comprarAhora(curso);
+      });
+    });
+  });
+</script> -->
+
+<script class:list="">
+  import comprarAhora from '../../utils/Buy-Now.js';
+  document.addEventListener('DOMContentLoaded', async () => {
+    const botones = document.querySelectorAll('.add-buy-now');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModalBtn = document.getElementById('closeModal');
+
+    // Cerrar el modal al hacer clic en la X
+    if (closeModalBtn && modalOverlay) {
+      closeModalBtn.addEventListener('click', () => {
+        modalOverlay.classList.add('hidden');
+      });
+    }
+    const res = await fetch("/api/auth/verificar-sesion");
+    const { autenticado } = await res.json();
+
+
+    botones.forEach((btn) => {
+      btn.textContent = autenticado ? "Comprar ahora" : "Inicia sesión para comprar";
+      btn.addEventListener('click', () => {
+        const curso = JSON.parse(btn.getAttribute('data-curso'));
+         
+        if (autenticado) {
+          // Usuario autenticado → ejecutar acción
+          comprarAhora(curso);
+        } else {
+          // Usuario no autenticado → mostrar modal
+          if (modalOverlay) {
+            modalOverlay.classList.remove('hidden');
+            modalOverlay.classList.add('flex'); // o 'block' según tu diseño
+          } else {
+            console.warn('No se encontró el modal de login');
+          }
+        }
+
+      });
+    });
+  });
+</script>

@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CursoItem from "../components/Curso-Item.astro";
+import LoginModal from "../components/Login-Modal.astro";
+
 ---
 
 <Layout
@@ -22,6 +24,7 @@ import CursoItem from "../components/Curso-Item.astro";
         <div class="grow-3">
           <div class="text-gray-400 text-sm mb-5">
             <p><span id="contador-carrito">0</span> CURSOS EN LA CESTA</p>
+
           </div>
           <CursoItem />
           <div
@@ -46,8 +49,8 @@ import CursoItem from "../components/Curso-Item.astro";
             <div class="mt-2">
               <button
                 type="button"
-                class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-sm border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-                >Proceder a pagar</button
+                class="add-buy-now w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-sm border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+                ></button
               >
             </div>
           </div>
@@ -55,6 +58,45 @@ import CursoItem from "../components/Curso-Item.astro";
       </div>
     </div>
   </section>
+  <LoginModal/>
+  
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', async () => {
+      const botones = document.querySelectorAll('.add-buy-now');
+      const modalOverlay = document.getElementById('modalOverlay');
+      const closeModalBtn = document.getElementById('closeModal');
+  
+      // Cerrar el modal al hacer clic en la X
+      if (closeModalBtn && modalOverlay) {
+        closeModalBtn.addEventListener('click', () => {
+          modalOverlay.classList.add('hidden');
+        });
+      }
+  
+      // Verificar sesión
+      const res = await fetch("/api/auth/verificar-sesion");
+      const { autenticado } = await res.json();
+  
+      // Acción al hacer clic en el botón
+      botones.forEach(boton => {
+        boton.textContent = autenticado ? "Proceder a pagar" : "Inicia sesión para comprar";
+        boton.addEventListener('click', (e) => {
+          e.preventDefault(); // prevenir comportamiento por defecto
+  
+          if (autenticado) {
+            // Redirigir si está autenticado
+            window.location.href = "/payment/CheckoutCard";
+          } else {
+            // Mostrar modal si no está autenticado
+            if (modalOverlay) {
+              modalOverlay.classList.remove('hidden');
+              modalOverlay.classList.add('flex'); // o 'block' según tu diseño
+            }
+          }
+        });
+      });
+    });
+  </script>
 
   <script type="module">
     document.addEventListener("DOMContentLoaded", () => {
