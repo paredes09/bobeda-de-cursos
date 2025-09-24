@@ -15,7 +15,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
     <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 mt-20 m-auto">
       <div class="flex flex-col-reverse md:flex-row gap-4">
         <ul
-        class="flex flex-row md:h-[68vh] md:flex-col size-auto md:size-40 overflow-x-auto overflow-y-hidden md:overflow-y-auto md:overflow-x-hidden rounded-lg md:space-y-2 space-x-2 md:space-x-0 scroll-hidden"
+        class="flex flex-row md:h-[55vh] md:flex-col size-auto md:size-40 overflow-x-auto overflow-y-hidden md:overflow-y-auto md:overflow-x-hidden rounded-lg md:space-y-2 space-x-2 md:space-x-0 scroll-hidden"
         id="thumbnailList"
       >
       
@@ -91,7 +91,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
         >
           <img
             id="mainImage"
-            class="h-[50vh] md:h-[68vh] w-full rounded-lg"
+            class="h-[30vh] md:h-[55vh] w-full rounded-lg"
             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
             alt=""
           />
@@ -236,7 +236,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
                 </button>
                 <div id="content-1" class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                   <div class="pb-5 text-sm text-slate-500 mt-5">
-                    1. Comienzo del modulo
+                    Contenido privado, disponible solo para nuestro clientes.
                   </div>
                 </div>
               </div>
@@ -302,6 +302,7 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
 }
 </style>
 
+// scrip del temario
 <script is:inline>
   const plusSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
@@ -420,23 +421,6 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
 </script>
 
 // Compra rapida, no agrega al carrito, va directo a checkout
-<!-- <script class:list="">
-
-  import comprarAhora from "../../utils/Buy-Now.js";
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const botones = document.querySelectorAll('.add-buy-now');
-
-    botones.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const curso = JSON.parse(btn.getAttribute('data-curso'));
-        console.log(curso);
-        comprarAhora(curso);
-      });
-    });
-  });
-</script> -->
-
 <script class:list="">
   import comprarAhora from '../../utils/Buy-Now.js';
   document.addEventListener('DOMContentLoaded', async () => {
@@ -452,11 +436,12 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
     }
     const res = await fetch("/api/auth/verificar-sesion");
     const { autenticado } = await res.json();
-
+    
 
     botones.forEach((btn) => {
       btn.textContent = autenticado ? "Comprar ahora" : "Inicia sesión para comprar";
       btn.addEventListener('click', () => {
+        
         const curso = JSON.parse(btn.getAttribute('data-curso'));
          
         if (autenticado) {

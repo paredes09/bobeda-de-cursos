@@ -36,9 +36,9 @@ import LoginModal from "../components/Login-Modal.astro";
         <div class="grow">
           <div id="resumen-carrito" class="flex flex-col mb-5 md:mb-0">
             <p class="text-gray-400 text-sm mb-2">TOTAL</p>
-            <h3 id="total-actual" class="text-black font-bold">S/. 0,00</h3>
+            <h3 id="total-actual" class="text-black font-bold">$. 0,00</h3>
             <span id="total-anterior" class="text-gray-500 text-sm line-through"
-              >S/. 0,00</span
+              >$. 0,00</span
             >
             <p
               id="descuento-texto"
@@ -101,6 +101,7 @@ import LoginModal from "../components/Login-Modal.astro";
   <script type="module">
     document.addEventListener("DOMContentLoaded", () => {
       const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      
       const template = document.querySelector(".curso-item-template");
       const container = document.getElementById("carrito-container");
       const contador = document.getElementById("contador-carrito");
@@ -131,10 +132,10 @@ import LoginModal from "../components/Login-Modal.astro";
           clone.querySelector(".curso-imagen").alt = curso.titulo;
           clone.querySelector(".curso-titulo").textContent = curso.titulo;
           clone.querySelector(".curso-precioactual").textContent =
-            `S/ ${parseFloat(curso.PrecioActual).toFixed(2)}`;
+            `$. ${parseFloat(curso.PrecioActual).toFixed(2)}`;
 
           clone.querySelector(".curso-precioanterior").textContent =
-            `S/ ${parseFloat(curso.PrecioAnterior).toFixed(2)}`;
+            `$. ${parseFloat(curso.PrecioAnterior).toFixed(2)}`;
 
           const estrellas = clone.querySelector(".curso-estrellas");
           estrellas.innerHTML = `
@@ -194,8 +195,8 @@ import LoginModal from "../components/Login-Modal.astro";
             totalAnterior += parseFloat(curso.PrecioAnterior) || 0;
           });
 
-          totalActualEl.textContent = `S/ ${totalActual.toFixed(2)}`;
-          totalAnteriorEl.textContent = `S/ ${totalAnterior.toFixed(2)}`;
+          totalActualEl.textContent = `$. ${totalActual.toFixed(2)}`;
+          totalAnteriorEl.textContent = `$. ${totalAnterior.toFixed(2)}`;
 
           if (totalAnterior > 0) {
             const descuento = ((totalAnterior - totalActual) / totalAnterior) * 100;

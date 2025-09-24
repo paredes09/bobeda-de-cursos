@@ -6,17 +6,7 @@ import PortadaSwiper from '../components/home/Portada-swiper.astro';
 import Contador from '../components/home/Contador.astro';
 import Beneficios from '../components/home/Beneficios.astro';
 import Botonera from '../components/home/Botonera.astro';
-import { app } from "../firebase/server";
-import { getAuth } from "firebase-admin/auth";
 
-const auth = getAuth(app);
-if (Astro.cookies.has("__session")) {
-  const sessionCookie = Astro.cookies.get("__session")!.value;
-  const decodedCookie = await auth.verifySessionCookie(sessionCookie);
-  if (decodedCookie) {
-   
-  }
-}
 ---
 
 <Layout title='boveda de cursos' description='Pagina dedicada para vender cursos'>

@@ -7,7 +7,7 @@ import Layout from "../layouts/Layout.astro";
   title="boveda de cursos"
   description="Pagina de todos los cursos que se encuentran disponibles"
 >
-  <section class="bg-white p-10 md:p-10 relative">
+  <section class="bg-white p-10 md:p-10 relative">    
     <div class="max-w-[1200px] flex flex-col gap-4 mt-30 md:mt-40 m-auto">
       <div class="flex justify-between items-center">
         <samp class="text-2xl md:text-5xl"> Tus compras</samp>
@@ -38,9 +38,7 @@ import Layout from "../layouts/Layout.astro";
                         Amazon FBA por Bessy Arteaga
                     </h3>
                 </div>
-                <button id="btn-ok" style="margin-right:10px; padding:10px; background:green; color:white;">
-                  Mostrar Correcto
-                </button>
+                <p id="result-message"></p>
                 <td
                   class="itemTotal content-start text-gray-900 font-semibold py-4 text-right"
                   >
@@ -52,17 +50,11 @@ import Layout from "../layouts/Layout.astro";
             </tr>
           </tbody>
         </table>
-         
       </div>
     </div>
-  </section>
+    <!-- En tu componente Astro -->  
 </Layout>
 
-<script>
-  import { alertaCorrecta } from "../utils/Alertas.js";
 
-  document.getElementById("btn-ok")!.addEventListener("click", () => {
-    alertaCorrecta();
-  });
 
-</script>
+

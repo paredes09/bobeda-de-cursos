@@ -30,5 +30,13 @@
         "Portada": "/img/prueba.webp",
         "PrecioAnterior": "500",
         "PrecioActual" : "180"
+    },
+    {
+        "id": 5,
+        "slug": "curso-prueba-5",
+        "titulo": "Curso Prueba 4",
+        "Portada": "/img/prueba.webp",
+        "PrecioAnterior": "2500",
+        "PrecioActual" : "250"
     }
 ]

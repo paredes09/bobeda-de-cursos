@@ -1,91 +1,119 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Paypal from "../../components/icons/Paypal.astro"
 import FacturacionItem from "../../components/payments/Facturacion-Item.astro";
+import { app } from "../../firebase/server";
+import { getAuth } from "firebase-admin/auth";
+
+const auth = getAuth(app);
+
+const sessionCookie = Astro.cookies.get("__session")!.value;
+const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+const user = await auth.getUser(decodedCookie.uid);
 ---
 
 <Layout
   title="boveda de cursos"
   description="Detalles de su pedido y facturacion"
 >
+
   <section class="bg-white p-10 md:p-10 relative">
     <div class="max-w-[1300px] flex flex-col gap-4 mt-30 md:mt-30 m-auto">
-      <div class="flex justify-between items-center">
-        <samp class="text-2xl md:text-5xl"> Detalles de su pedido</samp>
-      </div>
-      
       
       <div class="grid gap-4 grid-cols-1 lg:grid-cols-6 lg:grid-rows-6">
         <!-- Detalles de facturación -->
         <div class="lg:col-span-4 lg:row-span-3">
-          <div class="bg-white rounded-sm border border-gray-200 p-6 shadow-sm w-full">
-            <h3>Detalles de facturación</h3>
-            <div class="grid gap-4 grid-cols-1 lg:grid-cols-4 lg:grid-rows-4  py-10">
-              <div class="lg:col-span-2 lg:row-span-2">
-                <p class="text-sm text-gray-500">Nombres</p>
-                <p class="text-lg font-semibold">Aroldo Francisco</p>
-              </div>
-              <div class="lg:col-span-2 lg:row-span-2 lg:col-start-3">
-                <p class="text-sm text-gray-500">Apellidos</p>
-                <p class="text-lg font-semibold">Paredes Piñeiros</p>
-              </div>
-              <div class="lg:col-span-2 lg:row-span-2 lg:row-start-3">
-                <p class="text-sm text-gray-500">País / Región</p>
-                <p class="text-lg font-semibold">Perú</p>
-              </div>
-              <div class="lg:col-span-2 lg:row-span-2 lg:col-start-3 lg:row-start-3">
-                <p class="text-sm text-gray-500">Correo electrónico</p>
-                <p class="text-lg font-semibold">aroldopruebapage@gmail.com</p>
-              </div>
+          <div class="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-lg border border-gray-300 p-10 shadow-lg w-full flex flex-col gap-8">
+        
+            <!-- Título principal -->
+            <div class="flex flex-col gap-2">
+              <h3 class="text-4xl font-extrabold text-gray-800">Detalles de facturación</h3>
+              <p class="text-sm text-gray-500">Información del cliente asociada a esta compra.</p>
             </div>
-  
+        
+            <!-- Datos del cliente -->
+            <div class="grid gap-6 grid-cols-1 lg:grid-cols-4 lg:grid-rows-4 pt-4">
+        
+              <!-- Cliente -->
+              <div class="lg:col-span-2 lg:row-span-2 bg-white rounded-md shadow-sm border border-gray-200 p-4">
+                <p class="text-sm md:text-base text-gray-500 uppercase tracking-wide">Cliente</p>
+                <p class="text-lg md:text-xl font-semibold text-gray-800 mt-1">{user.displayName}</p>
+              </div>
+        
+              <!-- País / Región -->
+              <div class="lg:col-span-2 lg:row-span-2 lg:col-start-3 bg-white rounded-md shadow-sm border border-gray-200 p-4">
+                <p class="text-sm md:text-base text-gray-500 uppercase tracking-wide">País</p>
+                <p id="location" class="text-lg md:text-xl font-semibold text-gray-800 mt-1"></p>
+              </div>
+        
+              <!-- Correo electrónico -->
+              <div class="lg:col-span-2 lg:row-span-2 lg:row-start-3 bg-white rounded-md shadow-sm border border-gray-200 p-4">
+                <p class="text-sm md:text-base text-gray-500 uppercase tracking-wide">Correo electrónico</p>
+                <p class="text-lg md:text-xl font-semibold text-gray-800 mt-1">{user.email}</p>
+              </div>
+        
+            </div>
           </div>
         </div>
-      
         <!-- Segundo elemento -->
-        <div class="lg:col-span-2 lg:row-span-6 lg:col-start-5">
+        <div class="lg:col-span-2 lg:row-span-6 lg:col-start-5 space-y-5">
           <FacturacionItem/>
           <div id="facturacion-container"></div>
-        </div>
-      
-        <!-- Tercer elemento -->
-        <div class="lg:col-span-4 lg:row-span-3 lg:row-start-4">
-          <div class="bg-white rounded-sm border border-gray-200 p-6 shadow-sm w-full space-y-4">
-            
-            <!-- Opción PayPal -->
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="radio" name="payment" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
-              <span class="flex items-center space-x-5">
-                <span>PayPal</span>
-                <Paypal class="size-6"></Paypal>
-              </span>
-            </label>
-            <p class="text-gray-500 text-sm pl-6">Pago vía PayPal.</p>
-        
-            <!-- Opción Tarjeta -->
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="radio" name="payment" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-              <span>Tarjetas de débito y crédito</span>
-            </label>
-        
-            <!-- Aviso de privacidad -->
-            <p class="text-sm text-gray-600">
-              Tus datos personales se utilizarán para procesar tu pedido, mejorar tu experiencia en esta web y otros propósitos descritos en nuestra 
-              <a href="#" class="text-red-500 underline">política de privacidad</a>.
-            </p>
-        
-            <!-- Checkbox de términos -->
-            <label class="flex items-start space-x-2 cursor-pointer">
-              <input type="checkbox" class="mt-1 w-4 h-4 text-red-500 border-gray-300 focus:ring-red-500">
-              <span class="text-sm text-gray-600">
-                He leído y estoy de acuerdo con los 
-                <a href="#" class="text-red-500 underline">términos y condiciones</a> de la web <span class="text-red-500">*</span>
-              </span>
-            </label>
+          <div class="relative max-h-[500px] overflow-y-auto overflow-hidden border border-gray-300 rounded-lg shadow-lg p-6 bg-gradient-to-br from-white via-gray-50 to-gray-100 flex flex-col gap-4">
+
+            <!-- Encabezado -->
+            <div class="flex flex-col gap-1">
+              <h3 class="text-xl md:text-2xl font-bold text-gray-800">💳 Método de pago</h3>
+              <p class="text-sm text-gray-500">Seleccione su forma de pago para completar la compra de sus cursos.</p>
+            </div>
+          
+            <!-- Contenedor del botón (vacío por ahora) -->
+            <div id="paypal-button-container" class="pt-4 z-[1]"></div>
+          
           </div>
-        </div>  
+          </div> 
       </div>
   </section>
+  <script type="module">
+    import { getLocationFast } from '../src/utils/location.js';
+    getLocationFast();
+  </script>
+
+  <!-- En tu componente Astro -->
+  <script type="module">
+    document.addEventListener("DOMContentLoaded", () => {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const precioTotal = carrito.reduce((acc, item) => acc + parseFloat(item.PrecioActual || 0), 0);
+      const container = document.querySelector("#paypal-button-container").parentElement;
+container.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (window.paypal && precioTotal > 0) {
+        paypal.Buttons({
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: precioTotal.toFixed(2),
+                  currency_code: "USD"
+                }
+              }]
+            });
+          },
+          onApprove: (data, actions) => {
+            return actions.order.capture().then(details => {
+              alert(`Pago completado por ${details.payer.name.given_name}`);
+              localStorage.removeItem("carrito");
+              window.location.href = "/Cursos-Comprados";
+            });
+          },
+          onError: err => {
+            console.error("Error en el pago:", err);
+            alert("Hubo un problema al procesar el pago.");
+          }
+        }).render("#paypal-button-container");
+      }
+    });
+  </script>
+  
+  
 
   <script type="module">
     document.addEventListener('DOMContentLoaded', function () {
@@ -106,18 +134,19 @@ import FacturacionItem from "../../components/payments/Facturacion-Item.astro";
         precioTotal += precio;
   
         const itemHTML = `
-          <div class="flex justify-between py-3 text-sm text-gray-700 border-b">
-            <span>${buyNow.titulo}</span>
-            <span>S/ ${precio.toFixed(2)}</span>
-          </div>
-        `;
+  <div class="flex justify-between items-center py-4 px-2 bg-white rounded-md shadow-sm border border-gray-200 hover:bg-gray-50 transition-all duration-200">
+    <span class="text-base md:text-lg font-medium text-gray-800">${buyNow.titulo}</span>
+    <span class="text-sm md:text-base text-blue-700 font-semibold">$. ${precio.toFixed(2)}</span>
+  </div>
+`;
         listaProductos.insertAdjacentHTML("beforeend", itemHTML);
       });
   
-      clone.querySelector(".curso-precioTotal").textContent = `S/ ${precioTotal.toFixed(2)}`;
+      clone.querySelector(".curso-precioTotal").textContent = `$. ${precioTotal.toFixed(2)}`;
       facturacionContainer.appendChild(clone);
-    });
+      
+      
+    });    
   </script>
-  
 </Layout>
 

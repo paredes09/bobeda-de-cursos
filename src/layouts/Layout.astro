@@ -20,6 +20,10 @@ const { title,  description} = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.webp" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<script
+        src="https://www.paypal.com/sdk/js?client-id=AZOmn_yJ7pfsCjUaHEwRR7h9CvJevEBnqImEOYmZMbUeJNYzt525T-cY6E_G8UL31sRMqtYMUxZKGH1O&buyer-country=US&locale=es_PE&currency=USD&components=buttons&enable-funding=card&disable-funding=venmo,paylater"
+        data-sdk-integration-source="developer-studio"
+    	></script>
 	</head>
 	<body>
 		<Header></Header>
