@@ -1,98 +1,56 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import CursosB from '../../Data/Cursos.json';
 import LoginModal from "../../components/Login-Modal.astro";
 
-const {slug} = Astro.params;
-const detalleCurso = CursosB.find(c => c.slug === slug);
+import {getPostInfo,postAddToCart } from "../../lib/wp.js";
+
+const slug = Astro.params.slug;
+if (!slug) throw new Error("/404");
+const posts = await getPostInfo(slug);
+const date = posts[0];
+
+const addCart = await postAddToCart(date.id);
+
 ---
 
 <Layout
-  title="boveda de cursos"
+  title={date.name}
   description="Pagina de todos los cursos que se encuentran disponibles"
 >
+
+
+
   <section class="bg-white p-10 md:p-10 relative">
     <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 mt-20 m-auto">
       <div class="flex flex-col-reverse md:flex-row gap-4">
-        <ul
-        class="flex flex-row md:h-[55vh] md:flex-col size-auto md:size-40 overflow-x-auto overflow-y-hidden md:overflow-y-auto md:overflow-x-hidden rounded-lg md:space-y-2 space-x-2 md:space-x-0 scroll-hidden"
-        id="thumbnailList"
-      >
       
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px] "
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
-          />
-        </li>
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
-          />
-        </li>
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
-          />
-        </li>
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
-          />
-        </li>
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
-          />
-        </li>
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg"
-          />
-        </li>
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg"
-          />
-        </li>
-        <li>
-          <img
-            class="thumbnail object-cover rounded cursor-pointer min-w-[100px]"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg"
-            alt=""
-            data-full="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg"
-          />
-        </li>
+        
+        <ul
+        id="thumbnailList"
+        class="flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto md:overflow-x-hidden rounded-lg gap-2 md:h-[55vh] md:w-[150px] scroll-hidden"
+      >
+        {date.imageSrcs.map((src: any) => (
+          <li class="flex-shrink-0">
+            <img
+              class="thumbnail w-[80px] md:w-[150px] h-[80px] md:h-[100px] object-fill rounded cursor-pointer"
+              src={src}
+              alt=""
+              data-full={src}
+            />
+          </li>
+        ))}
       </ul>
-      <div>
+        
+      <div class="w-full min-w-[300px] md:w-[600px] h-[30vh] md:h-[55vh] overflow-hidden rounded-lg bg-white">
         <a
-          href="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+          href={date.imageSrcs[0]}
           id="mainImageLink"
+          class="block w-full h-full"
         >
           <img
             id="mainImage"
-            class="h-[30vh] md:h-[55vh] w-full rounded-lg"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
+            class="w-full h-full object-fill"
+            src={date.imageSrcs[0]}
             alt=""
           />
         </a>
@@ -102,14 +60,14 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
 
       <div class="space-y-3">
         <h3 class="font-bold">
-          {detalleCurso!.titulo}
+          {date.name}
         </h3>
         <div class="flex gap-2">
           <span class="line-through text-gray-400">
-            S/ {parseFloat(detalleCurso?.["PrecioAnterior"]!).toFixed(2)}
+            S/ {parseFloat(date.regular_price).toFixed(2)}
           </span>
           <span class="text-gray-900 font-semibold">
-            S/ {parseFloat(detalleCurso?.["PrecioActual"]!).toFixed(2)}
+            S/ {parseFloat(date.price).toFixed(2)}
           </span> 
         </div>
         <strong>Información del curso:</strong>
@@ -129,14 +87,15 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
           <button
           type="button"
           class="add-buy-now w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-          data-curso={JSON.stringify(detalleCurso)}
+          data-curso={JSON.stringify('detalleCurso')}
           ></button>
           <button
           type="button"
           class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-          data-cursos={JSON.stringify(detalleCurso)}
+          data-cursos={JSON.stringify('detalleCurso')}
           >Agregar al carrito</button>
         </div>
+        
         <div class="mt-6">
           <span class="text-lg font-bold text-gray-700">Paga mediante:</span>
           <div class="flex items-center justify-between ">
@@ -404,6 +363,8 @@ const detalleCurso = CursosB.find(c => c.slug === slug);
 
 
 // Agregar al carrito
+
+
 <script class:list="">
 
   import agregarAlCarrito from "../../utils/Add-Shopping-Card.js";

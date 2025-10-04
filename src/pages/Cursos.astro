@@ -1,64 +1,64 @@
 ---
 import Start from "../components/icons/Start.astro";
 import Layout from "../layouts/Layout.astro";
-import CursosB from "../Data/Cursos.json";
+import {getProductsPost } from "../lib/wp.js";
 
-const NewListCursos = CursosB;
+const posts = await getProductsPost({perPage: 100});
+
 
 
 ---
 
 <Layout
-    title="boveda de cursos"
-    description="Pagina de todos los cursos que se encuentran disponibles"
+    title="Cursos - Boveda de Cursos"
+    description="Pagina de todos los cursos que se encuentran disponibles en la plataforma"
 >
     <section class="bg-white p-10 md:p-10 relative m-auto">
-        <div
-            class="max-w-[1300px] m-auto grid grid-cols-none md:grid-cols-4 mt-20 gap-5"
-        >
-            {
-                NewListCursos.map((news) => (
-                    <div class="">
-                        <a href={`/Curso/${news.slug}`} class=" space-y-2">
-                            <div class="relative group w-fit rounded-t-2xl overflow-hidden">
-                                <img
-                                    class="bg-transparent object-cover"
-                                    src={news.Portada}
-                                    alt=""
-                                />
-                                <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-30 transition duration-300" />
-                            </div>
-                            <p>{news.titulo + " " + news.id}</p>
-                            <div class="flex text-amber-300">
-                                <Start />
-                                <Start />
-                                <Start />
-                                <Start />
-                                <Start />
-                            </div>
-                            <div class="flex gap-2">
-                                <span class="line-through text-gray-400">
-                                    $. {parseFloat(news?.["PrecioAnterior"]!).toFixed(2)}
-                                </span>
-                                <span class="text-gray-900 font-semibold">
-                                    $. {parseFloat(news?.["PrecioActual"]!).toFixed(2)}
-                                </span>
-                            </div>
-                        </a>
-
-                        <button
-            type="button"
-            class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-            data-curso={JSON.stringify(news)}
-            >Agregar al carrito</button>
-                    </div>
-                ))
-            }
-        </div>
+        <div class="max-w-[1300px] m-auto grid grid-cols-1 md:grid-cols-4 mt-20 gap-5">
+            {posts.map((news: any) => (
+              <div class="flex flex-col justify-between max-h-[700px] bg-white rounded-2xl shadow-md p-4 transition-transform duration-300 hover:-translate-y-2">
+                <a href={`/Curso/${news.slug}`} class="space-y-2">
+                  <div class="w-full rounded-t-2xl overflow-hidden">
+                    <img
+                      class="w-full h-auto object-contain"
+                      src={news.imageSrcs[0]}
+                      alt={news.name}
+                    />
+                  </div>
+                  <p class="text-lg font-semibold">{news.name}</p>
+                  <div class="flex text-amber-300">
+                    <Start />
+                    <Start />
+                    <Start />
+                    <Start />
+                    <Start />
+                  </div>
+                </a>
+          
+                <div class="mt-auto space-y-3">
+                  <div class="flex gap-2">
+                    <span class="line-through text-gray-400">
+                      $. {parseFloat(news?.regular_price).toFixed(2)}
+                    </span>
+                    <span class="text-gray-900 font-semibold">
+                      $. {parseFloat(news?.price).toFixed(2)}
+                    </span>
+                  </div>
+          
+                  <button
+                    type="button"
+                    class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+                  >
+                    Agregar al carrito
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
     </section>   
 </Layout>
 
-<script class:list="">
+<!-- <script class:list="">
 
   import agregarAlCarrito from "../utils/Add-Shopping-Card.js";
 
@@ -72,4 +72,14 @@ const NewListCursos = CursosB;
       });
     });
   });
-</script>
+
+  
+</script> -->
+
+<!--  <button
+type="button"
+class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+data-curso={JSON.stringify(news)}
+>
+Agregar al carrito
+</button>  -->

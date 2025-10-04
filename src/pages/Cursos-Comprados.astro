@@ -1,4 +1,5 @@
 ---
+import CursoItem from "../components/Curso-Item.astro";
 import Layout from "../layouts/Layout.astro";
 
 ---
@@ -7,51 +8,52 @@ import Layout from "../layouts/Layout.astro";
   title="boveda de cursos"
   description="Pagina de todos los cursos que se encuentran disponibles"
 >
-  <section class="bg-white p-10 md:p-10 relative">    
-    <div class="max-w-[1200px] flex flex-col gap-4 mt-30 md:mt-40 m-auto">
-      <div class="flex justify-between items-center">
-        <samp class="text-2xl md:text-5xl"> Tus compras</samp>
-        
-      </div>
-      <div class="item relative overflow-x-auto">
-        <table
-          class="w-full text-left rtl:text-right border-b-1 border-black/7"
-        >
-          <thead
-            class="text-xs text-gray-400 uppercase border-b-1 border-black/7"
-          >
-            <tr>
-              <th scope="col" class="py-3">Producto</th>
-              <th scope="col" class="py-3 text-right">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="">
-              <td class="flex py-4 space-x-5">
-                <img
-                  src="../img/prueba.webp"
-                  class="w-30 md:w-44 max-w-full max-h-full"
-                  alt=""
-                />
-                <div class="flex-row">
-                    <h3 class="text-lg font-semibold line-clamp-3">
-                        Amazon FBA por Bessy Arteaga
-                    </h3>
-                </div>
-                <p id="result-message"></p>
-                <td
-                  class="itemTotal content-start text-gray-900 font-semibold py-4 text-right"
-                  >
-                  <a href="#" class="text-[12px] md:text-[16px] underline underline-offset-4 hover:text-blue-400 hover:decoration-blue-400 hover:decoration-2">
-                        Descargar</a>
-                  </td
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<section class="bg-white p-10 md:p-10 relative">
+  <div class="max-w-[1200px] flex flex-col gap-4 mt-30 md:mt-40 m-auto">
+    <div class="flex justify-between items-center">
+      <samp class="text-2xl md:text-5xl">Compras</samp>
     </div>
+    <div class="flex flex-col-reverse md:flex-row w-full gap-x-10">
+      <div class="grow-3">
+        <div class="text-gray-400 text-sm mb-5">
+          <p><span id="contador-carrito">0</span> CURSOS EN LA CESTA</p>
+        </div>
+        <div class="flex flex-col md:flex-row w-full justify-between space-y-2 ">
+          <div class="flex flex-row gap-x-5">
+              <div>
+                <img
+              src=""
+              class="curso-imagen size-14 md:size-24 max-w-full max-h-full"
+              alt=""/>
+              </div>
+            <div>
+              <strong class="curso-titulo text-black font-black text-sm line-clamp-3">curso de prueba 2</strong>
+              <p class="hidden md:block">Por Bessy Arteaga</p>
+              <div class="flex flex-col-reverse md:flex-row gap-2">
+                <!-- Badge Lo más vendido -->
+                <span class="bg-cyan-100 text-cyan-800 w-min whitespace-nowrap text-sm font-semibold px-2 py-1 rounded ">
+                  Lo más vendido
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col whitespace-nowrap">
+            <!-- Precio actual -->
+            <a class="curso-precioactual text-indigo-600 font-extrabold text-xl ">Descargar</a>
+            <!-- Precio anterior (tachado) -->
+            <a class="curso-precioanterior text-gray-500 text-sm">Seguir Comprando</a> 
+          </div>
+        </div>
+        <div
+          id="carrito-container"
+          class="space-y-6 divide-y divide-gray-200"
+        >
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
     <!-- En tu componente Astro -->  
 </Layout>
 
