@@ -32,7 +32,6 @@ export const getPostInfo = async (slug: string) => {
            imageSrcs
        }
    })
-   console.log(resultDetallado)
    return resultDetallado
 
 }
@@ -93,7 +92,7 @@ export const postAddToCart = async (productId: number) => {
 
   // 3. Retornar el estado actualizado del carrito
   const updatedCart = await addRes.json();
-  //console.log('Carrito actualizado:' , updatedCart);
+  
   //window.location.href = `${domain}/carrito?cartToken=${cartToken}`;
   return { cartToken, updatedCart };
 }
