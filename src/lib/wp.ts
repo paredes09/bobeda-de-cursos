@@ -19,6 +19,8 @@ export const getPostInfo = async (slug: string) => {
            name,
            price,
            regular_price,
+           description,
+           short_description,
            images
        } = post
 
@@ -29,6 +31,8 @@ export const getPostInfo = async (slug: string) => {
            name,
            price,
            regular_price,
+           description,
+           short_description,
            imageSrcs
        }
    })
