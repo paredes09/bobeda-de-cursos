@@ -9,8 +9,6 @@ if (!slug) throw new Error("/404");
 const posts = await getPostInfo(slug);
 const date = posts[0];
 
-const addCart = await postAddToCart(date.id);
-
 ---
 
 <Layout
@@ -94,6 +92,7 @@ const addCart = await postAddToCart(date.id);
           class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
           data-cursos={JSON.stringify('detalleCurso')}
           >Agregar al carrito</button>
+          <button id="btn-add-cart" data-id={date.id}>Nuevo Carrito</button>
         </div>
         
         <div class="mt-6">
@@ -247,6 +246,11 @@ const addCart = await postAddToCart(date.id);
     <!-- contenido del modal -->
     <LoginModal/>
   
+    
+    <script type="module">
+      import { setupAddToCart } from "/src/scripts/add-to-cart.ts";
+      setupAddToCart("#btn-add-cart");
+    </script>
  
 </Layout>
 
