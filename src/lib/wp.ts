@@ -71,7 +71,7 @@ export const getProductsPost = async ({perPage = 10} : {perPage?: number} ={}) =
 const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/v1/cart`; 
 
 export const postAddToCart = async (productId: number) => {
-    const res = await fetch(`${cartApiWooCommerceUrl}/add-item`, {
+    const res = await fetch('https://vip.bovedadecursos2025.com/wp-json/astro/v1/add-to-cart', {
       method: 'POST',
       credentials: 'include', // importante para cookies
       headers: { 'Content-Type': 'application/json' },
