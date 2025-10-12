@@ -70,22 +70,38 @@ export const getProductsPost = async ({perPage = 10} : {perPage?: number} ={}) =
 
 const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/v1/cart`; 
 
-export const postAddToCart = async (productId: number) => {
-    const res = await fetch('https://vip.bovedadecursos2025.com/wp-json/astro/v1/add-to-cart', {
+export const postAddToCart = async (productId : number) => {
+    // 1️⃣ Obtener el nonce desde WordPress
+    const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
+      credentials: 'include' // 👈 para enviar cookies
+    });
+  
+    const { nonce } = await nonceRes.json();
+  
+    // 2️⃣ Hacer la petición al carrito
+    const addRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/add-item', {
       method: 'POST',
-      credentials: 'include', // importante para cookies
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Nonce': nonce,              // 👈 WooCommerce la usa aquí
+      },
+      credentials: 'include',        // 👈 mantiene la sesión de WooCommerce
       body: JSON.stringify({
         id: productId,
         quantity: 1
       })
     });
   
-    const text = await res.text();
-    console.log('STATUS:', res.status);
-    console.log('BODY:', text);
+    // 3️⃣ Manejo de error
+    if (!addRes.ok) {
+      const errorBody = await addRes.text();
+      console.error('STATUS:', addRes.status);
+      console.error('BODY:', errorBody);
+      throw new Error('Error al agregar el producto al carrito');
+    }
   
-    if (!res.ok) throw new Error('Error al agregar el producto al carrito');
-    return JSON.parse(text);
+    // 4️⃣ Retornar carrito actualizado
+    const updatedCart = await addRes.json();
+    return updatedCart;
   };
   
