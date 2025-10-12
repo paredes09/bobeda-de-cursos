@@ -68,7 +68,7 @@ export const getProductsPost = async ({perPage = 10} : {perPage?: number} ={}) =
     return resultDetallado
 }
 
-const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/cart`; 
+const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/v1/cart`; 
 
 export const postAddToCart = async (productId: number) => {
     const res = await fetch(`${cartApiWooCommerceUrl}/add-item`, {
