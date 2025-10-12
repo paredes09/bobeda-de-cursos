@@ -68,25 +68,24 @@ export const getProductsPost = async ({perPage = 10} : {perPage?: number} ={}) =
     return resultDetallado
 }
 
-const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/v1/cart`; 
+const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/cart`; 
 
 export const postAddToCart = async (productId: number) => {
-    const addRes = await fetch(`${cartApiWooCommerceUrl}/add-item`, {
+    const res = await fetch(`${cartApiWooCommerceUrl}/add-item`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      credentials: 'include', // importante para cookies
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: productId,
-        quantity: 1,
-      }),
-      credentials: 'include', // 🔥 Esto es lo que permite enviar las cookies
+        quantity: 1
+      })
     });
   
-    if (!addRes.ok) throw new Error('Error al agregar el producto al carrito');
+    const text = await res.text();
+    console.log('STATUS:', res.status);
+    console.log('BODY:', text);
   
-    const updatedCart = await addRes.json();
-    console.log('Carrito actualizado:', updatedCart);
-    return updatedCart;
+    if (!res.ok) throw new Error('Error al agregar el producto al carrito');
+    return JSON.parse(text);
   };
   
