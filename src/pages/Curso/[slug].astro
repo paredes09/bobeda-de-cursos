@@ -218,7 +218,7 @@ const descripcionLarga = date.description;
     <LoginModal/>
   
     
-    <script type="module">
+    <script >
       import { setupAddToCart } from "/src/scripts/add-to-cart.ts";
       setupAddToCart("#btn-add-cart");
     </script>
@@ -236,7 +236,6 @@ const descripcionLarga = date.description;
 }
 </style>
 
-// scrip del temario
 <script is:inline>
   const plusSVG = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
@@ -337,9 +336,6 @@ const descripcionLarga = date.description;
 </script>
 
 
-// Agregar al carrito
-
-
 <script class:list="">
 
   import agregarAlCarrito from "../../utils/Add-Shopping-Card.js";
@@ -356,7 +352,6 @@ const descripcionLarga = date.description;
   });
 </script>
 
-// Compra rapida, no agrega al carrito, va directo a checkout
 <script class:list="">
   import comprarAhora from '../../utils/Buy-Now.js';
   document.addEventListener('DOMContentLoaded', async () => {
