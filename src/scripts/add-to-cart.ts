@@ -4,7 +4,6 @@ import { postAddToCart } from "../lib/wp.ts";
 export function setupAddToCart(buttonSelector: string) {
   const button = document.querySelector<HTMLButtonElement>(buttonSelector);
   if (!button) return;
-
   button.addEventListener("click", async () => {
     const productId = button.dataset.id;
     if (!productId) return;
@@ -16,7 +15,7 @@ export function setupAddToCart(buttonSelector: string) {
       await postAddToCart(Number(productId));
       button.textContent = "✅ Agregado!";
     } catch (err) {
-      console.error(err);
+      console.log(err);
       button.textContent = "❌ Error";
     } finally {
       setTimeout(() => {

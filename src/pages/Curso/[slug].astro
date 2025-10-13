@@ -62,11 +62,11 @@ const descripcionLarga = date.description;
           {date.name}
         </h3>
         <div class="flex gap-2">
-          <span class="line-through text-gray-400">
-            S/ {parseFloat(date.regular_price).toFixed(2)}
+          <span class="line-through text-gray-400 text-2xl">
+            $. {parseFloat(date.regular_price).toFixed(2)}
           </span>
-          <span class="text-gray-900 font-semibold">
-            S/ {parseFloat(date.price).toFixed(2)}
+          <span class="text-gray-900 font-semibold text-2xl">
+            $. {parseFloat(date.price).toFixed(2)}
           </span> 
         </div>
         <div class="prose prose-neutral max-w-none" set:html={descripcionCorta}></div>
