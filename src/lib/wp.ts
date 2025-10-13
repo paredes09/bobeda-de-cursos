@@ -42,7 +42,7 @@ export const getPostInfo = async (slug: string) => {
 
 
 export const getProductsPost = async ({perPage = 10, page = 1} : {perPage?: number; page?:number} ={}) => {
-    const response =await fetch(`${productApiWooCommerceUrl}/?per_page=${perPage}&page=${page}&consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`);
+    const response =await fetch(`${productApiWooCommerceUrl}?per_page=${perPage}&page=${page}&consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`);
     if (!response.ok) throw new Error('Failed to fetch products');
     
     const resultado = await response.json();

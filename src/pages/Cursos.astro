@@ -1,94 +1,118 @@
 ---
 import Start from "../components/icons/Start.astro";
 import Layout from "../layouts/Layout.astro";
-import {getProductsPost } from "../lib/wp.js";
+import { getProductsPost } from "../lib/wp.ts";
 
-const posts = await getProductsPost({perPage: 10});
+const perPage = 10;
+const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 
+// Productos actuales
+const posts = await getProductsPost({ perPage, page: currentPage });
 
+// Comprobamos si hay productos en la siguiente página
+let hasNextPage = false;
+try {
+  const next = await getProductsPost({ perPage, page: currentPage + 1 });
+  hasNextPage = next.length > 0;
+} catch {
+  hasNextPage = false;
+}
 
+// Calculamos cuántas páginas mostrar
+const totalPages = hasNextPage ? currentPage + 1 : currentPage;
 ---
 
 <Layout
-    title="Cursos - Boveda de Cursos"
-    description="Pagina de todos los cursos que se encuentran disponibles en la plataforma"
+  title="Cursos - Boveda de Cursos"
+  description="Página de todos los cursos que se encuentran disponibles en la plataforma"
 >
-    <section class="bg-white p-10 md:p-10 relative m-auto">
-        <div class="max-w-[1300px] m-auto grid grid-cols-1 md:grid-cols-4 mt-20 gap-5">
-            {posts.map((news: any) => (
-              <div class="flex flex-col justify-between max-h-[700px] bg-white rounded-2xl shadow-md p-4 transition-transform duration-300 hover:-translate-y-2">
-                <a href={`/Curso/${news.slug}`} class="space-y-2">
-                  <div class="w-full rounded-t-2xl overflow-hidden">
-                    <img
-                      class="w-full h-auto object-contain"
-                      src={news.imageSrcs[0]}
-                      alt={news.name}
-                    />
-                  </div>
-                  <p class="text-lg font-semibold">{news.name}</p>
-                  <div class="flex text-amber-300">
-                    <Start />
-                    <Start />
-                    <Start />
-                    <Start />
-                    <Start />
-                  </div>
-                </a>
-          
-                <div class="mt-auto space-y-3">
-                  <div class="flex gap-2">
-                    <span class="line-through text-gray-400">
-                      $. {parseFloat(news?.regular_price).toFixed(2)}
-                    </span>
-                    <span class="text-gray-900 font-semibold">
-                      $. {parseFloat(news?.price).toFixed(2)}
-                    </span>
-                  </div>
-                  <button
-                  type="button"
-                  class="btn-add-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-                  data-id={news.id}
-                  >
-                  Agregar al carrito
-                  </button>
-        </div>
-                </div>
-              </div>
-            ))}
+  <section class="bg-white p-10 md:p-10 relative m-auto">
+    <div class="max-w-[1300px] m-auto grid grid-cols-1 md:grid-cols-4 mt-20 gap-5">
+      {posts.map((news: any) => (
+        <div class="flex flex-col justify-between max-h-[700px] bg-white rounded-2xl shadow-md p-4 transition-transform duration-300 hover:-translate-y-2">
+          <a href={`/Curso/${news.slug}`} class="space-y-2">
+            <div class="w-full rounded-t-2xl overflow-hidden">
+              <img
+                class="w-full h-auto object-contain"
+                src={news.imageSrcs[0]}
+                alt={news.name}
+              />
+            </div>
+            <p class="text-lg font-semibold">{news.name}</p>
+            <div class="flex text-amber-300">
+              <Start /><Start /><Start /><Start /><Start />
+            </div>
+          </a>
 
+          <div class="mt-auto space-y-3">
+            <div class="flex gap-2">
+              <span class="line-through text-gray-400">
+                $. {parseFloat(news?.regular_price).toFixed(2)}
+              </span>
+              <span class="text-gray-900 font-semibold">
+                $. {parseFloat(news?.price).toFixed(2)}
+              </span>
+            </div>
+            <button
+              type="button"
+              class="btn-add-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+              data-id={news.id}
+            >
+              Agregar al carrito
+            </button>
           </div>
-    </section> 
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {posts.length > 0 && (
     <section class="flex justify-center items-center bg-white p-10 md:p-10 relative m-auto">
       <nav aria-label="Page navigation example">
         <ul class="inline-flex -space-x-px text-sm">
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">Previous</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
-          </li>
-          <li>
-            <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700">3</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">4</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">5</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">Next</a>
-          </li>
+          {currentPage > 1 && (
+            <li>
+              <a
+                href={`?page=${currentPage - 1}`}
+                class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700"
+              >
+                Anterior
+              </a>
+            </li>
+          )}
+
+          {Array.from({ length: totalPages }, (_, i) => (
+            <li>
+              <a
+                href={`?page=${i + 1}`}
+                class={`flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 ${
+                  currentPage === i + 1
+                    ? "text-blue-600 border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                    : "text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
+                }`}
+              >
+                {i + 1}
+              </a>
+            </li>
+          ))}
+
+          {hasNextPage && (
+            <li>
+              <a
+                href={`?page=${currentPage + 1}`}
+                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700"
+              >
+                Siguiente
+              </a>
+            </li>
+          )}
         </ul>
       </nav>
     </section>
-    
-    <script>
-      import { setupAddToCart } from "/src/scripts/add-to-cart.ts";
-      setupAddToCart(".btn-add-cart");
-    </script>
+  )}
 
+  <script>
+    import { setupAddToCart } from "/src/scripts/add-to-cart.ts";
+    setupAddToCart(".btn-add-cart");
+  </script>
 </Layout>
