@@ -78,10 +78,10 @@ const descripcionLarga = date.description;
           ></button>
           <button
           type="button"
-          class="add-to-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
-          data-cursos={JSON.stringify('detalleCurso')}
+          id="btn-add-cart"
+          class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+          data-id={date.id}
           >Agregar al carrito</button>
-          <button id="btn-add-cart" data-id={date.id}>Nuevo Carrito pe</button>
         </div>
         
         <div class="mt-6">
