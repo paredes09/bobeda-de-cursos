@@ -78,10 +78,12 @@ const descripcionLarga = date.description;
           ></button>
           <button
           type="button"
-          id="btn-add-cart"
-          class="w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
+          class="btn-add-cart w-full py-2.5 px-5 text-sm focus:outline-none bg-white rounded-lg border border-black hover:bg-black hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100"
           data-id={date.id}
-          >Agregar al carrito</button>
+        >
+          Agregar al carrito
+        </button>
+        
         </div>
         
         <div class="mt-6">
@@ -218,10 +220,11 @@ const descripcionLarga = date.description;
     <LoginModal/>
   
     
-    <script class="" >
+    <script>
       import { setupAddToCart } from "/src/scripts/add-to-cart.ts";
-      setupAddToCart("#btn-add-cart");
+      setupAddToCart(".btn-add-cart");
     </script>
+    
  
 </Layout>
 

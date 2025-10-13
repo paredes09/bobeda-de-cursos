@@ -41,8 +41,8 @@ export const getPostInfo = async (slug: string) => {
 }
 
 
-export const getProductsPost = async ({perPage = 10} : {perPage?: number} ={}) => {
-    const response =await fetch(`${productApiWooCommerceUrl}/?per_page=${perPage}&consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`);
+export const getProductsPost = async ({perPage = 10, page = 1} : {perPage?: number; page?:number} ={}) => {
+    const response =await fetch(`${productApiWooCommerceUrl}/?per_page=${perPage}&page=${page}&consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`);
     if (!response.ok) throw new Error('Failed to fetch products');
     
     const resultado = await response.json();
@@ -81,7 +81,7 @@ export const postAddToCart = async (productId : number) => {
     });
   
     const { nonce } = await nonceRes.json();
-  
+    console.log('NONCE RESPONSE:', nonce);
     // 2️⃣ Hacer la petición al carrito
     const addRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/add-item', {
       method: 'POST',
@@ -95,7 +95,10 @@ export const postAddToCart = async (productId : number) => {
         quantity: 1
       })
     });
-  
+        console.log('ADD TO CART RESPONSE STATUS:', addRes.status);
+        console.log('ADD TO CART RESPONSE HEADERS:', [...addRes.headers]);
+        const debugBody = await addRes.clone().text();
+        console.log('ADD TO CART RAW BODY:', debugBody);
     // 3️⃣ Manejo de error
     if (!addRes.ok) {
       const errorBody = await addRes.text();
