@@ -4,7 +4,7 @@ import User from "./icons/User.astro";
 import LoginModal from "./Login-Modal.astro";
 ---
 
-<header class="fixed z-40 w-screen">
+<header class="fixed z-999 w-screen">
     <section id="globalNav" class="globalNav absolute z-[10000] w-full overflow-x-hidden bg-slate-500/70 h-screen backdrop-blur-md">
         <div id="MainMenu" class="globalMainMenu mt-10 absolute w-full">
         <nav>
@@ -76,7 +76,6 @@ import LoginModal from "./Login-Modal.astro";
                 </div>
             </div>
         </div>
-        
         <div class="grow content-center hidden md:block ">
             <div class="flex flex-row-reverse">
                 <ul class="flex text-[18px] items-center">
@@ -131,7 +130,6 @@ import LoginModal from "./Login-Modal.astro";
  <LoginModal></LoginModal>
 
 </header>
-
 <style>
     .ms-full {
         margin-left: 100%;
@@ -303,7 +301,7 @@ import LoginModal from "./Login-Modal.astro";
             transform: rotate(45deg);
         }
     }
-</style> 
+</style>   
 <script>
 
     const btnDisplayNav = document.getElementById('btnDisplayNav') as HTMLButtonElement
