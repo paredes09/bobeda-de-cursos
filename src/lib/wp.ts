@@ -41,36 +41,39 @@ export const getPostInfo = async (slug: string) => {
 }
 
 
-export const getProductsPost = async ({perPage = 10, page = 1} : {perPage?: number; page?:number} ={}) => {
-    const response =await fetch(`${productApiWooCommerceUrl}?per_page=${perPage}&page=${page}&consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`);
-    if (!response.ok) throw new Error('Failed to fetch products');
-    
-    const resultado = await response.json();
-    if (!resultado.length) throw new Error('No data found');
-    
-    const resultDetallado = resultado.map((post : any) =>{
-        const {
-            id,
-            slug,
-            name,
-            price,
-            regular_price,
-            images
-        } = post
+export const getProductsPost = async ({ perPage = 10, page = 1 }: { perPage?: number; page?: number } = {}) => {
+  const response = await fetch(`${productApiWooCommerceUrl}?per_page=${perPage}&page=${page}&consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`);
+  if (!response.ok) throw new Error("Failed to fetch products");
 
-        const imageSrcs = images.map((img: any) => img.src);
+  const resultado = await response.json();
+  if (!resultado.length) throw new Error("No data found");
 
-        return {
-            id,
-            slug,
-            name,
-            price,
-            regular_price,
-            imageSrcs
-        }
-    })
-    return resultDetallado
-}
+  const resultDetallado = resultado.map((post: any) => {
+    const { id, slug, name, price, regular_price, images } = post;
+    const imageSrcs = images.map((img: any) => img.src);
+
+    return { id, slug, name, price, regular_price, imageSrcs };
+  });
+
+  return resultDetallado;
+};
+
+// ✅ Nueva función para obtener todos los productos sin paginación
+export const getAllProducts = async () => {
+  const perPage = 100;
+  let page = 1;
+  let allProducts: any[] = [];
+  let batch: any[] = [];
+
+  do {
+    batch = await getProductsPost({ perPage, page });
+    allProducts = allProducts.concat(batch);
+    page++;
+  } while (batch.length === perPage);
+
+  return allProducts;
+};
+
 
 const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/v1/cart`; 
 

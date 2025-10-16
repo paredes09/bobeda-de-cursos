@@ -7,7 +7,7 @@
             </a>
           
             <!-- Formulario ocupa todo el espacio disponible -->
-            <form class="flex-grow hidden lg:block w-full lg:w-auto">
+            <form action="/Cursos" method="GET" class="flex-grow hidden lg:block w-full lg:w-auto">
               <label for="default-search" class="sr-only">Buscar</label>
               <div class="flex gap-2 items-center">
                 <div class="relative flex-grow">
@@ -17,7 +17,7 @@
                         d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                   </div>
-                  <input type="search" id="default-search"
+                  <input type="search" name="q" id="default-search"
                     class="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Buscar cursos, logos..." required />
                 </div>
@@ -57,8 +57,8 @@
                 </div>
                 <!-- Lista de navegación -->
                 <ul class="flex flex-col w-full font-medium divide-x divide-black/10 lg:flex-row lg:w-auto">
-                  <li><a href="./" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Inicio</a></li>
-                  <li><a href="/Cursos" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Tienda</a></li>
+                  <li><a href="../" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Inicio</a></li>
+                  <li><a href="/Cursos" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Todos nuestros cursos</a></li>
                   <li><a href="https://t.me/bovedadecursos/"  target="_blank" class="block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Soporte 24/7</a></li>
                 </ul>
               </div>

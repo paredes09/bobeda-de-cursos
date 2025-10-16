@@ -1,34 +1,58 @@
 ---
 import Start from "../components/icons/Start.astro";
 import Layout from "../layouts/Layout.astro";
-import { getProductsPost } from "../lib/wp.ts";
+import { getProductsPost, getAllProducts } from "../lib/wp.ts";
 
 const perPage = 10;
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
+const query = Astro.url.searchParams.get("q")?.toLowerCase() || "";
+const isSearching = query.length > 0;
 
-// Productos actuales
-const posts = await getProductsPost({ perPage, page: currentPage });
+// Obtener productos
+let posts: any[] = [];
 
-// Comprobamos si hay productos en la siguiente página
-let hasNextPage = false;
-try {
-  const next = await getProductsPost({ perPage, page: currentPage + 1 });
-  hasNextPage = next.length > 0;
-} catch {
-  hasNextPage = false;
+if (isSearching) {
+  posts = await getAllProducts();
+} else {
+  posts = await getProductsPost({ perPage, page: currentPage });
 }
 
-// Calculamos cuántas páginas mostrar
+// Filtrar si hay búsqueda
+const filteredPosts = isSearching
+  ? posts.filter((post: any) =>
+      post.name.toLowerCase().includes(query)
+    )
+  : posts;
+
+// Mostrar paginación solo si no hay búsqueda
+const showPagination = !isSearching;
+
+// Comprobar si hay productos en la siguiente página
+let hasNextPage = false;
+if (!isSearching) {
+  try {
+    const next = await getProductsPost({ perPage, page: currentPage + 1 });
+    hasNextPage = next.length > 0;
+  } catch {
+    hasNextPage = false;
+  }
+}
+
 const totalPages = hasNextPage ? currentPage + 1 : currentPage;
 ---
-
 <Layout
   title="Cursos - Boveda de Cursos"
   description="Página de todos los cursos que se encuentran disponibles en la plataforma"
 >
   <section class="bg-white p-10 md:p-10 relative m-auto">
     <div class="max-w-[1300px] m-auto grid grid-cols-1 md:grid-cols-4 mt-20 gap-5">
-      {posts.map((news: any) => (
+      {filteredPosts.length === 0 && (
+        <p class="text-center text-gray-500 text-lg col-span-full">
+          No se encontraron cursos para “{query}”.
+        </p>
+      )}
+
+      {filteredPosts.map((news: any) => (
         <div class="flex flex-col justify-between max-h-[700px] bg-white rounded-2xl shadow-md p-4 transition-transform duration-300 hover:-translate-y-2">
           <a href={`/Curso/${news.slug}`} class="space-y-2">
             <div class="w-full rounded-t-2xl overflow-hidden">
@@ -66,7 +90,7 @@ const totalPages = hasNextPage ? currentPage + 1 : currentPage;
     </div>
   </section>
 
-  {posts.length > 0 && (
+  {showPagination && filteredPosts.length > 0 && (
     <section class="flex justify-center items-center bg-white p-10 md:p-10 relative m-auto">
       <nav aria-label="Page navigation example">
         <ul class="inline-flex -space-x-px text-sm">
@@ -111,7 +135,7 @@ const totalPages = hasNextPage ? currentPage + 1 : currentPage;
     </section>
   )}
 
-  <script>
+  <script class="">
     import { setupAddToCart } from "/src/scripts/add-to-cart.ts";
     setupAddToCart(".btn-add-cart");
   </script>
