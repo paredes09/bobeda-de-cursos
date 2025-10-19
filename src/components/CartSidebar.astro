@@ -1,0 +1,46 @@
+---
+/* Ya no incluye el botón de abrir; ahora solo el sidebar y overlay */
+---
+
+<!-- Overlay oscuro -->
+<div id="overlay"
+  class="hidden fixed inset-0 bg-black/40 z-100">
+</div>
+
+<!-- Sidebar del carrito (desde la derecha) -->
+<div id="cartSidebar"
+  class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-150 flex flex-col p-4 overflow-y-auto">
+  
+  <h2 class="text-lg font-semibold mb-4">Carrito de compras</h2>
+  <p class="text-gray-500">No products in the cart.</p>
+  <div id="cartItems" class="flex flex-col gap-2"></div>
+
+    <hr class="my-4">
+
+    <p class="text-lg font-bold">
+    Subtotal: <span id="cartSubtotal">$0.00</span>
+    </p>
+
+</div>
+<button id="closeCartBtn"
+  class="hidden fixed top-4 right-[300px] md:right-[410px] text-gray-300 text-2xl z-[70]">
+  ✖
+</button>
+
+
+<script type="module" src="/src/scripts/cart.ts"></script>
+
+<script class="">
+  window.openCart = () => {
+    document.getElementById('cartSidebar')?.classList.remove('translate-x-full');
+    document.getElementById('overlay')?.classList.remove('hidden');
+    document.getElementById('closeCartBtn')?.classList.remove('hidden');
+    window.fetchCart(); // ✅ Cuando se abre, se carga el carrito real
+  };
+
+  window.closeCart = () => {
+    document.getElementById('cartSidebar')?.classList.add('translate-x-full');
+    document.getElementById('overlay')?.classList.add('hidden');
+    document.getElementById('closeCartBtn')?.classList.add('hidden');
+  };
+</script>
