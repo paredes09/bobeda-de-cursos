@@ -1,9 +1,10 @@
-const domain = import.meta.env.WP_DOMAIN
 
-const CART_URL  = `${domain}/wp-json/wc/store/v1/cart`
+
+const CART_URL  = 'https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart';
 
 export async function fetchCart() {
     try {
+        console.log('Fetching cart from', CART_URL);
       const response = await fetch(CART_URL);
       if (!response.ok) throw new Error('Error cargando carrito');
       const cart = await response.json();
