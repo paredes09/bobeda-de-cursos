@@ -1,6 +1,6 @@
 const domain = import.meta.env.WP_DOMAIN
 
-const CART_URL  = `${domain}/wp-json/cocart/v1/cart`
+const CART_URL  = `${domain}/wp-json/wc/store/v1/cart`
 
 export async function fetchCart() {
     try {
