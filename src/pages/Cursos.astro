@@ -17,6 +17,7 @@ if (isSearching) {
   posts = await getProductsPost({ perPage, page: currentPage });
 }
 const cart = await getCart();
+console.log(cart);
 // Filtrar si hay búsqueda
 const filteredPosts = isSearching
   ? posts.filter((post: any) =>
