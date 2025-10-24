@@ -82,10 +82,7 @@ export const postAddToCart = async (productId : number) => {
     const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
       credentials: 'include' // 👈 para enviar cookies
     });
-  
     const { nonce } = await nonceRes.json();
-    console.log('NONCE RESPONSE:', nonce);
-    // 2️⃣ Hacer la petición al carrito
     const addRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/add-item', {
       method: 'POST',
       headers: {
@@ -104,6 +101,7 @@ export const postAddToCart = async (productId : number) => {
         console.log('ADD TO CART RAW BODY:', debugBody) */;
     // 3️⃣ Manejo de error
     if (!addRes.ok) {
+      await getCart();
       const errorBody = await addRes.text();
       console.error('STATUS:', addRes.status);
       console.error('BODY:', errorBody);
@@ -115,27 +113,23 @@ export const postAddToCart = async (productId : number) => {
     return updatedCart;
   };
   
-
+  
   export const getCart = async () => {
-    const reponse = await fetch(cartApiWooCommerceUrl);
-    if (!reponse.ok) throw new Error('Failed to fetch cart');
-    const cart = await reponse.json();
-    const resultadoCart = cart.items.map((items: any) => {
-      const{
-        id,
-        name,
-        quantity,
-        image
-      } = items;
-      const imageSrc = image[0].src;
-      return {
-        id,
-        name,
-        quantity,
-        imageSrc
-      }
-    }
-    );
+    const response = await fetch(cartApiWooCommerceUrl);
+  
+    if (!response.ok) throw new Error('Failed to fetch cart');
+  
+    const cart = await response.json();
+  
+    const resultadoCart = cart.items.map((item: any) => {
+      const { id, name, quantity, images } = item;
+  
+      // WooCommerce REST API normalmente usa "images" (no "image")
+      const imageSrc = images?.[0]?.src || '';
+  
+      return { id, name, quantity, imageSrc };
+    });
     console.log('CART ITEMS:', resultadoCart);
     return resultadoCart;
-  }
+  };
+  
