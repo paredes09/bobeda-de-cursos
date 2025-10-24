@@ -1,7 +1,7 @@
 ---
 import Start from "../components/icons/Start.astro";
 import Layout from "../layouts/Layout.astro";
-import { getProductsPost, getAllProducts } from "../lib/wp.ts";
+import { getProductsPost, getAllProducts, getCart } from "../lib/wp.ts";
 
 const perPage = 10;
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
@@ -16,7 +16,7 @@ if (isSearching) {
 } else {
   posts = await getProductsPost({ perPage, page: currentPage });
 }
-
+const cart = await getCart();
 // Filtrar si hay búsqueda
 const filteredPosts = isSearching
   ? posts.filter((post: any) =>

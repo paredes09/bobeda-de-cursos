@@ -98,10 +98,10 @@ export const postAddToCart = async (productId : number) => {
         quantity: 1
       })
     });
-        console.log('ADD TO CART RESPONSE STATUS:', addRes.status);
+/*         console.log('ADD TO CART RESPONSE STATUS:', addRes.status);
         console.log('ADD TO CART RESPONSE HEADERS:', [...addRes.headers]);
         const debugBody = await addRes.clone().text();
-        console.log('ADD TO CART RAW BODY:', debugBody);
+        console.log('ADD TO CART RAW BODY:', debugBody) */;
     // 3️⃣ Manejo de error
     if (!addRes.ok) {
       const errorBody = await addRes.text();
@@ -115,3 +115,27 @@ export const postAddToCart = async (productId : number) => {
     return updatedCart;
   };
   
+
+  export const getCart = async () => {
+    const reponse = await fetch(cartApiWooCommerceUrl);
+    if (!reponse.ok) throw new Error('Failed to fetch cart');
+    const cart = await reponse.json();
+    const resultadoCart = cart.items.map((items: any) => {
+      const{
+        id,
+        name,
+        quantity,
+        image
+      } = items;
+      const imageSrc = image[0].src;
+      return {
+        id,
+        name,
+        quantity,
+        imageSrc
+      }
+    }
+    );
+    console.log('CART ITEMS:', resultadoCart);
+    return resultadoCart;
+  }
