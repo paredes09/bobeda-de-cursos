@@ -78,10 +78,8 @@ export const getAllProducts = async () => {
 
 
 export const postAddToCart = async (productId : number) => {
-  await getCart();
-    // 1️⃣ Obtener el nonce desde WordPress
     const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
-      credentials: 'include' // 👈 para enviar cookies
+      credentials: 'include' 
     });
     const { nonce } = await nonceRes.json();
     const addRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/add-item', {
