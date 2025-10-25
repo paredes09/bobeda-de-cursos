@@ -113,7 +113,7 @@ export const postAddToCart = async (productId : number) => {
   
   
   export const getCart = async () => {
-    const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart');
+    const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/cart');
   
     if (!response.ok) throw new Error('Failed to fetch cart');
   
