@@ -78,8 +78,8 @@ export const getAllProducts = async () => {
 
 
 export const postAddToCart = async (productId : number) => {
-    await getCart(); // Asegura que la cookie de sesión esté establecida
-    const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
+    
+  const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
       credentials: 'include' 
     });
     const { nonce } = await nonceRes.json();
@@ -106,7 +106,7 @@ export const postAddToCart = async (productId : number) => {
       console.error('BODY:', errorBody);
       throw new Error('Error al agregar el producto al carrito');
     }
-  
+    await getCart(); 
     // 4️⃣ Retornar carrito actualizado
     const updatedCart = await addRes.json();
     return updatedCart;
@@ -114,13 +114,13 @@ export const postAddToCart = async (productId : number) => {
   
   
   export const getCart = async () => {
-    const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/cart');
+    const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/items');
   
     if (!response.ok) throw new Error('Failed to fetch cart');
   
     const cart = await response.json();
   
-    const resultadoCart = cart.items.map((item: any) => {
+    const resultadoCart = cart.map((item: any) => {
       const { id, name, quantity, images } = item;
   
       // WooCommerce REST API normalmente usa "images" (no "image")
@@ -128,6 +128,7 @@ export const postAddToCart = async (productId : number) => {
   
       return { id, name, quantity, imageSrc };
     });
+    console.log('FETCH CART RESPONSE STATUS:', cart)
     console.log('CART ITEMS:', resultadoCart);
     return resultadoCart;
   };
