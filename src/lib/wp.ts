@@ -128,6 +128,7 @@ export const postAddToCart = async (productId : number) => {
   
       return { id, name, quantity, imageSrc };
     });
+    console.log('CART ITEMS:', resultadoCart);
     return resultadoCart;
   };
   
