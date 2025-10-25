@@ -38,12 +38,20 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
 </div>
 
 <!-- Botón global de abrir -->
-  <button id="cartBtn"
-    class="relative text-gray-700 hover:text-black"
-    onclick="openCart()">
-    <Shopping_cart class="size-8 inline-block" />
-    <span id="cart-count" class="ml-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full hidden"> 0 </span>
-  </button>
+<button id="cartBtn"
+  class="relative text-gray-700 hover:text-black"
+  onclick="openCart()">
+  <Shopping_cart class="size-8 inline-block" />
+  
+  <!-- Burbuja con número centrado -->
+  <span id="cart-count"
+      class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 rounded-full hidden"
+    >
+    4
+    </span>
+
+</button>
+
 
   
 <!-- Scripts embebidos -->
@@ -102,8 +110,10 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
     if (cartItems.length > 0) {
       badge.textContent = cartItems.length;
       badge.classList.remove("hidden");
+      badge.classList.add("flex", "items-center", "justify-center");
     } else {
       badge.classList.add("hidden");
+      badge.classList.remove("flex", "items-center", "justify-center");
     }
   }
 
