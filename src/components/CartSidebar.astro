@@ -1,47 +1,71 @@
 ---
-/* Ya no incluye el botón de abrir; ahora solo el sidebar y overlay */
+import { getCart } from "../lib/wp.ts";
+
+// ✅ Obtener carrito desde WooCommerce (SSR)
+let cartItems = [];
+try {
+  cartItems = await getCart();
+} catch (error) {
+  console.error('Error al cargar carrito:', error);
+}
 ---
 
 <!-- Overlay oscuro -->
 <div id="overlay"
-  class="hidden fixed inset-0 bg-black/40 z-100">
-</div>
+  class="hidden fixed inset-0 bg-black/40 z-[90]"
+  onclick="closeCart()"></div>
 
-<!-- Sidebar del carrito (desde la derecha) -->
+<!-- Sidebar del carrito -->
 <div id="cartSidebar"
-  class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-150 flex flex-col p-4 overflow-y-auto">
-  
-  <h2 class="text-lg font-semibold mb-4">Carrito de compras</h2>
-  <p class="text-gray-500">No products in the cart.</p>
-  <div id="cartItems" class="flex flex-col gap-2"></div>
+  class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-[100] flex flex-col p-4 overflow-y-auto">
 
-    <hr class="my-4">
+  <div class="flex justify-between items-center">
+    <h2 class="text-lg font-semibold">Carrito de compras</h2>
+    <button onclick="closeCart()" class="text-gray-400 hover:text-black text-xl">✖</button>
+  </div>
 
-    <p class="text-lg font-bold">
-    Subtotal: <span id="cartSubtotal">$0.00</span>
-    </p>
+  <hr class="my-3" />
 
+  <!-- Contenido del carrito -->
+  <div id="cartItems" class="flex flex-col gap-2">
+    {
+      cartItems.length === 0 ? (
+        <p class="text-gray-500">No products in the cart.</p>
+      ) : (
+        cartItems.map((item: any) => (
+          <div class="flex items-center gap-3 p-2 border rounded-lg shadow-sm">
+            <img src={item.imageSrc} alt={item.name} class="w-12 h-12 object-cover rounded border" />
+            <div class="flex-1">
+              <p class="text-sm font-medium">{item.name}</p>
+              <p class="text-xs text-gray-500">Cantidad: <b>{item.quantity}</b></p>
+            </div>
+            <button class="text-gray-400 hover:text-red-500">✖</button>
+          </div>
+        ))
+      )
+    }
+  </div>
 </div>
-<button id="closeCartBtn"
-  class="hidden fixed top-4 right-[300px] md:right-[410px] text-gray-300 text-2xl z-[70]">
-  ✖
+
+<!-- Botón global de abrir -->
+<button onclick="openCart()" id="cartBtn" class="fixed top-5 right-5 bg-gray-800 text-white px-4 py-2 rounded-full">
+  🛒
+  {cartItems.length > 0 && (
+    <span class="ml-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+      {cartItems.length}
+    </span>
+  )}
 </button>
 
-
-<script
- src="/src/scripts/cart.ts"></script>
-
+<!-- Scripts embebidos -->
 <script class="">
   window.openCart = () => {
-    document.getElementById('cartSidebar')?.classList.remove('translate-x-full');
-    document.getElementById('overlay')?.classList.remove('hidden');
-    document.getElementById('closeCartBtn')?.classList.remove('hidden');
-    window.fetchCart(); // ✅ Cuando se abre, se carga el carrito real
+    document.getElementById('cartSidebar').classList.remove('translate-x-full');
+    document.getElementById('overlay').classList.remove('hidden');
   };
 
   window.closeCart = () => {
-    document.getElementById('cartSidebar')?.classList.add('translate-x-full');
-    document.getElementById('overlay')?.classList.add('hidden');
-    document.getElementById('closeCartBtn')?.classList.add('hidden');
+    document.getElementById('cartSidebar').classList.add('translate-x-full');
+    document.getElementById('overlay').classList.add('hidden');
   };
 </script>
