@@ -100,7 +100,6 @@ export const postAddToCart = async (productId : number) => {
         console.log('ADD TO CART RAW BODY:', debugBody) */;
     // 3️⃣ Manejo de error
     if (!addRes.ok) {
-      await getCart();
       const errorBody = await addRes.text();
       console.error('STATUS:', addRes.status);
       console.error('BODY:', errorBody);
