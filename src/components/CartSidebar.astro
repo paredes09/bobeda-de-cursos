@@ -1,8 +1,6 @@
 ---
-import { getCart } from "../lib/wp.ts";
+import Shopping_cart from "./icons/Shopping-cart.astro";
 ---
-
-<!-- Overlay oscuro -->
 <div id="overlay"
   class="hidden fixed inset-0 bg-black/40 z-[90]"
   onclick="closeCart();"></div>
@@ -25,12 +23,16 @@ import { getCart } from "../lib/wp.ts";
 </div>
 
 <!-- Botón global de abrir -->
-<button onclick="openCart()" id="cartBtn" class="fixed top-5 right-5 bg-gray-800 text-white px-4 py-2 rounded-full">
-  🛒
-  <span id="cart-count" class="ml-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full hidden">
-    0
-  </span>
-</button>
+  <button
+    class="relative text-gray-700 hover:text-black"
+    onclick="openCart()">
+    <Shopping_cart class="size-8 inline-block" />
+    <span
+      id="cart-count"
+      class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+      0
+    </span>
+  </button>
 
 <!-- Scripts embebidos -->
 <script class="">

@@ -1,6 +1,6 @@
 ---
   import CartSidebar from "../components/CartSidebar.astro";
-  import Shopping_cart from "./icons/Shopping-cart.astro";
+
 ---
 
     
@@ -39,16 +39,6 @@
               <a href="https://vip.bovedadecursos2025.com/mi-cuenta/"
                 class="hover:text-white hover:bg-black focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-lg px-4 py-2 focus:outline-none">Iniciar
                 sesión</a>
-                <button
-                  class="relative text-gray-700 hover:text-black"
-                  onclick="openCart()">
-                  <Shopping_cart class="size-8 inline-block" />
-                  <span
-                    id="cartCount"
-                    class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                    3
-                  </span>
-                </button>
                 <CartSidebar/>
               <button id="menu-toggle" type="button"
                 class="inline-flex items-center p-2 text-sm text-black rounded-lg lg:hidden hover:bg-black hover:text-white">
