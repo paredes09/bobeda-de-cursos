@@ -78,6 +78,7 @@ export const getAllProducts = async () => {
 
 
 export const postAddToCart = async (productId : number) => {
+    await getCart(); // Asegura que la cookie de sesión esté establecida
     const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
       credentials: 'include' 
     });
