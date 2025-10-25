@@ -114,22 +114,22 @@ export const postAddToCart = async (productId : number) => {
   
   
   export const getCart = async () => {
-    const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/items');
+    const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart', {
+      credentials: 'include' // 🔹 Para enviar la cookie WC_CART_HASH y WC_SESSION
+    });
   
     if (!response.ok) throw new Error('Failed to fetch cart');
   
     const cart = await response.json();
   
-    const resultadoCart = cart.map((item: any) => {
+    console.log('CART FULL RESPONSE:', cart); // <-- Aquí verás items, totals, etc.
+  
+    const resultadoCart = cart.items.map((item: any) => {
       const { id, name, quantity, images } = item;
-  
-      // WooCommerce REST API normalmente usa "images" (no "image")
       const imageSrc = images?.[0]?.src || '';
-  
       return { id, name, quantity, imageSrc };
     });
-    console.log('FETCH CART RESPONSE STATUS:', cart)
+  
     console.log('CART ITEMS:', resultadoCart);
     return resultadoCart;
   };
-  
