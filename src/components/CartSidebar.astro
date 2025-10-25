@@ -2,17 +2,24 @@
 import Shopping_cart from "./icons/Shopping-cart.astro";
 ---
 <div id="overlay"
-  class="hidden fixed inset-0 bg-black/40 z-[90]"
+  class="hidden fixed inset-0 bg-black/40 z-[90] "
   onclick="closeCart();"></div>
 
 <!-- Sidebar del carrito -->
 <div id="cartSidebar"
-  class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-[100] flex flex-col p-4 overflow-y-auto">
 
-  <div class="flex justify-between items-center">
-    <h2 class="text-lg font-semibold">Carrito de compras</h2>
-    <button onclick="closeCart();" class="text-gray-400 hover:text-black text-xl">✖</button>
+  class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-[100] flex flex-col p-4 overflow-y-auto">
+  <div class="flex justify-between items-center pb-3 border-b border-gray-200">
+    <h2 class="text-xl font-bold text-gray-800 tracking-tight">Carrito de compras
+    </h2>
+    <button 
+      onclick="closeCart();" 
+      class="text-gray-400 hover:text-red-500 transition-all duration-200 text-2xl font-light"
+      aria-label="Cerrar carrito">
+      ✖
+    </button>
   </div>
+  
 
   <hr class="my-3" />
 
@@ -43,14 +50,10 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
   // ✅ Cargar carrito en el cliente apenas se abre la página
   async function loadCart() {
     try {
-      console.log("🔄 Cargando carrito desde WooCommerce...");
       cartItems = await getCart(); // Llamada fetch al backend
-      console.log("✅ Carrito cargado:", cartItems);
-
       renderCartItems();
       updateCartBadge();
     } catch (error) {
-      console.error("❌ Error al cargar carrito:", error);
       document.getElementById("cartItems").innerHTML =
         '<p class="text-gray-500">Error al cargar el carrito.</p>';
     }
@@ -68,14 +71,26 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
 
     cartItems.forEach((item) => {
       container.innerHTML += `
-        <div class="flex items-center gap-3 p-2 border rounded-lg shadow-sm">
-          <img src="${item.imageSrc}" alt="${item.name}" class="w-12 h-12 object-cover rounded border" />
-          <div class="flex-1">
-            <p class="text-sm font-medium">${item.name}</p>
-            <p class="text-xs text-gray-500">Cantidad: <b>${item.quantity}</b></p>
-          </div>
-          <button class="text-gray-400 hover:text-red-500">✖</button>
+      <div class="flex items-center gap-3 p-3 rounded-xl shadow-md bg-white hover:shadow-lg transition-all">
+        <img 
+          src="${item.imageSrc}" 
+          alt="${item.name}" 
+          class="w-14 h-14 md:w-16 md:h-16 object-cover rounded-lg"
+        />
+        
+        <div class="flex-1">
+          <p class="text-sm md:text-base font-semibold text-gray-700 leading-tight">${item.name}</p>
+          <p class="text-xs md:text-sm text-gray-500">Cantidad: <span class="font-bold text-gray-700">${item.quantity}</span></p>
         </div>
+
+        <button 
+          class="text-gray-400 hover:text-red-500 transition text-lg"
+          onclick="removeItem('${item.id}')"
+        >
+          ✖
+        </button>
+      </div>
+
       `;
     });
   }
@@ -96,13 +111,11 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
 
   // ✅ Funciones para abrir y cerrar el carrito
   window.openCart = () => {
-    console.log("🛒 Abriendo sidebar...");
     document.getElementById('cartSidebar')?.classList.remove('translate-x-full');
     document.getElementById('overlay')?.classList.remove('hidden');
   };
 
   window.closeCart = () => {
-    console.log("❌ Cerrando sidebar...");
     document.getElementById('cartSidebar')?.classList.add('translate-x-full');
     document.getElementById('overlay')?.classList.add('hidden');
   };
