@@ -1,7 +1,6 @@
 ---
 import { getCart } from "../lib/wp.ts";
 
-// ✅ Obtener carrito desde WooCommerce (SSR)
 let cartItems = [];
 try {
   cartItems = await getCart();

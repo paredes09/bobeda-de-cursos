@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import LoginModal from "../../components/Login-Modal.astro";
 
-import {getPostInfo,postAddToCart } from "../../lib/wp.js";
+import {getPostInfo } from "../../lib/wp.js";
 
 const slug = Astro.params.slug;
 if (!slug) throw new Error("/404");
