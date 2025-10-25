@@ -1,12 +1,5 @@
 ---
 import { getCart } from "../lib/wp.ts";
-
-let cartItems = [];
-try {
-  cartItems = await getCart();
-} catch (error) {
-  console.error('Error al cargar carrito:', error);
-}
 ---
 
 <!-- Overlay oscuro -->
@@ -25,46 +18,90 @@ try {
 
   <hr class="my-3" />
 
-  <!-- Contenido del carrito -->
+  <!-- Contenido dinámico del carrito -->
   <div id="cartItems" class="flex flex-col gap-2">
-    {
-      cartItems.length === 0 ? (
-        <p class="text-gray-500">No products in the cart.</p>
-      ) : (
-        cartItems.map((item: any) => (
-          <div class="flex items-center gap-3 p-2 border rounded-lg shadow-sm">
-            <img src={item.imageSrc} alt={item.name} class="w-12 h-12 object-cover rounded border" />
-            <div class="flex-1">
-              <p class="text-sm font-medium">{item.name}</p>
-              <p class="text-xs text-gray-500">Cantidad: <b>{item.quantity}</b></p>
-            </div>
-            <button class="text-gray-400 hover:text-red-500">✖</button>
-          </div>
-        ))
-      )
-    }
+    <p class="text-gray-500">Cargando carrito...</p>
   </div>
 </div>
 
 <!-- Botón global de abrir -->
 <button onclick="openCart()" id="cartBtn" class="fixed top-5 right-5 bg-gray-800 text-white px-4 py-2 rounded-full">
   🛒
-  {cartItems.length > 0 && (
-    <span class="ml-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-      {cartItems.length}
-    </span>
-  )}
+  <span id="cart-count" class="ml-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full hidden">
+    0
+  </span>
 </button>
 
 <!-- Scripts embebidos -->
 <script class="">
+  import { getCart } from "../lib/wp.ts";
+
+  let cartItems = [];
+
+  // ✅ Cargar carrito en el cliente apenas se abre la página
+  async function loadCart() {
+    try {
+      console.log("🔄 Cargando carrito desde WooCommerce...");
+      cartItems = await getCart(); // Llamada fetch al backend
+      console.log("✅ Carrito cargado:", cartItems);
+
+      renderCartItems();
+      updateCartBadge();
+    } catch (error) {
+      console.error("❌ Error al cargar carrito:", error);
+      document.getElementById("cartItems").innerHTML =
+        '<p class="text-gray-500">Error al cargar el carrito.</p>';
+    }
+  }
+
+  // ✅ Renderizar productos dentro del sidebar
+  function renderCartItems() {
+    const container = document.getElementById("cartItems");
+    container.innerHTML = ""; // limpiar contenido
+
+    if (!cartItems || cartItems.length === 0) {
+      container.innerHTML = '<p class="text-gray-500">No products in the cart.</p>';
+      return;
+    }
+
+    cartItems.forEach((item) => {
+      container.innerHTML += `
+        <div class="flex items-center gap-3 p-2 border rounded-lg shadow-sm">
+          <img src="${item.imageSrc}" alt="${item.name}" class="w-12 h-12 object-cover rounded border" />
+          <div class="flex-1">
+            <p class="text-sm font-medium">${item.name}</p>
+            <p class="text-xs text-gray-500">Cantidad: <b>${item.quantity}</b></p>
+          </div>
+          <button class="text-gray-400 hover:text-red-500">✖</button>
+        </div>
+      `;
+    });
+  }
+
+  // ✅ Actualiza la burbuja del ícono del carrito
+  function updateCartBadge() {
+    const badge = document.getElementById("cart-count");
+    if (cartItems.length > 0) {
+      badge.textContent = cartItems.length;
+      badge.classList.remove("hidden");
+    } else {
+      badge.classList.add("hidden");
+    }
+  }
+
+  // ✅ Ejecutamos al cargar la página
+  loadCart();
+
+  // ✅ Funciones para abrir y cerrar el carrito
   window.openCart = () => {
-    document.getElementById('cartSidebar').classList.remove('translate-x-full');
-    document.getElementById('overlay').classList.remove('hidden');
+    console.log("🛒 Abriendo sidebar...");
+    document.getElementById('cartSidebar')?.classList.remove('translate-x-full');
+    document.getElementById('overlay')?.classList.remove('hidden');
   };
 
   window.closeCart = () => {
-    document.getElementById('cartSidebar').classList.add('translate-x-full');
-    document.getElementById('overlay').classList.add('hidden');
+    console.log("❌ Cerrando sidebar...");
+    document.getElementById('cartSidebar')?.classList.add('translate-x-full');
+    document.getElementById('overlay')?.classList.add('hidden');
   };
 </script>
