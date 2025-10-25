@@ -75,9 +75,10 @@ export const getAllProducts = async () => {
 };
 
 
-const cartApiWooCommerceUrl = `${domain}/wp-json/wc/store/v1/cart`; 
+
 
 export const postAddToCart = async (productId : number) => {
+  await getCart();
     // 1️⃣ Obtener el nonce desde WordPress
     const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
       credentials: 'include' // 👈 para enviar cookies
@@ -115,7 +116,7 @@ export const postAddToCart = async (productId : number) => {
   
   
   export const getCart = async () => {
-    const response = await fetch(cartApiWooCommerceUrl);
+    const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart');
   
     if (!response.ok) throw new Error('Failed to fetch cart');
   
