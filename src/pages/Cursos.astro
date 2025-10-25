@@ -8,6 +8,7 @@ const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 const query = Astro.url.searchParams.get("q")?.toLowerCase() || "";
 const isSearching = query.length > 0;
 
+await getCart();
 // Obtener productos
 let posts: any[] = [];
 
