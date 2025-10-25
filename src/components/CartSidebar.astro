@@ -9,9 +9,7 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
 <div id="cartSidebar"
 
   class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-[100] flex flex-col p-4 overflow-y-auto">
-  <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-    <h2 class="text-xl font-bold text-gray-800 tracking-tight">Carrito de compras
-    </h2>
+  <div class="flex justify-end items-center pb-3 border-b border-gray-200">
     <button 
       onclick="closeCart();" 
       class="text-gray-400 hover:text-red-500 transition-all duration-200 text-2xl font-light"
@@ -20,27 +18,34 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
     </button>
   </div>
   
-
-  <hr class="my-3" />
-
   <!-- Contenido dinámico del carrito -->
   <div id="cartItems" class="flex flex-col gap-2">
     <p class="text-gray-500">Cargando carrito...</p>
   </div>
+  <div id="cartActions" class="absolute bottom-0 left-0 w-full p-4 bg-white border-t border-gray-200 hidden">
+    <button 
+      onclick="window.location.href='https://vip.bovedadecursos2025.com/carrito/';"
+      class="w-full py-2 mb-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+      Ver carrito
+    </button>
+  
+    <button 
+      onclick="window.location.href='https://vip.bovedadecursos2025.com/carrito/finalizar-compra';"
+      class="w-full py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+      Finalizar compra
+    </button>
+  </div>
 </div>
 
 <!-- Botón global de abrir -->
-  <button
+  <button id="cartBtn"
     class="relative text-gray-700 hover:text-black"
     onclick="openCart()">
     <Shopping_cart class="size-8 inline-block" />
-    <span
-      id="cart-count"
-      class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-      0
-    </span>
+    <span id="cart-count" class="ml-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full hidden"> 0 </span>
   </button>
 
+  
 <!-- Scripts embebidos -->
 <script class="">
   import { getCart } from "../lib/wp.ts";
@@ -55,20 +60,24 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
       updateCartBadge();
     } catch (error) {
       document.getElementById("cartItems").innerHTML =
-        '<p class="text-gray-500">Error al cargar el carrito.</p>';
+        '<p class="text-gray-500 pt-5">Error al cargar el carrito.</p>';
     }
   }
 
   // ✅ Renderizar productos dentro del sidebar
   function renderCartItems() {
     const container = document.getElementById("cartItems");
+    const cartActions = document.getElementById("cartActions");
     container.innerHTML = ""; // limpiar contenido
 
     if (!cartItems || cartItems.length === 0) {
       container.innerHTML = '<p class="text-gray-500">No products in the cart.</p>';
+      cartActions.classList.add("hidden");
       return;
     }
 
+    cartActions.classList.remove("hidden");
+    
     cartItems.forEach((item) => {
       container.innerHTML += `
       <div class="flex items-center gap-3 p-3 rounded-xl shadow-md bg-white hover:shadow-lg transition-all">
@@ -76,19 +85,11 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
           src="${item.imageSrc}" 
           alt="${item.name}" 
           class="w-14 h-14 md:w-16 md:h-16 object-cover rounded-lg"
-        />
-        
+        />  
         <div class="flex-1">
           <p class="text-sm md:text-base font-semibold text-gray-700 leading-tight">${item.name}</p>
           <p class="text-xs md:text-sm text-gray-500">Cantidad: <span class="font-bold text-gray-700">${item.quantity}</span></p>
         </div>
-
-        <button 
-          class="text-gray-400 hover:text-red-500 transition text-lg"
-          onclick="removeItem('${item.id}')"
-        >
-          ✖
-        </button>
       </div>
 
       `;
@@ -120,3 +121,4 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
     document.getElementById('overlay')?.classList.add('hidden');
   };
 </script>
+
