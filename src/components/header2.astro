@@ -6,34 +6,58 @@
     
     <header>
         <nav class="shadow-md bg-primary px-4 lg:px-6 py-2.5">
-          <div class="flex items-center justify-between gap-4 flex-wrap lg:flex-nowrap mx-auto max-w-screen-xl">
+          <div class="flex items-center  flex-wrap lg:flex-nowrap gap-4 mx-auto max-w-screen-xl">
             <!-- Logo a la izquierda -->
-            <a href="https://flowbite.com" class="flex items-center flex-shrink-0">
-              <img src="/img/logo.webp" class="h-12" alt="Boveda de cursos 2025" />
-            </a>
-          
-            <!-- Formulario ocupa todo el espacio disponible -->
-            <form action="/Cursos" method="GET" class="flex-grow hidden lg:block w-full lg:w-auto">
-              <label for="default-search" class="sr-only">Buscar</label>
-              <div class="flex gap-2 items-center">
-                <div class="relative flex-grow">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 20 20">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                  </div>
-                  <input type="search" name="q" id="default-search"
-                    class="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Buscar cursos" required />
+            <div class="flex-none">
+              <a href="../" class="flex items-center flex-shrink-0">
+                <img src="/img/logo.webp" class="h-12" alt="Boveda de cursos 2025" />
+              </a>
+            </div>
+            <div class="grow items-center">
+              <!-- ✅ Menú pegado al logo (IZQUIERDA) -->
+              <div id="mobile-menu"
+                class="hidden fixed inset-0 bg-primary z-50 lg:static lg:flex lg:w-auto lg:order-1 transition-all duration-300 ease-in-out">
+                
+                <div class="flex justify-end px-6 p-4 lg:hidden">
+                  <button id="menu-close" class="text-black hover:text-black text-3xl font-bold">
+                    &times;
+                  </button>
                 </div>
-                <button type="submit"
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 dark:bg-blue-600">
-                  Buscar
-                </button>
+
+                <div class="flex flex-col-reverse lg:flex-row">
+                    <div class="flex items-center">
+                      <ul class="flex flex-col w-full font-medium lg:flex-row lg:w-auto">
+                        <li><a href="../" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Inicio</a></li>
+                        <li><a href="/Cursos" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Todos nuestros cursos</a></li>
+                        <li><a href="/Categorias" target="_blank" class="block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Categoria</a></li>
+                        <li><a href="https://t.me/bovedadecursos/" target="_blank" class="block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Soporte 24/7</a></li>
+                        
+                      </ul>
+                    </div>
+                
+                  <!-- ✅ Buscador ocupa todo el espacio restante -->
+                  <div class="grow px-5"> <!-- 🔹 Aquí se agregó flex-1 -->
+                    <form action="/Cursos" method="GET" class="block flex-grow lg:block w-full lg:w-auto">
+                      <label for="default-search" class="sr-only">Buscar</label>
+                      <div class="flex gap-2 items-center">
+                        <div class="relative flex-grow">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 20 20">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                          </div>
+                          <input type="search" name="q" id="default-search"
+                            class="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Buscar cursos" required />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>                
               </div>
-            </form>
-          
+            </div>
+            
             <!-- Botones a la derecha -->
             <div class="flex items-center gap-2 flex-shrink-0 lg:order-2">
               <a href="https://vip.bovedadecursos2025.com/mi-cuenta/"
@@ -51,22 +75,7 @@
               </button>
             </div>
           </div>
-          <div class="flex flex-wrap justify-between mx-auto max-w-screen-xl mt-2 ">
-            <div id="mobile-menu" class="hidden fixed inset-0 bg-primary z-50 lg:static lg:flex lg:w-auto lg:order-1 transition-all duration-300 ease-in-out">
-                <!-- Botón de cierre -->
-                <div class="flex justify-end p-4 lg:hidden">
-                  <button id="menu-close" class="text-black hover:text-black text-3xl font-bold">
-                    &times;
-                  </button>
-                </div>
-                <!-- Lista de navegación -->
-                <ul class="flex flex-col w-full font-medium divide-x divide-black/10 lg:flex-row lg:w-auto">
-                  <li><a href="../" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Inicio</a></li>
-                  <li><a href="/Cursos" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Todos nuestros cursos</a></li>
-                  <li><a href="https://t.me/bovedadecursos/"  target="_blank" class="block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Soporte 24/7</a></li>
-                </ul>
-              </div>
-          </div>
+         
         </nav>
       </header>
       
