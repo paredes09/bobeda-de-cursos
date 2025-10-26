@@ -7,9 +7,10 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
 
 <!-- Sidebar del carrito -->
 <div id="cartSidebar"
+  class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-[100] flex flex-col">
 
-  class="fixed top-0 right-0 h-full w-72 md:w-96 bg-white shadow-xl translate-x-full transition-transform duration-300 z-[100] flex flex-col p-4 overflow-y-auto">
-  <div class="flex justify-end items-center pb-3 border-b border-gray-200">
+  <!-- Botón cerrar -->
+  <div class="flex justify-end items-center p-4 border-b border-gray-200">
     <button 
       onclick="closeCart();" 
       class="text-gray-400 hover:text-red-500 transition-all duration-200 text-2xl font-light"
@@ -17,18 +18,20 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
       ✖
     </button>
   </div>
-  
-  <!-- Contenido dinámico del carrito -->
-  <div id="cartItems" class="flex flex-col gap-2">
+
+  <!-- Contenedor que ocupa todo el espacio restante -->
+  <div class="flex flex-col flex-grow overflow-y-auto p-4 gap-2" id="cartItems">
     <p class="text-gray-500">Cargando carrito...</p>
   </div>
-  <div id="cartActions" class="absolute bottom-0 left-0 w-full p-4 bg-white border-t border-gray-200 hidden">
+
+  <!-- Acciones fijas abajo -->
+  <div id="cartActions" class="sticky bottom-0 left-0 w-full p-4 bg-white border-t border-gray-200 hidden">
     <button 
       onclick="window.location.href='https://vip.bovedadecursos2025.com/carrito/';"
       class="w-full py-2 mb-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition">
       Ver carrito
     </button>
-  
+
     <button 
       onclick="window.location.href='https://vip.bovedadecursos2025.com/carrito/finalizar-compra';"
       class="w-full py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition">
