@@ -16,7 +16,7 @@
             <div class="grow items-center">
               <!-- ✅ Menú pegado al logo (IZQUIERDA) -->
               <div id="mobile-menu"
-                class="hidden fixed inset-0 bg-primary z-50 lg:static lg:flex lg:w-auto lg:order-1 transition-all duration-300 ease-in-out">
+                class="hidden menu-hidden menu-transition fixed inset-0 bg-primary z-50 lg:static lg:flex lg:w-auto lg:order-1 transition-all duration-300 ease-in-out">
                 
                 <div class="flex justify-end px-6 p-4 lg:hidden">
                   <button id="menu-close" class="text-black hover:text-black text-3xl font-bold">
@@ -79,24 +79,56 @@
         </nav>
       </header>
       
+      <style>
+        /* Estado oculto con animación */
+        .menu-hidden {
+          opacity: 0;
+          transform: translateY(-30px);
+          pointer-events: none;
+        }
+        /* Estado visible con animación */
+        .menu-visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+        /* Transición suave */
+        .menu-transition {
+          transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+      </style>
+      
       <script>
         const toggleBtn = document.getElementById('menu-toggle');
         const closeBtn = document.getElementById('menu-close');
         const mobileMenu = document.getElementById('mobile-menu');
       
         toggleBtn!.addEventListener('click', () => {
-          mobileMenu!.classList.remove('hidden');
+          // Mostrar y transicionar suavemente
+          mobileMenu!.classList.remove('hidden', 'menu-hidden');
+          setTimeout(() => {
+            mobileMenu!.classList.add('menu-visible');
+          }, 10); // pequeño delay para permitir que la transición se active
         });
       
         closeBtn!.addEventListener('click', () => {
-          mobileMenu!.classList.add('hidden');
+          mobileMenu!.classList.remove('menu-visible');
+          mobileMenu!.classList.add('menu-hidden');
+      
+          setTimeout(() => {
+            mobileMenu!.classList.add('hidden');
+          }, 300); // mismo tiempo que la transición
         });
       
-        // Opcional: cerrar menú al hacer clic en un enlace
+        // Si haces clic en un enlace del menú móvil
         document.querySelectorAll('#mobile-menu a').forEach(link => {
           link.addEventListener('click', () => {
-            mobileMenu!.classList.add('hidden');
+            mobileMenu!.classList.remove('menu-visible');
+            mobileMenu!.classList.add('menu-hidden');
+            setTimeout(() => mobileMenu!.classList.add('hidden'), 300);
           });
         });
       </script>
+      
+      
       
