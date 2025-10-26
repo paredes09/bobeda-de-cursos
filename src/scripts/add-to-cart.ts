@@ -1,5 +1,5 @@
 // src/scripts/add-to-cart.ts
-import { postAddToCart } from "../lib/wp.ts";
+import { postAddToCart, getCart } from "../lib/wp.ts";
 
 export function setupAddToCart(buttonSelector: string) {
   const buttons = document.querySelectorAll<HTMLButtonElement>(buttonSelector);
@@ -16,6 +16,7 @@ export function setupAddToCart(buttonSelector: string) {
 
       try {
         await postAddToCart(Number(productId));
+        await getCart();
         button.textContent = "✅ Agregado!";
       } catch (err) {
         console.error(err);
