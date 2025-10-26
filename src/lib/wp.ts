@@ -95,7 +95,7 @@ export const postAddToCart = async (productId : number) => {
         quantity: 1
       })
     });
-/*         console.log('ADD TO CART RESPONSE STATUS:', addRes.status);
+/*      console.log('ADD TO CART RESPONSE STATUS:', addRes.status);
         console.log('ADD TO CART RESPONSE HEADERS:', [...addRes.headers]);
         const debugBody = await addRes.clone().text();
         console.log('ADD TO CART RAW BODY:', debugBody) */;
@@ -106,7 +106,6 @@ export const postAddToCart = async (productId : number) => {
       console.error('BODY:', errorBody);
       throw new Error('Error al agregar el producto al carrito');
     }
-    await getCart(); 
     // 4️⃣ Retornar carrito actualizado
     const updatedCart = await addRes.json();
     return updatedCart;
