@@ -357,3 +357,15 @@ const descripcionLarga = date.description;
   updateActiveThumbnail(mainImage.src);
 </script>
 
+<script class="">
+  window.addEventListener('pageshow', function (e) {
+    // Si la página vino del "back/forward cache", recargamos una sola vez
+    if (e.persisted) location.reload();
+
+    // Safari y otros navegadores que no usan persisted:
+    try {
+      const nav = performance.getEntriesByType('navigation')[0];
+      if (nav && nav.type === 'back_forward') location.reload();
+    } catch (_) {}
+  }, { once: true });
+</script>
