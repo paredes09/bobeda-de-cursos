@@ -21,11 +21,12 @@ export const getPostInfo = async (slug: string) => {
            regular_price,
            description,
            short_description,
-           images
+           images,
+           attributes
        } = post
 
        const imageSrcs = images.map((img: any) => img.src);
-
+       const attributeDetails = attributes.map((attr: any) =>  attr.options[0]);
        return {
         id,
            name,
@@ -33,11 +34,12 @@ export const getPostInfo = async (slug: string) => {
            regular_price,
            description,
            short_description,
-           imageSrcs
-       }
+           imageSrcs,
+           attributeDetails}
    })
+   console.log(resultDetallado);
    return resultDetallado
-
+   
 }
 
 
