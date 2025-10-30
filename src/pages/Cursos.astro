@@ -2,35 +2,50 @@
 import Start from "../components/icons/Start.astro";
 import Layout from "../layouts/Layout.astro";
 import { getProductsPost, getAllProducts, getCart } from "../lib/wp.ts";
-
+import Fuse from "fuse.js";
 const perPage = 10;
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
-const query = Astro.url.searchParams.get("q")?.toLowerCase() || "";
+const query = Astro.url.searchParams.get("q")?.toLowerCase().trim() || "";
 const isSearching = query.length > 0;
 
-
-// Obtener productos
 let posts: any[] = [];
 
+// Obtener productos
 if (isSearching) {
-  posts = await getAllProducts();
+  posts = await getAllProducts(); // Para buscar en todos los productos
 } else {
-  posts = await getProductsPost({ perPage, page: currentPage });
+  posts = await getProductsPost({ perPage, page: currentPage }); // Paginación normal
 }
 
+let filteredPosts = posts;
 
-// Filtrar si hay búsqueda
-const filteredPosts = isSearching
-  ? posts.filter((post: any) =>
-      post.name.toLowerCase().includes(query)
-    )
-  : posts;
+if (isSearching) {
+  // Primero buscar coincidencias exactas
+  const exactMatches = posts.filter((post: any) =>
+    post.name.toLowerCase() === query
+  );
+
+  if (exactMatches.length > 0) {
+    // Si hay coincidencia exacta, se muestra solo esa
+    filteredPosts = exactMatches;
+  } else {
+    // Si no hay coincidencia exacta, usar Fuse.js (búsqueda flexible)
+    const fuse = new Fuse(posts, {
+      keys: ["name"],   // Campo a buscar
+      threshold: 0.4,   // Precisión de similitud (0 exacto → 1 permisivo)
+      includeScore: false,
+    });
+
+    filteredPosts = fuse.search(query).map(result => result.item);
+  }
+}
 
 // Mostrar paginación solo si no hay búsqueda
 const showPagination = !isSearching;
 
-// Comprobar si hay productos en la siguiente página
+// Verificar si hay productos en la siguiente página
 let hasNextPage = false;
+
 if (!isSearching) {
   try {
     const next = await getProductsPost({ perPage, page: currentPage + 1 });
