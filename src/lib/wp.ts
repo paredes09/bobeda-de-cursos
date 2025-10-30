@@ -79,40 +79,55 @@ export const getAllProducts = async () => {
 
 
 
-export const postAddToCart = async (productId : number) => {
-    
-  const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
-      credentials: 'include' 
+export const postAddToCart = async (productId: number) => {
+  // 🔹 Función interna para obtener un nonce fresco
+  const getFreshNonce = async (): Promise<string> => {
+    const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
+      credentials: 'include',
     });
     const { nonce } = await nonceRes.json();
+    return nonce;
+  };
+
+  // 1️⃣ Obtener nonce inicial
+  let nonce = await getFreshNonce();
+
+  // 2️⃣ Intentar agregar producto con manejo automático de nonce
+  const tryAddToCart = async (nonceValue: string): Promise<any> => {
     const addRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/add-item', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Nonce': nonce,              // 👈 WooCommerce la usa aquí
+        'Nonce': nonceValue,
       },
-      credentials: 'include',        // 👈 mantiene la sesión de WooCommerce
+      credentials: 'include',
       body: JSON.stringify({
         id: productId,
-        quantity: 1
-      })
+        quantity: 1,
+      }),
     });
-/*      console.log('ADD TO CART RESPONSE STATUS:', addRes.status);
-        console.log('ADD TO CART RESPONSE HEADERS:', [...addRes.headers]);
-        const debugBody = await addRes.clone().text();
-        console.log('ADD TO CART RAW BODY:', debugBody) */;
-    // 3️⃣ Manejo de error
-    if (!addRes.ok) {
-      const errorBody = await addRes.text();
-      console.error('STATUS:', addRes.status);
-      console.error('BODY:', errorBody);
-      throw new Error('Error al agregar el producto al carrito');
+
+    const debugBody = await addRes.clone().text();
+    console.log("🧾 ADD TO CART STATUS:", addRes.status);
+    console.log("🧾 RAW BODY:", debugBody);
+
+    // ⚠️ Si el nonce está vencido, renovarlo y reintentar
+    if (addRes.status === 403 && debugBody.includes("woocommerce_rest_invalid_nonce")) {
+      console.warn("⚠️ Nonce inválido, solicitando uno nuevo...");
+      const newNonce = await getFreshNonce();
+      return await tryAddToCart(newNonce); // 👈 llamada recursiva segura
     }
-    // 4️⃣ Retornar carrito actualizado
-    const updatedCart = await addRes.json();
-    return updatedCart;
+
+    if (!addRes.ok) {
+      throw new Error(`Error al agregar al carrito (${addRes.status}): ${debugBody}`);
+    }
+
+    return await addRes.json(); // ✅ devuelve el carrito actualizado
   };
-  
+
+  // 3️⃣ Ejecutar intento
+  return await tryAddToCart(nonce);
+};
   
   export const getCart = async () => {
     const response = await fetch('https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart', {
