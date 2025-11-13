@@ -37,7 +37,6 @@ export const getPostInfo = async (slug: string) => {
            imageSrcs,
            attributeDetails}
    })
-   console.log(resultDetallado);
    return resultDetallado
    
 }
