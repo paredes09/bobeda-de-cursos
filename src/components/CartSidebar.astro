@@ -60,7 +60,7 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
 <!-- Scripts embebidos -->
 <script class="">
   
-  import { getCart } from "../lib/wp.ts";
+  import { getCart, deleteCartItem  } from "../lib/wp.ts";
 
   let cartItems = [];
 
@@ -92,18 +92,28 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
 
     cartItems.forEach((item) => {
       container.innerHTML += `
-      <div class="flex items-center gap-3 p-3 rounded-xl shadow-md bg-white hover:shadow-lg transition-all">
-        <img 
-          src="${item.imageSrc}" 
-          alt="${item.name}" 
-          class="w-14 h-14 md:w-16 md:h-16 object-cover rounded-lg"
-        />  
-        <div class="flex-1">
-          <p class="text-sm md:text-base font-semibold text-gray-700 leading-tight">${item.name}</p>
-          <p class="text-xs md:text-sm text-gray-500">Cantidad: <span class="font-bold text-gray-700">${item.quantity}</span></p>
-        </div>
-      </div>
+        <div class="flex items-center gap-3 p-3 rounded-xl shadow-md bg-white hover:shadow-lg transition-all relative">
+          <img 
+            src="${item.imageSrc}" 
+            alt="${item.name}" 
+            class="w-14 h-14 md:w-16 md:h-16 object-cover rounded-lg"
+          />  
+          <div class="flex-1">
+            <p class="text-sm md:text-base font-semibold text-gray-700 leading-tight">${item.name}</p>
+            <p class="text-xs md:text-sm text-gray-500">Cantidad: 
+              <span class="font-bold text-gray-700">${item.quantity}</span>
+            </p>
+          </div>
 
+          <!-- Botón eliminar -->
+          <button 
+            class="absolute top-2 right-3 text-gray-400 hover:text-red-500 transition text-xl font-bold delete-btn"
+            data-key="${item.key}"
+            title="Eliminar del carrito"
+          >
+            ×
+          </button>
+        </div>
       `;
     });
   }

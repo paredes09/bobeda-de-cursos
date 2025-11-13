@@ -76,9 +76,7 @@ export const getAllProducts = async () => {
   return allProducts;
 };
 
-
-
-
+// agregar al carrito con manejo de nonce
 export const postAddToCart = async (productId: number) => {
   // 🔹 Función interna para obtener un nonce fresco
   const getFreshNonce = async (): Promise<string> => {
@@ -141,11 +139,62 @@ export const postAddToCart = async (productId: number) => {
     console.log('CART FULL RESPONSE:', cart); // <-- Aquí verás items, totals, etc.
   
     const resultadoCart = cart.items.map((item: any) => {
-      const { id, name, quantity, images } = item;
+      const { key, id, name, quantity, images } = item;
       const imageSrc = images?.[0]?.src || '';
-      return { id, name, quantity, imageSrc };
+      return { key, id, name, quantity, imageSrc };
     });
   
     console.log('CART ITEMS:', resultadoCart);
     return resultadoCart;
   };
+
+
+// eliminar item del carrito con manejo de nonce
+export const deleteCartItem = async (cartItemKey: string) => {
+  // 🔹 Función interna para obtener un nonce fresco
+  const getFreshNonce = async (): Promise<string> => {
+    const nonceRes = await fetch('https://vip.bovedadecursos2025.com/wp-json/custom/v1/nonce', {
+      credentials: 'include',
+    });
+    const { nonce } = await nonceRes.json();
+    return nonce;
+  };
+
+  // 1️⃣ Obtener nonce inicial
+  let nonce = await getFreshNonce();
+
+  // 2️⃣ Intentar eliminar item con manejo automático de nonce
+  const tryDeleteItem = async (nonceValue: string): Promise<any> => {
+    const deleteRes = await fetch(`https://vip.bovedadecursos2025.com/wp-json/wc/store/v1/cart/remove-item`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Nonce': nonceValue,
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        key: cartItemKey,
+      }),
+    });
+
+    const debugBody = await deleteRes.clone().text();
+    console.log("🧾 DELETE CART ITEM STATUS:", deleteRes.status);
+    console.log("🧾 RAW BODY:", debugBody);
+
+    // ⚠️ Si el nonce está vencido, renovarlo y reintentar
+    if (deleteRes.status === 403 && debugBody.includes("woocommerce_rest_invalid_nonce")) {
+      console.warn("⚠️ Nonce inválido, solicitando uno nuevo...");
+      const newNonce = await getFreshNonce();
+      return await tryDeleteItem(newNonce); // 👈 llamada recursiva segura
+    }
+
+    if (!deleteRes.ok) {
+      throw new Error(`Error al eliminar del carrito (${deleteRes.status}): ${debugBody}`);
+    }
+
+    return await deleteRes.json(); // ✅ devuelve el carrito actualizado
+  };
+
+  // 3️⃣ Ejecutar intento
+  return await tryDeleteItem(nonce);
+};
