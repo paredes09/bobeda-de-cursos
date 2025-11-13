@@ -47,22 +47,38 @@ const descripcionLarga = date.description;
         ))}
       </ul>
         
-      <div class="w-full min-w-[300px] md:w-[600px] h-[30vh] md:h-[55vh] overflow-hidden rounded-lg bg-white">
-        <a
-          href={date.imageSrcs[0]}
-          id="mainImageLink"
-          class="block w-full h-full"
+      <div
+        class="w-full min-w-[300px] md:w-[600px] h-[30vh] md:h-[55vh] overflow-hidden rounded-lg bg-white cursor-pointer"
+        id="imageContainer"
+      >
+        <img
+          id="mainImage"
+          class="w-full h-full object-fill hover:opacity-90 transition"
+          src={date.imageSrcs[0]}
+          alt=""
+        />
+      </div>
+      </div>
+      <!-- Modal -->
+      <div
+        id="modal"
+        class="hidden fixed inset-0 z-50 bg-black/80 justify-center items-center"
         >
-          <img
-            id="mainImage"
-            class="w-full h-full object-fill"
-            src={date.imageSrcs[0]}
-            alt=""
-          />
-        </a>
+        <!-- Botón cerrar -->
+        <button
+          id="closeModalBtn"
+          class="absolute top-4 right-6 text-white text-5xl font-bold hover:text-gray-300 transition"
+        >
+          ×
+        </button>
+
+        <!-- Imagen ampliada -->
+        <img
+          id="modal-img"
+          class="max-w-[90vw] max-h-[80vh] object-contain rounded-lg shadow-lg"
+          alt="Imagen ampliada"
+        />
       </div>
-      </div>
-      
 
       <div class="space-y-3">
         <h3 class="font-bold">
@@ -350,3 +366,34 @@ const descripcionLarga = date.description;
     }
   });
   </script>
+
+
+<script class="">
+  const imageContainer = document.getElementById('imageContainer');
+  const mainImage = document.getElementById('mainImage');
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  // Mostrar modal al hacer clic en la imagen
+  imageContainer.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modalImg.src = mainImage.src;
+  });
+
+  // Función para cerrar modal
+  const closeModal = () => {
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+    modalImg.src = '';
+  };
+
+  // Cerrar con la X
+  closeModalBtn.addEventListener('click', closeModal);
+
+  // Cerrar al hacer clic fuera de la imagen
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+</script>
