@@ -29,8 +29,6 @@ const descripcionLarga = date.description;
   <section class="bg-white p-10 md:p-10 relative">
     <div class="max-w-[1300px] flex flex-col md:flex-row gap-4 m-auto">
       <div class="flex flex-col-reverse md:flex-row gap-4">
-      
-        
         <ul
         id="thumbnailList"
         class="flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto md:overflow-x-hidden rounded-lg gap-2 md:h-[55vh] md:w-[150px] scroll-hidden"
@@ -325,34 +323,38 @@ const descripcionLarga = date.description;
   });
 </script>
 
-<script>
-  const thumbnails = document.querySelectorAll(".thumbnail");
-  const mainImage = document.querySelector<HTMLImageElement>("#mainImage")!;
-  const mainImageLink =
-    document.querySelector<HTMLAnchorElement>("#mainImageLink")!;
-
-  function updateActiveThumbnail(activeSrc: string) {
+<script class="">
+  (() => {
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    const mainImage = document.querySelector("#mainImage");
+  
+    function updateActiveThumbnail(activeSrc) {
+      thumbnails.forEach((thumb) => {
+        const thumbEl = thumb;
+        const thumbSrc = thumbEl.getAttribute("data-full");
+  
+        if (thumbSrc === activeSrc) {
+          thumbEl.classList.remove("opacity-50");
+          thumbEl.classList.add("opacity-100");
+        } else {
+          thumbEl.classList.add("opacity-50");
+          thumbEl.classList.remove("opacity-100");
+        }
+      });
+    }
+  
     thumbnails.forEach((thumb) => {
-      const thumbEl = thumb as HTMLImageElement;
-      if (thumbEl.getAttribute("data-full") === activeSrc) {
-        thumbEl.classList.remove("opacity-50");
-      } else {
-        thumbEl.classList.add("opacity-50");
-      }
+      thumb.addEventListener("click", () => {
+        const newSrc = thumb.getAttribute("data-full");
+        mainImage.src = newSrc;
+        updateActiveThumbnail(newSrc);
+      });
     });
-  }
+  
+    updateActiveThumbnail(mainImage.src);
+  })();
+  </script>
 
-  thumbnails.forEach((thumb) => {
-    thumb.addEventListener("click", () => {
-      const newSrc = (thumb as HTMLImageElement).getAttribute("data-full")!;
-      mainImage.src = newSrc;
-      mainImageLink.href = newSrc;
-      updateActiveThumbnail(newSrc);
-    });
-  });
-
-  updateActiveThumbnail(mainImage.src);
-</script>
 
 <script is:inline>
   document.addEventListener('visibilitychange', () => {
