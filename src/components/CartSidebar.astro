@@ -131,7 +131,7 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
           alert("No se pudo eliminar el producto. Intente nuevamente.");
         } finally {
           btn.disabled = false;
-          btn.textContent = "×";
+          btn.textContent = "x";
         }
       });
     });
@@ -166,6 +166,6 @@ import Shopping_cart from "./icons/Shopping-cart.astro";
   window.closeCart = () => {
     document.getElementById('cartSidebar')?.classList.add('translate-x-full');
     document.getElementById('overlay')?.classList.add('hidden');
-  };
+  }; 
 </script>
 
