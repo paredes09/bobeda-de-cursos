@@ -4,12 +4,13 @@ import Telegram from "./icons/Telegram.astro";
 import Instagram from "./icons/Instagram.astro";
 import Bitcoin from "./icons/Bitcoin.astro";
 import Paypal from "./icons/Paypal.astro";
+import NavItem from "./NavItem.astro";
 ---
 
 
 <footer class="bottom-0 left-0 w-full bg-primary">
  <section class="relative text-black m-auto">
-    <div class="flex flex-wrap max-w-[1400px] m-auto  p-10 md:py-10 gap-x-20">
+    <div class="flex flex-wrap max-w-[1300px] m-auto  p-5 md:py-10 gap-x-20">
         <div>
             <a href=""><img src="/img/logo.webp" class="w-40 h-auto" aria-label="Logo de Boveda de curso"></a>
             <div class="flex gap-x-3 py-2">
@@ -24,50 +25,67 @@ import Paypal from "./icons/Paypal.astro";
                     <Instagram class="size-6 text-black inline-block"/>
                 </a>
             </div>
-            <p>Compra seguro, con facilidad <br> y calidad de tus cursos</p>       
+            <p>Compra seguro, con facilidad <br> y calidad de tus cursos.</p>       
         </div>
         <div>
             <h3 class=" font-bold md:pb-3 md:py-0 py-5">Navegación</h3>
             <ul role="list" class="space-y-3 px-3">
-                <li class="flex"><a href="../">Inicio</a></li> 
-                <li class="flex"><a href="/Cursos">Tienda</a></li>
-                <li class="flex"><a href="">Contacto y FASQs</a></li>  
-            </u>
+                <NavItem href="/" label="Inicio" />
+                <NavItem href="/Cursos" label="Tienda" />
+                <NavItem href="" label="Contacto y FASQs"/>
+                <li>
+                  <a 
+                    href=""
+                    class="relative pb-1 transition-all duration-200 font-normal hover:font-semibold 
+                           after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 
+                           after:bg-black after:transition-all after:duration-200 hover:after:w-full"
+                  >
+                    
+                  </a>
+                </li>
+              </ul>
+              
         </div>
         <div>
             <h3 class="text-xl font-bold md:pb-3 md:py-0 py-5">Políticas y Legal</h3>
             <ul role="list" class="space-y-3 px-3">
-                <li class="flex"><a href="/Politica-Privacidad">Política de Privacidad</a></li>
-                <li class="flex"><a href="/Politica-Devolucion">Política de Devolución</a></li>
-                <li class="flex"><a href="/Terminos-Condiciones">Términos y Condiciones</a></li>
-                <li class="flex"><a href="/Aviso-Legal">Aviso Legal</a></li>
-                <li class="flex"><a href="/T&C-Vendedor">T&C - Vendedor</a></li>
-                <li class="flex"><a href="/DMCA">DMCA</a></li>   
+                <NavItem href="/Politica-Privacidad" label="Política de Privacidad" />
+                <NavItem href="/Politica-Devolucion" label="Política de Devolución" />
+                <NavItem href="/Terminos-Condiciones" label="Términos y Condiciones" />
+                <NavItem href="/Aviso-Legal" label="Aviso Legal" />
+                <NavItem href="/T&C-Vendedor" label="T&C - Vendedor" />
+                <NavItem href="/DMCA" label="DMCA" /> 
             </ul>
         </div>
         <div>
             <h3 class="text-xl font-bold md:pb-3 md:py-0 py-5">Información de Contacto</h3>
             <ul role="list" class="space-y-3 px-3">
-                <li class="flex"><a href="mailto:info@bovedadecursos2025.com">info@bovedadecursos2025.com</a></li> 
-                <li class="flex"><a href="https://www.facebook.com/share/1NovfzDk3S/" target="_blank">Facebook</a></li>
-                <li class="flex"><a href="https://www.instagram.com/boveda.de.cursos?igsh=YmhyenFiM3R0MGNk" target="_blank">Instagram</a></li>
-                <li class="flex"><a href="https://t.me/bovedadecursos/" target="_blank">Telegram</a></li>  
+                <NavItem href="mailto:info@bovedadecursos2025.com" label="info@bovedadecursos2025.com" external={true} />
+                <NavItem href="https://www.facebook.com/share/1NovfzDk3S/" label="Facebook" external={true} />
+                <NavItem href="https://www.instagram.com/boveda.de.cursos?igsh=YmhyenFiM3R0MGNk" label="Instagram" external={true} />
+                <NavItem href="https://t.me/bovedadecursos/" label="Telegram" external={true} />
             </ul>
         </div>
     </div>
-
- </section>
-  <section class="bg-[#232524]">
-    <div class="max-w-[1400px]  m-auto flex flex-wrap-reverse justify-center md:justify-between text-xs px-10 py-3 text-white gap-y-5">
-        <div>
-            <p>&copy 2025 - Boveda de Cursos. Todos los derechos reservados.</p>
-            <p>Desarrollado por <a class="font-bold cursor-pointer hover:underline" href="mailto:bovedadecursos2025@gmail.com">bovedadecursos2025</a></p>
-        </div>
-        <div class="flex flex-row gap-x-2">
-            <Bitcoin class="h-[40px] w-[40px]"></Bitcoin>
-            <Paypal class="h-[40px] w-[40px]"></Paypal>
+    <div id="footer2" class=" max-full">
+        <div class="max-w-[1300px] m-auto flex flex-wrap-reverse justify-center md:justify-between text-xs px-5 py-3 text-white gap-y-5">
+                <div>
+                    <p>&copy 2025 - Boveda de Cursos. Todos los derechos reservados.</p>
+                    <p>Desarrollado por <a class="font-bold cursor-pointer hover:underline" href="mailto:bovedadecursos2025@gmail.com">bovedadecursos2025</a></p>
+                </div>
+                <div class="flex flex-row gap-x-2">
+                    <Bitcoin class="h-[40px] w-[40px]"></Bitcoin>
+                    <Paypal class="h-[40px] w-[40px]"></Paypal>
+                </div>
         </div>
     </div>
-    
-  </section>
+ </section>
+
 </footer>
+ 
+<style>
+  #footer2 {
+    background-color: #1a1a1a;
+
+ }
+</style>

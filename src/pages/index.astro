@@ -17,55 +17,12 @@ import Close from '../components/icons/Close.astro';
 <Contador></Contador>
 <Beneficios></Beneficios>
 <Botonera></Botonera>
-<!-- Modal -->
-<!-- <div id="tiempoBeneficioModal" class="invisible opacity-0 transition-all duration-150 bg-black/50 fixed inset-0 h-full z-50 px-2 lg:px-5">
-    <div class="flex h-full self-center">
-        <div class="relative px-3 max-w-[350px] md:max-w-[450px] lg:max-w-[600px] rounded-lg bg-white m-auto  self-center align-middle">
-            <button        
-              type="button"
-              id="btnCloseBeneficioModal"
-              class="absolute mt-2 me-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center inset-y-0 right-0">
-              <Close/>
-              <span class="sr-only">Close modal</span>
-            </button>
-            <section class="pt-10">
-                <img class="items-center h-[350px] md:h-[450px] lg:h-[550px] w-full" alt="Planes de previsión social" src="/img/aviso.webp">
-                <div class="flex items-center text-center py-10 md:py-20 w-full">
-                    <h3>
-                        ¡Gracias por visitarnos! Nuestra tienda aún está en proceso de configuración.  
-Por favor, no realices compras hasta nuevo aviso.  
-Pronto estaremos listos para atenderte 💛
-
-                    </h3>
-                </div>
-            </section>
-        </div>
-    </div>
-</div> -->
 </main>
 </Layout>
 
 
 <style>
-	.mostrarModal{
-    opacity: 1;
-    visibility: visible;
-	transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-  }
-  
+    html{
+        background-color: #232524;
+    }
 </style>
-
-<!--   <script>
-	const tiempoBeneficioModal = document.getElementById('tiempoBeneficioModal');
-	const btnCloseBeneficioModal = document.getElementById('btnCloseBeneficioModal')
-	btnCloseBeneficioModal?.addEventListener('click', f => {
-    tiempoBeneficioModal?.classList.remove('mostrarModal')
-  	})
-
-	document.addEventListener('DOMContentLoaded', function() {	
-	if (tiempoBeneficioModal) {
-		tiempoBeneficioModal.classList.add('mostrarModal');
-	}
-  });
-  
-  </script> -->

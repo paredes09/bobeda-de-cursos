@@ -1,23 +1,41 @@
 ---
 import Start from "../components/icons/Start.astro";
+
 import Layout from "../layouts/Layout.astro";
-import { getProductsPost, getAllProducts, getCart } from "../lib/wp.ts";
+import { getProductsPost, getAllProducts, getProductCategories } from "../lib/wp.ts";
 import Fuse from "fuse.js";
-const perPage = 10;
+import Categorias from "../components/Categories.astro";
+const perPage = 12;
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 const query = Astro.url.searchParams.get("q")?.toLowerCase().trim() || "";
 const isSearching = query.length > 0;
-
 let posts: any[] = [];
+const wpCategories = await getProductCategories();
 
+const categoryParam = Astro.url.searchParams.get("category") || "";
+const isFilteringCategory = categoryParam.length > 0;
 // Obtener productos
-if (isSearching) {
+if (isSearching || isFilteringCategory) {
   posts = await getAllProducts(); // Para buscar en todos los productos
 } else {
   posts = await getProductsPost({ perPage, page: currentPage }); // Paginación normal
 }
 
+
 let filteredPosts = posts;
+if (isFilteringCategory) {
+  filteredPosts = posts.filter(
+    (post: any) =>
+      post.categoryName?.toLowerCase() === categoryParam.toLowerCase()
+  );
+}
+
+let paginatedPosts = filteredPosts;
+if (isFilteringCategory) {
+  const start = (currentPage - 1) * perPage;
+  const end = start + perPage;
+  paginatedPosts = filteredPosts.slice(start, end);
+}
 
 if (isSearching) {
   // Primero buscar coincidencias exactas
@@ -46,7 +64,7 @@ const showPagination = !isSearching;
 // Verificar si hay productos en la siguiente página
 let hasNextPage = false;
 
-if (!isSearching) {
+if (!isSearching && !isFilteringCategory) {
   try {
     const next = await getProductsPost({ perPage, page: currentPage + 1 });
     hasNextPage = next.length > 0;
@@ -55,25 +73,64 @@ if (!isSearching) {
   }
 }
 
-const totalPages = hasNextPage ? currentPage + 1 : currentPage;
+let totalPages = hasNextPage ? currentPage + 1 : currentPage;
+if (isFilteringCategory) {
+  totalPages = Math.ceil(filteredPosts.length / perPage);
+} else if (!isSearching) {
+  totalPages = hasNextPage ? currentPage + 1 : currentPage;
+}
+
 ---
 <Layout
   title="Cursos - Boveda de Cursos"
   description="Página de todos los cursos que se encuentran disponibles en la plataforma"
 >
   <section class="bg-white p-10 md:p-10 relative m-auto">
-  
-    <div class="max-w-[1300px] m-auto grid grid-cols-1 md:grid-cols-4 mt-10 gap-5">
-      {filteredPosts.length === 0 && (
+
+    
+    <div
+      class={`flex items-center justify-between max-w-[1300px] m-auto h-full 
+              flex-col gap-3
+              sm:flex-row 
+              ${isFilteringCategory ? "sm:flex-row-reverse" : ""}`}
+    >
+      <div class="w-full sm:w-auto flex justify-start sm:justify-normal">
+        {!isSearching && (
+          <Categorias categories={wpCategories} /> 
+        )}
+      </div>
+
+      <div class="w-full sm:w-auto flex justify-start sm:justify-normal">
+        {isFilteringCategory && (
+          <h3 class="font-medium text-text py-2 text-left sm:text-right">
+            <span>
+              {filteredPosts.length} curso{filteredPosts.length !== 1 ? "s" : ""} de
+            </span>
+            <span class="font-semibold p-2">{categoryParam}</span>
+          </h3>
+        )}
+      </div>
+    </div>
+
+
+    {isSearching && (
+      <h3 class="mb-3 text-lg font-medium text-gray-700 bg-gray-100 px-4 py-2 rounded-sm border border-gray-200">
+        Encontramos <span class="font-semibold text-black">{filteredPosts.length}</span> curso(s) para “{query}”
+      </h3>
+    )}
+    
+    <div class="max-w-[1300px] m-auto grid grid-cols-1 md:grid-cols-4 mt-5 gap-5">
+      {isSearching && filteredPosts.length === 0 && (
         <p class="text-center text-gray-500 text-lg col-span-full">
           No se encontraron cursos para “{query}”.
         </p>
       )}
       
-      {filteredPosts.map((news: any) => (
-        <div class="flex flex-col justify-between max-h-[700px] bg-white rounded-2xl shadow-md p-4 transition-transform duration-300 hover:-translate-y-2">
+      
+      {(isFilteringCategory ? paginatedPosts : filteredPosts).map((news: any) => (
+        <div class="flex flex-col justify-between max-h-[700px] bg-white rounded-sm shadow-sm p-4 transition-transform duration-300 hover:-translate-y-2">
           <a href={`/Curso/${news.slug}`} class="space-y-2">
-            <div class="w-full rounded-t-2xl overflow-hidden">
+            <div class="w-full rounded-t-lg overflow-hidden">
               <img
                 class="w-full h-auto object-contain"
                 src={news.imageSrcs[0]}
@@ -109,7 +166,7 @@ const totalPages = hasNextPage ? currentPage + 1 : currentPage;
   </section>
 
   {showPagination && filteredPosts.length > 0 && (
-    <section class="flex justify-center items-center bg-white p-10 md:p-10 relative m-auto">
+    <section class="flex justify-center items-center bg-white pb-10 relative m-auto">
       <nav aria-label="Page navigation example">
         <ul class="inline-flex -space-x-px text-sm">
           {currentPage > 1 && (
@@ -126,15 +183,16 @@ const totalPages = hasNextPage ? currentPage + 1 : currentPage;
           {Array.from({ length: totalPages }, (_, i) => (
             <li>
               <a
-                href={`?page=${i + 1}`}
-                class={`flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 ${
-                  currentPage === i + 1
-                    ? "text-blue-600 border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-                    : "text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
-                }`}
-              >
-                {i + 1}
-              </a>
+            href={`?category=${categoryParam}&page=${i + 1}`}
+            class={`flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 ${
+              currentPage === i + 1
+                ? "text-blue-600 border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+                : "text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
+            }`}
+          >
+            {i + 1}
+          </a>
+
             </li>
           ))}
 

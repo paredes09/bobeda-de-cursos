@@ -26,9 +26,11 @@ const { title,  description} = Astro.props;
         data-sdk-integration-source="developer-studio"
     	></script>
 	</head>
-	<body>
+	<body class="min-h-screen flex flex-col">
 		<Header2></Header2>
-		<slot />
+		<main class="flex-1">
+			<slot /> <!-- aquí va el contenido de cada página -->
+		</main>
 		<FloatingButton></FloatingButton>
 		<Footer></Footer>
 	</body>
@@ -36,7 +38,6 @@ const { title,  description} = Astro.props;
 
 <style>
 	html {
-		background-color: #232524;
 		font-family: 'Lato',sans-serif;
 		margin: 0;
 		width: 100%;

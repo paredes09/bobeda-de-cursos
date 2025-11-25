@@ -50,14 +50,26 @@ export const getProductsPost = async ({ perPage = 10, page = 1 }: { perPage?: nu
   if (!resultado.length) throw new Error("No data found");
 
   const resultDetallado = resultado.map((post: any) => {
-    const { id, slug, name, price, regular_price, images } = post;
+    const { id, slug, name, price, regular_price, images, categories } = post;
     const imageSrcs = images.map((img: any) => img.src);
+    const categoryName = categories.map((cat: any) => cat.name)[0];
 
-    return { id, slug, name, price, regular_price, imageSrcs };
+    return { id, slug, name, price, regular_price, imageSrcs, categoryName };
+  });
+
+  // 🔥 ORDENAR: “Trading” primero, luego lo demás
+  resultDetallado.sort((a: any, b: any) => {
+    const isATrading = a.categoryName?.toLowerCase() === "trading";
+    const isBTrading = b.categoryName?.toLowerCase() === "trading";
+
+    if (isATrading && !isBTrading) return -1;
+    if (!isATrading && isBTrading) return 1;
+    return 0;
   });
 
   return resultDetallado;
 };
+
 
 // ✅ Nueva función para obtener todos los productos sin paginación
 export const getAllProducts = async () => {
@@ -74,6 +86,20 @@ export const getAllProducts = async () => {
 
   return allProducts;
 };
+
+// api for categories the products
+export const getProductCategories = async () => {
+  const response = await fetch(`${productApiWooCommerceUrl}/categories?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`);
+
+  if (!response.ok) throw new Error("Failed to fetch product categories");
+  const categories = await response.json();
+  if (!categories.length) throw new Error("No categories found");
+  const resultCategories = categories.map((category: any) => {
+    const { id, name, slug } = category;
+    return { id, name, slug };
+  })
+  return resultCategories;
+}
 
 // agregar al carrito con manejo de nonce
 export const postAddToCart = async (productId: number) => {

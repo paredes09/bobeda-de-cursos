@@ -1,0 +1,67 @@
+---
+import IconCategory from "../components/icons/Categorie.astro";
+const { categories } = Astro.props;
+---
+
+<div class="relative inline-block">
+  <!-- Botón -->
+  <button
+    id="btnCategories"
+    class="px-4 py-2 bg-primary text-black font-bold rounded-sm shadow"
+  >
+  <IconCategory class="w-4 md:w-6 h-4 md:h-6 text-gray-700 inline-block mr-2 mb-1" />
+    Categorías
+  </button>
+
+  <!-- Contenedor Flotante -->
+  <div
+    id="categoryMenu"
+    class="hidden absolute left-0 mt-2 w-52 bg-white shadow-xl rounded-xl p-3 z-50 border border-gray-100 animate-fadeIn"
+  >
+    <ul class="space-y-1">
+      {categories.map((cat:any) => (
+        <li>
+          <button
+            class="w-full text-left px-3 py-2 rounded-lg hover:bg-amber-200 transition"
+            data-category={cat.name}
+          >
+            {cat.name}
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<!-- Script -->
+<script class="">
+  const btn = document.getElementById("btnCategories");
+  const menu = document.getElementById("categoryMenu");
+
+  // Toggle del menú
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+  // Seleccionar categoría
+  menu.querySelectorAll("[data-category]").forEach(btnCat => {
+    btnCat.addEventListener("click", () => {
+      const categoriaSeleccionada = btnCat.dataset.category;
+
+      console.log("✔ Categoría seleccionada:", categoriaSeleccionada);
+
+      // Cerrar menú
+      menu.classList.add("hidden");
+
+      // REDIRIGIR CON PARAMETRO ?category=
+      window.location.href = `?category=${encodeURIComponent(categoriaSeleccionada)}`;
+    });
+  });
+
+  // Cerrar clickeando afuera
+  document.addEventListener("click", (e) => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add("hidden");
+    }
+  });
+</script>
