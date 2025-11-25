@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# Bloquear carpetas internas si existieran
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+
+# Tu sitemap dinámico
 Sitemap: https://bovedadecursos2025.com/sitemap.xml
