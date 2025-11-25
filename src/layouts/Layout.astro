@@ -1,6 +1,5 @@
 ---
 import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
 import FloatingButton  from '../components/FloatingButton.astro';
 import "../styles/global.css"
 import Header2 from '../components/header2.astro';
@@ -16,15 +15,20 @@ const { title,  description} = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.webp" />
-		<meta name="generator" content={Astro.generator} />
+
 		<title>{title}</title>
-		<script
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="keywords" content="cursos online, tienda de cursos, cursos virtuales, aprender en linea, formación, capacitación">
+		<meta name="author" content="Boveda de cursos 2025" />
+		<link rel="canonical" href="https://robbovedadecursos2025.com" />
+		<!-- este scrip es para paypal -->
+<!-- 		<script
         src="https://www.paypal.com/sdk/js?client-id=AZOmn_yJ7pfsCjUaHEwRR7h9CvJevEBnqImEOYmZMbUeJNYzt525T-cY6E_G8UL31sRMqtYMUxZKGH1O&buyer-country=US&locale=es_PE&currency=USD&components=buttons&enable-funding=card&disable-funding=venmo,paylater"
         data-sdk-integration-source="developer-studio"
-    	></script>
+    	></script> -->
 	</head>
 	<body class="min-h-screen flex flex-col">
 		<Header2></Header2>

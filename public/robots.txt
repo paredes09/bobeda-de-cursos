@@ -1,0 +1,19 @@
+# Permitir que todos los bots accedan al sitio
+User-agent: *
+Allow: /
+
+# Bloquear carpetas internas que no deben indexarse
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /cart/
+Disallow: /my-account/
+Disallow: /checkout/
+Disallow: /thank-you/
+
+# Bloquear parámetros para evitar contenido duplicado
+Disallow: /*?s=
+Disallow: /*?orderby=
+Disallow: /*?add-to-cart=
+
+# Sitemap principal
+Sitemap: https://bovedadecursos2025.com/sitemap.xml

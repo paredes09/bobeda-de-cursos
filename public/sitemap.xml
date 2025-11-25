@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://bovedadecursos2025.com/schemas/sitemap/0.9">
+    
+    <url>
+        <loc>https://bovedadecursos2025.com/</loc>
+        <priority>1.0</priority>
+        <changefreq>daily</changefreq>
+    </url>
+
+    <url>
+        <loc>bovedadecursos2025.com/Cursos</loc>
+        <priority>0.9</priority>
+        <changefreq>daily</changefreq>
+    </url>
+
+    <url>
+        <loc>bovedadecursos2025.com/Terminos-Condiciones</loc>
+        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+
+</urlset>

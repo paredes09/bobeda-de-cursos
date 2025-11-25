@@ -1,12 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro'; // si usas un layout global
+import Lottie from "../components/Lottie404.astro";
 ---
-<Layout title='Page 404' description='Paguina 404 cuando no se encuentra la ruta'>
+<Layout title="Página 404" description="Página no encontrada">
   <main class="flex flex-col items-center justify-center min-h-screen bg-white text-center px-6">
-    <h1 class="text-6xl font-bold text-gray-900 mb-4">404</h1>
-    <p class="text-lg text-gray-700 mb-6">Ups... la página que buscas no existe.</p>
-    <a href="/" class="px-6 py-3 bg-black text-white rounded hover:bg-gray-800 transition">
+    
+    <div class="w-full max-w-[820px]">
+      <Lottie 
+        src="/animations/404.json" 
+        width="100%" 
+        height="100%" 
+      />
+    </div>
+
+    <strong class="text-4xl text-gray-700 mt-4 mb-8">
+      Ups... la página que buscas no existe.
+    </strong>
+
+    <a 
+      href="/" 
+      class="px-7 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition"
+    >
       Volver al inicio
     </a>
+
   </main>
 </Layout>
