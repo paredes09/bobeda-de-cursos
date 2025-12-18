@@ -16,7 +16,7 @@ const categories = await getProductCategories();
             <div class="grow items-center">
               <!-- ✅ Menú pegado al logo (IZQUIERDA) -->
               <div id="mobile-menu"
-                class="hidden fixed inset-0 bg-primary z-50 lg:static lg:flex lg:w-auto lg:order-1">
+                class="hidden fixed inset-0 bg-primary z-50 lg:static lg:flex lg:w-max lg:order-1">
                 
                 <div class="flex justify-end px-6 p-4 lg:hidden">
                   <button id="menu-close" class="text-black hover:text-black text-3xl font-bold">
@@ -24,11 +24,11 @@ const categories = await getProductCategories();
                   </button>
                 </div>
 
-                <div class="flex flex-col-reverse lg:flex-row">
-                    <div class="flex items-center">
+                <div class="flex flex-col-reverse lg:flex-row w-full">
+                    <div class="flex items-center shrink-0">
                       <ul class="flex flex-col w-full font-medium lg:flex-row lg:w-auto">
                         <li><a href="../" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Inicio</a></li>
-                        <li><a href="/Cursos" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Todos nuestros cursos</a></li>
+                        <li><a href="/Cursos" class="block w-full py-3 lg:py-1  whitespace-nowrap overflow-hidden text-ellipsis text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Todos nuestros cursos</a></li>
                         <li>
                           <div class="relative lg:inline-block group hidden">
                             <a class="cursor-pointer block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">
@@ -94,14 +94,14 @@ const categories = await getProductCategories();
                             </div>
                           </li>              
                         </li> 
-                        <li><a href="https://t.me/bovedadecursos/" target="_blank" class="block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Soporte 24/7</a></li>
+                        <li><a href="https://t.me/bovedadecursos/" target="_blank" class="block w-full py-3 lg:py-1 rounded  whitespace-nowrap overflow-hidden text-ellipsis text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Soporte 24/7</a></li>
                       </ul>
                       
                     </div>
                 
                   <!-- ✅ Buscador ocupa todo el espacio restante -->
-                  <div class="grow px-5"> <!-- 🔹 Aquí se agregó flex-1 -->
-                    <form action="/Cursos" method="GET" class="block flex-grow lg:block w-full lg:w-auto">
+                  <div class="flex-1 p-5"> <!-- 🔹 Aquí se agregó flex-1 -->
+                    <form action="/Cursos" method="GET" class="w-full">
                       <label for="default-search" class="sr-only">Buscar</label>
                       <div class="flex gap-2 items-center">
                         <div class="relative flex-grow">
