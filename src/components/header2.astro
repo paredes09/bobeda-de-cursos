@@ -1,6 +1,8 @@
 ---
   import CartSidebar from "../components/CartSidebar.astro";
+  import { getProductCategories } from "../lib/wp.ts";
 
+const categories = await getProductCategories();
 ---  
     <header>
         <nav class="shadow-md bg-primary px-4 lg:px-6 py-2.5">
@@ -27,10 +29,74 @@
                       <ul class="flex flex-col w-full font-medium lg:flex-row lg:w-auto">
                         <li><a href="../" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Inicio</a></li>
                         <li><a href="/Cursos" class="block w-full py-3 lg:py-1 text-shadow-md text-lg px-6 text-gray-800 rounded hover:bg-black hover:text-white transition-colors duration-200">Todos nuestros cursos</a></li>
-                        <li><a href="/Categorias" target="_blank" class="block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Categoria</a></li>
+                        <li>
+                          <div class="relative lg:inline-block group hidden">
+                            <a class="cursor-pointer block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">
+                                Categorias
+                            </a>
+                            <div class="absolute left-0 top-full h-2 w-full"></div>
+                            <div class="absolute  mt-2  bg-white z-50 w-[300px] p-5 space-y-2 rounded-sm opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0
+                            transition-all duration-300  pointer-events-none group-hover:pointer-events-auto">
+                            <ul class="space-y-1">
+                              {categories.map((cat : any) => (
+                                <li>
+                                  <a
+                                    href={`/cursos?category=${encodeURIComponent(cat.name)}`}
+                                    class="block px-3 py-2 rounded hover:bg-blue-100 transition"
+                                  >
+                                    {cat.name}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <li class="lg:hidden">
+                            <!-- Botón acordeón -->
+                            <button
+                              id="btnCategorias"
+                              class="w-full flex justify-between items-center py-3 px-6 text-lg
+                                     text-gray-800 hover:bg-primary transition
+                                     hover:bg-black hover:text-white"
+                            >
+                              Categorías
+                              <svg
+                                id="iconCategorias"
+                                class="w-5 h-5 transition-transform duration-300"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M19 9l-7 7-7-7"/>
+                              </svg>
+                            </button>
+                          
+                            <!-- Contenido acordeón -->
+                            <div
+                              id="menuCategorias"
+                              class="max-h-0 overflow-hidden transition-all duration-300"
+                            >
+                            <ul>
+                              {categories.map((cat : any) => (
+                                <li>
+                                  <a
+                                    href={`/Cursos?category=${encodeURIComponent(cat.name)}`}
+                                    class="block px-10 py-2 hover:bg-black hover:text-white"
+                                  >
+                                    {cat.name}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                            </div>
+                          </li>              
+                        </li> 
                         <li><a href="https://t.me/bovedadecursos/" target="_blank" class="block w-full py-3 lg:py-1 rounded text-shadow-md text-lg px-6 text-gray-800 hover:bg-black hover:text-white transition-colors duration-200">Soporte 24/7</a></li>
-                        
                       </ul>
+                      
                     </div>
                 
                   <!-- ✅ Buscador ocupa todo el espacio restante -->
@@ -109,6 +175,15 @@
         });
       </script>
 
+<script class="">
+  const btn = document.getElementById("btnCategorias");
+  const menu = document.getElementById("menuCategorias");
+  const icon = document.getElementById("iconCategorias");
 
-      
-      
+  btn.addEventListener("click", () => {
+    const abierto = menu.classList.contains("max-h-96");
+
+    menu.classList.toggle("max-h-96");
+    icon.classList.toggle("rotate-180");
+  });
+</script>
